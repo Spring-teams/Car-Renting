@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/jquery-ui.css">
+    <script src="script/jquery-1.12.4.js"></script>
+    <script src="script/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form class="login-form">
+        <h1>Đăng nhập</h1>
+        <div class="js-txtb">
+            <input type="text">
+            <span data-placeholder="Tên đăng nhập"></span>
+        </div>
+
+        <div class="js-txtb">
+            <input type="password">
+            <span data-placeholder="Mật khẩu"></span>
+        </div>
+        <button class="js-logbutton">Đăng nhập</button>
+        <div class="button-text">Bạn chưa có tài khoản? <a href="#">Đăng ký</a></div>
+    </form>
+
+</div>
+</body>
+<script type="text/javascript">
+
+    $(".js-txtb input").on("focus",function(){
+        $(this).addClass("focus");
+
+    });
+    $(".js-txtb input").on("blur",function(){
+
+        if($(this).val()==""){
+
+            $(this).removeClass("focus");
+        }
+    });
+
+</script>
+</html>
