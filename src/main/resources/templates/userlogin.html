@@ -5,24 +5,24 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
 
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/jquery-ui.css">
-    <script src="script/jquery-1.12.4.js"></script>
-    <script src="script/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+<!--    <script src="scripts/jquery-1.12.4.js"></script>-->
+    <script src="scripts/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <form class="login-form">
+    <form class="login-form" action="/comfirmAdmin_">
         <h1>Đăng nhập</h1>
         <div class="js-txtb">
-            <input type="text">
+            <input type="text" name="username">
             <span data-placeholder="Tên đăng nhập"></span>
         </div>
 
         <div class="js-txtb">
-            <input type="password">
+            <input type="password" name="password">
             <span data-placeholder="Mật khẩu"></span>
         </div>
-        <button class="js-logbutton">Đăng nhập</button>
+        <button class="js-logbutton" name="submit">Đăng nhập</button>
         <div class="button-text">Bạn chưa có tài khoản? <a href="#">Đăng ký</a></div>
     </form>
 
@@ -41,6 +41,31 @@
             $(this).removeClass("focus");
         }
     });
+    $(".container").on("click",".js-logbutton",function(){
+
+        var data="username="+$("input[name=username]").val()+"&password="+$("input[name=password]").val();
+
+        // $.ajax({
+        //     type:"GET",
+        //     url:"comfirmAdmin?"+data,
+        //     //contentType: "application/json; charset=utf-8",
+        //     dataType: "json",
+        //     async:false,
+        //     success: function (res) {
+        //         if(res.result=="true"){
+        //             window.location.href=res.url;
+        //
+        //             // window.location.href=data.url;
+        //         }
+        //         else {
+        //             window.location.href=res.url;
+        //         }
+        //     },
+        //     error: function(){
+        //         alert("error");
+        //     }
+        // });
+    })
 
 </script>
 </html>

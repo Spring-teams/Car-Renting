@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ Thống Cho Thuê Xe Trực Tuyến</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="scripts/jquery-1.12.4.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/home.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="menu-bar" >
+
+        <div class="customer-management" th:classappend="${className}">Quản lý khách hàng</div>
+        <div class="car-management" th:classappend="${className}">Quản lý xe</div>
+        <div class="account">Tài Khoản</div>
+    </div>
+</div>
+</body>
+</html>
