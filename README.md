@@ -1,3 +1,4 @@
-﻿Hệ thống cho thuê xe trực tuyến.
+﻿## Phát triển ứng dụng web
+ #Hệ thống cho thuê xe trực tuyến.
 
-[a link](https://github.com/user/repo/blob/branch/other_file.md)
+#[Tài liệu mô tả chung về ứng dụng](https://docs.google.com/document/d/1wMjBnJVuxVzujK2nn6sznOTFAGja6iSF0MlnuAg4lCk/edit?usp=sharing)
