@@ -1,2 +1,1 @@
-# Car-Renting
-Bài tập lớn Phát triển ứng dụng web 
+﻿Hệ thống cho thuê xe trực tuyến.
