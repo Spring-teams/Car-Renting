@@ -2,6 +2,7 @@ package net.springteam.CarRenting.controller;
 
 import net.springteam.CarRenting.dao.AdminDao;
 import net.springteam.CarRenting.dao.CarDao;
+import net.springteam.CarRenting.dao.DaoFactory;
 import net.springteam.CarRenting.model.Admin;
 import net.springteam.CarRenting.model.Car;
 import org.apache.el.lang.EvaluationContext;
@@ -17,21 +18,18 @@ import java.util.Map;
 
 @RestController
 public class RestAPI {
-    private final ApplicationContext context= new ClassPathXmlApplicationContext("car_renting_config.xml");
-    private final CarDao carDao=(CarDao)context.getBean("car");
-    private final AdminDao adminDao=(AdminDao) context.getBean("admin");
 
 
 
     @RequestMapping(value = "api/getallcar",method=RequestMethod.GET,produces = "application/json")
     @ResponseBody
     public List<Car> getAllCar(){
-        return carDao.getAllCar();
+        return DaoFactory.carDao.getAllCar();
     }
     @RequestMapping(value="api/getadminbyid/{id}",method=RequestMethod.GET,produces = "application/json")
     @ResponseBody
     public Admin getAdminById(@PathVariable("id") String adminID){
-        return adminDao.getAdminById(adminID);
+        return DaoFactory.adminDao.getAdminById(adminID);
     }
 
 }

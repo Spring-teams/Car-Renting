@@ -1,21 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hệ Thống Cho Thuê Xe Trực Tuyến</title>
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <script src="scripts/jquery-1.12.4.js"></script>
-    <script src="scripts/jquery-3.4.1.min.js"></script>
-    <script src="scripts/home.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="./scripts/jquery-1.12.4.js"></script>
+    <script src="./scripts/jquery-3.4.1.min.js"></script>
+    <script src="./scripts/home.js"></script>
+
+
 </head>
 <body>
 <div class="container">
-    <div class="menu-bar" >
+    <ul class="header">
+        <li>Trang chủ</li>
+        <li>Hướng dẫn</li>
+        <li>Tra cứu</li>
+        <li>Giới thiệu</li>
+    </ul>
+    <div class="content">
+        <div class="left-menu-bar">
+            <div class="menu-content">
+                <h3>Tìm xe</h3>
+                <div  class="filter" id="4">Xe 4 chỗ ngồi</div>
+                <div class="filter" id="7">Xe 7 chỗ ngồi</div>
+                <div class="filter" id="16">Xe 16 chỗ ngồi</div>
+                <select>
+                    <option>Tất cả hãng xe</option>
+                    <option>Toyota</option>
+                    <option>Mazda</option>
+                    <option>Mercedes</option>
+                    <option>Ford</option>
+                </select>
+                <button id="find-button">Tìm kiếm</button>
+            </div>
 
-        <div class="customer-management" th:classappend="${className}">Quản lý khách hàng</div>
-        <div class="car-management" th:classappend="${className}">Quản lý xe</div>
-        <div class="account">Tài Khoản</div>
+        </div>
+        <div class="main-content">
+<!--            <div class="wrapper">-->
+<!--                <div class="car-image"></div>-->
+<!--                <div class="car-content">-->
+<!--                    <div class="car-header">-->
+<!--                        <div class="car-name">Mercedes - benz</div>-->
+<!--                        <div class="car-price">1.000.000</div>-->
+<!--                    </div>-->
+<!--                    <hr>-->
+<!--                    <div class="car-info">-->
+<!--                        <div class="car-branch">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Nhãn hiệu: Mercedes-->
+<!--                        </div>-->
+<!--                        <div class="setting">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Hộp số-->
+<!--                        </div>-->
+<!--                        <div>Loại xe: 7 chỗ</div>-->
+<!--                        <div class="ventor">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Máy lạnh: có-->
+<!--                        </div>-->
+<!--                        <div class="battery">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Tiêu hao: 5 L/100km-->
+<!--                        </div>-->
+<!--                        <button class="let-rent">Thuê Ngay</button>-->
+<!--                        <div class="carnumber">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Biển số-->
+<!--                        </div>-->
+<!--                        <div class="limit">-->
+<!--                            <i class="icon"></i>-->
+<!--                            Giới hạn: 250 km/ngày-->
+<!--                        </div>-->
+<!--                        <div></div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+        </div>
     </div>
 </div>
 </body>

@@ -1,11 +1,10 @@
 package net.springteam.CarRenting.controller;
 
+import net.springteam.CarRenting.dao.DaoFactory;
+import net.springteam.CarRenting.model.Car;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,4 +30,12 @@ public class APIController {
     public String comfirmAdmin(@RequestParam(name="username") String username, @RequestParam(name="password") String password){
         return "home";
     }
+
+    @RequestMapping(value="/getSubmitForm",method = RequestMethod.GET)
+    public String getSubmitForm(@RequestParam(name="id") String id, Model model){
+        Car car= DaoFactory.carDao.getCarById(id);
+        model.addAttribute("car",car);
+        return "submitForm";
+    }
+
 }

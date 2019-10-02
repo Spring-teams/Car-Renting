@@ -18,8 +18,12 @@ public class CarDao {
         this.template.update(SQL,car.getCarID(),car.getAdminID(),car.getPrice(),car.getCarName(),car.getBranch(),car.getNumberSeat(),car.getImage());
     }
     public List<Car> getAllCar(){
-        String SQL="select * from car inner join category";
+        String SQL="select * from car inner join category on car.categoryId=category.categoryId";
         List<Car> cars=this.template.query(SQL,new CarMapper());
         return cars;
+    }
+    public Car getCarById(String id){
+        String SQL="select * from car inner  join category  on car.categoryId=category.categoryId where car.carId= ?;";
+        return this.template.queryForObject(SQL,new CarMapper(),id);
     }
 }

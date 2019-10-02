@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin khách hàng</title>
+    <link type="text/css" rel="stylesheet" href="./css/submitForm.css">
+    <link rel="stylesheet" href="./css/home.css">
+
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>Xác nhận thuê xe</h2>
+
+    </div>
+    <div class="form-submit">
+        <div class="form-car-content">
+            <div class="form-car-image"></div>
+            <div class="form-car-info">
+                <div class="form-car-info-header"  >
+                    <div th:text="${car.carName}"></div>
+                    <div th:text="${#numbers.formatInteger(car.price,3,'POINT')+' đ/ngày '}" style="margin-right: 10px;"></div>
+
+                </div>
+
+                <hr>
+                <div class="form-car-info-main-content">
+                    <div class="car-branch">
+                        <i class="icon"></i>
+                        <div th:text="${'Nhãn hiệu: ' + car.branch}">Nhãn hiệu: </div>
+                    </div>
+                    <div class="setting">
+                        <i class="icon"></i>
+                        Hộp số: tự động
+                    </div>
+                    <div class="category">
+                        <i class="icon"></i>
+                        <div th:text="${'Loại xe: ' + car.categoryName}">Nhãn hiệu: </div>
+                    </div>
+                    <div class="number-seat">
+                        <i class="icon"></i>
+                        <div th:text="${'Số ghế: ' + car.numberSeat}">Nhãn hiệu: </div>
+                    </div>
+                    <div class="limit">
+                        <i class="icon"></i>
+                        Giới hạn: 250 km/h
+                    </div>
+                    <div class="battery">
+                        <i class="icon"></i>
+                        Tiêu hao: 5 L/100km
+                    </div>
+                    <div class="carId">
+                        <i class="icon"></i>
+                        <div th:text="${'Biển số: ' + car.carID}">Nhãn hiệu: </div>
+                    </div>
+                    <div class="ventor">
+                        <i class="icon"></i>
+                        Điều hòa: Có
+                    </div>
+                    <div></div>
+                </div>
+                <div class="company-info"></div>
+            </div>
+        </div>
+        <div class="form-customer-info">
+            <div class="form-customer-info-header">
+                <h2>Thông tin khách hàng</h2>
+                <p style="color: red;">Chú ý: bạn phải nhập đủ các trường có dấu *</p>
+            </div>
+            <div class="form-main-customer-info">
+                <div class="infor-wrapper">
+                    <div>Họ và tên <font>*</font></div>
+                    <input name="customerName" type="text">
+                </div>
+                <div class="infor-wrapper">
+                    <div>Số CMND<font>*</font></div>
+                    <input name="customerName" type="text">
+                </div>
+                <div class="infor-wrapper">
+                    <div>Giới tính<font>*</font></div>
+                    <input name="gender" type="radio">Nam
+                    <input name="gender" type="radio">Nữ
+                </div>
+                <div class="infor-wrapper">
+                    <div>Số điện thoại <font>*</font></div>
+                    <input name="customerName" type="text">
+                </div>
+                <div class="infor-wrapper">
+                    <div>Công ty</div>
+                    <input name="customerName" type="text">
+                </div>
+                <div class="infor-wrapper">
+                    <div>Ngày sinh<font>*</font></div>
+                    <input name="customerName" type="text">
+                </div>
+                <div class="infor-wrapper div-button">
+                    <button class="confirm-button">Xác nhận</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
