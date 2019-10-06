@@ -139,7 +139,11 @@ h3{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
+    border-radius: 5px;
 
+}
+.car-name{
+    padding-left: 10px;
 }
 .wrapper .car-content{
     /*background-color: red;*/
@@ -235,3 +239,4 @@ button.let-rent:hover{
     box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
 }
+

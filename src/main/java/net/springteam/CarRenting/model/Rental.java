@@ -1,30 +1,38 @@
 package net.springteam.CarRenting.model;
 
+import java.sql.Date;
+
 public class Rental {
-    String beginDate;
-    String endDate;
+    String rentalId;
+    Date beginDate;
+    Date endDate;
     int totalMoney;
     int isRent;
     int isPay;
-    String customerName;
+    String adminId;
     String customerId;
-    String customerPhone;
-    String adminName;
-    String adminEmail;
 
-    public String getBeginDate() {
+    public String getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
+    }
+
+    public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(String beginDate) {
+    public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -52,12 +60,12 @@ public class Rental {
         this.isPay = isPay;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getAdminId() {
+        return adminId;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getCustomerId() {
@@ -66,29 +74,5 @@ public class Rental {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
-
-    public String getAdminName() {
-        return adminName;
-    }
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
-    }
-
-    public String getAdminEmail() {
-        return adminEmail;
-    }
-
-    public void setAdminEmail(String adminEmail) {
-        this.adminEmail = adminEmail;
     }
 }

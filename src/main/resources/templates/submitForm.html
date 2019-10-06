@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>Thông tin khách hàng</title>
+
+    <link rel="stylesheet" href="./css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="./css/submitForm.css">
     <link rel="stylesheet" href="./css/home.css">
+
+    <script src="/scripts/jquery-1.12.4.js"></script>
+    <script src="/scripts/jquery-ui.min.js"></script>
+    <script src="./scripts/submitform.js" type="text/javascript"></script>
+
+
 
 </head>
 <body>
@@ -16,11 +25,12 @@
     </div>
     <div class="form-submit">
         <div class="form-car-content">
-            <div class="form-car-image"></div>
+            <div th:class="${'form-car-image '+ car.carID }" th:attr="imageName=${ car.image}"></div>
             <div class="form-car-info">
-                <div class="form-car-info-header"  >
+                <div class="form-car-info-header">
                     <div th:text="${car.carName}"></div>
-                    <div th:text="${#numbers.formatInteger(car.price,3,'POINT')+' đ/ngày '}" style="margin-right: 10px;"></div>
+                    <div th:text="${#numbers.formatInteger(car.price,3,'POINT')+' đ/ngày '}"
+                         style="margin-right: 10px;"></div>
 
                 </div>
 
@@ -28,7 +38,7 @@
                 <div class="form-car-info-main-content">
                     <div class="car-branch">
                         <i class="icon"></i>
-                        <div th:text="${'Nhãn hiệu: ' + car.branch}">Nhãn hiệu: </div>
+                        <div th:text="${'Nhãn hiệu: ' + car.branch}">Nhãn hiệu:</div>
                     </div>
                     <div class="setting">
                         <i class="icon"></i>
@@ -36,11 +46,11 @@
                     </div>
                     <div class="category">
                         <i class="icon"></i>
-                        <div th:text="${'Loại xe: ' + car.categoryName}">Nhãn hiệu: </div>
+                        <div th:text="${'Loại xe: ' + car.categoryName}">Nhãn hiệu:</div>
                     </div>
                     <div class="number-seat">
                         <i class="icon"></i>
-                        <div th:text="${'Số ghế: ' + car.numberSeat}">Nhãn hiệu: </div>
+                        <div th:text="${'Số ghế: ' + car.numberSeat}">Nhãn hiệu:</div>
                     </div>
                     <div class="limit">
                         <i class="icon"></i>
@@ -52,7 +62,7 @@
                     </div>
                     <div class="carId">
                         <i class="icon"></i>
-                        <div th:text="${'Biển số: ' + car.carID}">Nhãn hiệu: </div>
+                        <div th:text="${'Biển số: ' + car.carID}">Nhãn hiệu:</div>
                     </div>
                     <div class="ventor">
                         <i class="icon"></i>
@@ -69,37 +79,59 @@
                 <p style="color: red;">Chú ý: bạn phải nhập đủ các trường có dấu *</p>
             </div>
             <div class="form-main-customer-info">
-                <div class="infor-wrapper">
+                <div class="infor-wrapper mustfill">
                     <div>Họ và tên <font>*</font></div>
-                    <input name="customerName" type="text">
+                    <input name="customerName" type="text" belong="customer">
+                    <span class="warning"></span>
                 </div>
-                <div class="infor-wrapper">
+                <div class="infor-wrapper mustfill">
                     <div>Số CMND<font>*</font></div>
-                    <input name="customerName" type="text">
+                    <input name="customerId" type="text" belong="customer">
+                    <span class="warning"></span>
                 </div>
-                <div class="infor-wrapper">
+                <div class="infor-wrapper mustfill">
                     <div>Giới tính<font>*</font></div>
-                    <input name="gender" type="radio">Nam
-                    <input name="gender" type="radio">Nữ
+                    <input name="gender" type="radio" belong="customer" _gender="Nam" checked>Nam
+                    <input name="gender" type="radio" belong="customer" _gender="Nữ">Nữ
                 </div>
-                <div class="infor-wrapper">
+                <div class="infor-wrapper mustfill">
                     <div>Số điện thoại <font>*</font></div>
-                    <input name="customerName" type="text">
+                    <input name="customerPhone" type="text" belong="customer">
+                    <span class="warning"></span>
+                </div>
+                <div class="infor-wrapper mustfill">
+                    <div>Email <font>*</font></div>
+                    <input name="email" type="text" belong="customer">
+                    <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper">
                     <div>Công ty</div>
-                    <input name="customerName" type="text">
+                    <input name="customerCompany" type="text" belong="customer">
+                </div>
+                <div class="infor-wrapper mustfill">
+                    <div>Ngày sinh<font>*</font></div>
+                    <input name="birthday" type="text" belong="customer">
+                    <span class="warning"></span>
+                </div>
+
+                <div class="infor-wrapper form-begin-date mustfill">
+                    <div>Ngày thuê:<font>*</font></div>
+                    <input type="text"class="input-begin-date" placeholder="dd-mm-yyyy" name="beginDate" belong="rental">
+                    <span class="warning"></span>
+                </div>
+                <div class=" infor-wrapper form-begin-date mustfill">
+                    <div>Ngày trả:<font>*</font></div>
+                    <input type="text" class="input-end-date" placeholder="dd-mm-yyyy" name="endDate" belong="rental">
+                    <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper">
-                    <div>Ngày sinh<font>*</font></div>
-                    <input name="customerName" type="text">
+                    <div>Tổng số tiền: </div>
+                    <div class="form-total-money" th:id="${car.price}" style="color: #0f3bff" belong="rental" name="totalMoney">0 Đồng</div>
                 </div>
                 <div class="infor-wrapper div-button">
                     <button class="confirm-button">Xác nhận</button>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

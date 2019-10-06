@@ -15,5 +15,11 @@
     <bean id="admin" class="net.springteam.CarRenting.dao.AdminDao">
         <constructor-arg ref="DataSource"/>
     </bean>
+    <bean id="customer" class="net.springteam.CarRenting.dao.CustomerDao">
+        <constructor-arg ref="DataSource"/>
+    </bean>
+    <bean id="rental" class="net.springteam.CarRenting.dao.RentalDao">
+        <constructor-arg ref="DataSource"/>
+    </bean>
 
 </beans>

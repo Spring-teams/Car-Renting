@@ -23,7 +23,7 @@ $(document).ready(function(){
         car.filterCar(seatNumber,branch);
 
     });
-    $(".let-rent").on("click",function(){
+    $(".car-info").on("click",".let-rent",function(){
         var parent=$(this).parent();
         var carId=parent.find(".carId").attr('name');
         window.open('/getSubmitForm?id='+carId);
@@ -55,11 +55,11 @@ Car.prototype={
     },
     getWrapper: function(item){
         var wrapper=$("<div class=\"wrapper\">\n" +
-            "                <div class=\"car-image\"></div>\n" +
+            "                <div class=\"car-image "+item.carID+"\"></div>\n" +
             "                <div class=\"car-content\">\n" +
             "                    <div class=\"car-header\">\n" +
             "                        <div class=\"car-name\">"+item.carName+"</div>\n" +
-            "                        <div class=\"car-price\">"+item.price+"</div>\n" +
+            "                        <div class=\"car-price\">"+formatNumber(parseInt(item.price))+" VND"+"</div>\n" +
             "                    </div>\n" +
             "                    <hr>\n" +
             "                    <div class=\"car-info\">\n" +
@@ -95,6 +95,7 @@ Car.prototype={
             "                </div>\n" +
             "\n" +
             "            </div>");
+
         return wrapper;
     },
     loadAllToView: function(){
@@ -104,6 +105,11 @@ Car.prototype={
         main_content.empty();
         $.each(data,function(index,item){
             main_content.append(me.getWrapper(item));
+            var b=".car-image."+item.carID;
+            var name="url('../images/"+item.image+".png')";
+            $(b).css("background-image",name);
+
+
         });
     },
     filterCar: function(numberSeat,branch){
@@ -112,12 +118,19 @@ Car.prototype={
         var data=this.getAllCar();
         var main_content=$(".main-content");
         main_content.empty();
+
         $.each(data,function(index,item){
             if(item.numberSeat==numberSeat && (item.branch==branch || branch=="Tất cả hãng xe")){
                 main_content.append(me.getWrapper(item));
+                var b=".car-image."+item.carID;
+                var name="url('../images/"+item.image+".png')";
+                $(b).css("background-image",name);
 
             }
         })
 
     }
+}
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }

@@ -1,16 +1,55 @@
 package net.springteam.CarRenting.model;
 
+import java.sql.Date;
+
 public class Customer {
-    String customerID;
+    String customerId;
     String customerName;
     String customerPhone;
+    String customerCompany;
+    String gender;
+    Date birthday;
+    String email;
 
-    public String getCustomerID() {
-        return customerID;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCustomerCompany() {
+        return customerCompany;
+    }
+
+    public void setCustomerCompany(String customerCompany) {
+        this.customerCompany = customerCompany;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerID) {
+        this.customerId = customerID;
     }
 
     public String getCustomerName() {

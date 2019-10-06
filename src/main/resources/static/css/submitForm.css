@@ -45,14 +45,14 @@ div{
 }
 .form-car-content{
     width: 80vw;
-    height: 400px;
+    height: 300px;
     margin: 0 auto;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-    border: 1px solid blue;
+    /*border: 1px solid ;*/
     border-radius: 10px;
-    background-color: rgba(232, 236, 241, 1);
+    background-color: white;
 
 }
 .form-car-image{
@@ -170,4 +170,17 @@ font{
     box-shadow: 2px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
     color: white;
+}
+.red-border{
+    border: 1px solid red;
+}
+.warning{
+    height: 20px;
+    width: 20px;
+    background-image: url("../images/warning-icon.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 10px 0px auto 10px;
+    background-position: center;
+    display: none;
 }
