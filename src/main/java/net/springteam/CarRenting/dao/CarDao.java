@@ -14,16 +14,16 @@ public class CarDao {
         this.template= new JdbcTemplate(this.dataSource);
     }
     public void insert(Car car){
-        String SQL="insert into Car (carId,adminId,categoryId,price,carName,branch,numberSeat,image) values(?,?,?,?,?,?,?,?)";
-        this.template.update(SQL,car.getCarID(),car.getAdminID(),car.getPrice(),car.getCarName(),car.getBranch(),car.getNumberSeat(),car.getImage());
+        String SQL="insert into Car (carId,ownerId,categoryId,price,carName,branch,numberSeat,image) values(?,?,?,?,?,?,?,?)";
+        this.template.update(SQL,car.getCarID(),car.getOwnerId(),car.getPrice(),car.getCarName(),car.getBranch(),car.getNumberSeat(),car.getImage());
     }
     public List<Car> getAllCar(){
-        String SQL="select * from car inner join category on car.categoryId=category.categoryId order by car.numberSeat";
+        String SQL="select * from car inner join category on car.categoryId=category.categoryId  inner join owner on owner.ownerId=car.ownerId order by car.numberSeat";
         List<Car> cars=this.template.query(SQL,new CarMapper());
         return cars;
     }
     public Car getCarById(String id){
-        String SQL="select * from car inner  join category  on car.categoryId=category.categoryId where car.carId= ?;";
+        String SQL="select * from car inner join category  on car.categoryId=category.categoryId inner join owner on owner.ownerId=car.ownerId  where car.carId= ?;";
         return this.template.queryForObject(SQL,new CarMapper(),id);
     }
 }

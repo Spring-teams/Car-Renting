@@ -19,6 +19,11 @@ public class CustomerDao {
         List<Customer> customers = this.template.query(SQL,new CustomerMapper(),customer.getCustomerId());
         return customers.size()==0 ? false : true;
     }
+    public Boolean comfirmUser(Customer customer){
+        String SQL="select * from customer where customerId=? and pass=?";
+        List<Customer> customers=this.template.query(SQL, new CustomerMapper(),customer.getCustomerId(),customer.getPass());
+        return customers.size()==0 ? false : true;
+    }
     public void insertCustomer(Customer customer){
         if(checkIfExist(customer)){
             return ;

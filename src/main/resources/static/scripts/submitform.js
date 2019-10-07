@@ -24,8 +24,8 @@ $(document).ready(function(){
         endDate=new Date(endDate[2],endDate[1],endDate[0]);
         var diffDate=Math.abs(endDate-beginDate)/(1000*60*60*24);
         price=parseInt($(".form-total-money").attr("id"));
-        $(".form-total-money").text(formatNumber(price*diffDate)+" Đ");
-
+        price=price*diffDate;
+        $(".form-total-money").text(formatNumber(price)+" Đ");
     });
     // submit button event
     // 4/10/2019 dominhkha
@@ -55,7 +55,8 @@ $(document).ready(function(){
                 async: false,
 
                 success: function (response) {
-                    debugger
+                    alert("Xác nhận thành công!");
+                    location.reload()
                 },
                 error: function (response) {
                     alert("lỗi")
@@ -80,16 +81,8 @@ function getInforFromForm(price){
     var rental={};
 
     $.each(customerInputProperties,function(index,item){
-        if($(this).attr("name")=="gender"){
-            if($(this).is(':checked')) {
-                customer[$(this).attr('name')] = $(this).attr("_gender");
-            }
-
-        }
-
-        else {
             customer[$(this).attr('name')]=$(this).val();
-        }
+
     });
     $.each(rentalInputProperties,function(index,item){
         // if($(this).attr('class')=="form-total-money"){
@@ -99,7 +92,7 @@ function getInforFromForm(price){
         // else {
         //     rental[$(this).attr('name')]=$
         // }
-        if($(this).attr("name")=="beginDate" || $(this).attr("name")=="endDate"){
+        if($(this).attr("name")=="beginDate" || $(this).attr("name")=="endDate" ){
             var date=$(this).val().split("-").reverse().join("-");
             rental[$(this).attr("name")]=date;
         }
@@ -113,6 +106,10 @@ function getInforFromForm(price){
     rental['isRent']=0;
     rental['isPay']=0;
     rental['customerId']=customer['customerId'];
+    rental['ownerId']=$(".owner").attr('id');
+    rental['carId']=$(".form-car-content").attr("id");
+    rental['confirm']=0;
+    debugger
     return [customer,rental];
 }
 

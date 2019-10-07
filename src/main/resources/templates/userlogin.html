@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/login.css">
@@ -11,18 +11,18 @@
 </head>
 <body>
 <div class="container">
-    <form class="login-form" action="/comfirmAdmin_">
+    <form class="login-form" action="#" th:object="${customer}" th:action="@{/confirmuser}" method="post">
         <h1>Đăng nhập</h1>
         <div class="js-txtb">
-            <input type="text" name="username">
+            <input type="text" th:field="*{customerId}">
             <span data-placeholder="Tên đăng nhập"></span>
         </div>
 
         <div class="js-txtb">
-            <input type="password" name="password">
-            <span data-placeholder="Mật khẩu"></span>
+            <input type="password" th:field="*{pass}">
+            <span data-placeholder="password"></span>
         </div>
-        <button class="js-logbutton" name="submit">Đăng nhập</button>
+        <button class="js-logbutton" >Đăng nhập</button>
         <div class="button-text">Bạn chưa có tài khoản? <a href="#">Đăng ký</a></div>
     </form>
 

@@ -24,7 +24,7 @@
 
     </div>
     <div class="form-submit">
-        <div class="form-car-content">
+        <div class="form-car-content" th:id="${car.carID}">
             <div th:class="${'form-car-image '+ car.carID }" th:attr="imageName=${ car.image}"></div>
             <div class="form-car-info">
                 <div class="form-car-info-header">
@@ -68,9 +68,23 @@
                         <i class="icon"></i>
                         Điều hòa: Có
                     </div>
-                    <div></div>
+                    <div>
+                    </div>
                 </div>
-                <div class="company-info"></div>
+                <div class="owner-info">
+                    <div class="owner" th:id="${car.ownerId}">
+                        <i class="icon"></i>
+                        <div th:text="${'Chủ xe: '+ car.ownerName}"></div>
+                    </div>
+                    <div class="owner-company">
+                        <i class="icon"></i>
+                        <div th:text="${'Tên công ty : '+ car.ownerCompany}"></div>
+                    </div>
+                    <div class="owner-email">
+                        <i class="icon"></i>
+                        <div th:text="${'Email : '+ car.ownerEmail}"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-customer-info">
@@ -80,37 +94,36 @@
             </div>
             <div class="form-main-customer-info">
                 <div class="infor-wrapper mustfill">
-                    <div>Họ và tên <font>*</font></div>
-                    <input name="customerName" type="text" belong="customer">
+                    <div>Họ và tên</div>
+                    <input name="customerName" type="text" belong="customer" th:value="${customer.customerName}" readonly>
                     <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper mustfill">
-                    <div>Số CMND<font>*</font></div>
-                    <input name="customerId" type="text" belong="customer">
+                    <div >Số CMND</div>
+                    <input name="customerId" type="text" belong="customer" th:value="${customer.customerId}" readonly>
                     <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper mustfill">
-                    <div>Giới tính<font>*</font></div>
-                    <input name="gender" type="radio" belong="customer" _gender="Nam" checked>Nam
-                    <input name="gender" type="radio" belong="customer" _gender="Nữ">Nữ
+                    <div>Giới tính</div>
+                    <input name="gender" type="text" belong="customer" th:value="${customer.getGender()}" readonly>
                 </div>
                 <div class="infor-wrapper mustfill">
-                    <div>Số điện thoại <font>*</font></div>
-                    <input name="customerPhone" type="text" belong="customer">
+                    <div>Số điện thoại</div>
+                    <input name="customerPhone" type="text" belong="customer" th:value="${customer.customerPhone}" readonly>
                     <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper mustfill">
-                    <div>Email <font>*</font></div>
-                    <input name="email" type="text" belong="customer">
+                    <div>Email </div>
+                    <input name="email" type="text" belong="customer" th:value="${customer.email}" readonly>
                     <span class="warning"></span>
                 </div>
                 <div class="infor-wrapper">
                     <div>Công ty</div>
-                    <input name="customerCompany" type="text" belong="customer">
+                    <input name="customerCompany" type="text" belong="customer" th:value="${customer.customerCompany}" readonly>
                 </div>
                 <div class="infor-wrapper mustfill">
-                    <div>Ngày sinh<font>*</font></div>
-                    <input name="birthday" type="text" belong="customer">
+                    <div>Ngày sinh</div>
+                    <input name="birthday" type="text" belong="customer" th:value="${customer.birthday}" readonly>
                     <span class="warning"></span>
                 </div>
 

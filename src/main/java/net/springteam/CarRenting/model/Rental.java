@@ -3,20 +3,65 @@ package net.springteam.CarRenting.model;
 import java.sql.Date;
 
 public class Rental {
-    String rentalId;
+    int rentalId;
     Date beginDate;
     Date endDate;
     int totalMoney;
     int isRent;
     int isPay;
-    String adminId;
+    String ownerId;
     String customerId;
+    String ownerName;
+    String ownerCompany;
+    String ownerEmail;
+    String carId;
+    int confirm;
 
-    public String getRentalId() {
+    public int getConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(int confirm) {
+        this.confirm = confirm;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerCompany() {
+        return ownerCompany;
+    }
+
+    public void setOwnerCompany(String ownerCompany) {
+        this.ownerCompany = ownerCompany;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public int getRentalId() {
         return rentalId;
     }
 
-    public void setRentalId(String rentalId) {
+    public void setRentalId(int rentalId) {
         this.rentalId = rentalId;
     }
 
@@ -60,12 +105,12 @@ public class Rental {
         this.isPay = isPay;
     }
 
-    public String getAdminId() {
-        return adminId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getCustomerId() {

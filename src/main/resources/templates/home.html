@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Hệ Thống Cho Thuê Xe Trực Tuyến</title>
@@ -13,12 +13,17 @@
 <body>
 <div class="container">
     <ul class="header">
-        <li class="home" id="home-container">Trang chủ</li>
-        <li>Hướng dẫn</li>
-        <li class="search" id="search-container">Tra cứu</li>
-        <li>Giới thiệu</li>
+        <li class="" id="home-container">Trang chủ</li>
+        <li class="guide">Hướng dẫn</li>
+        <li class="history">Lịch sử</li>
+        <li class="account">Tài khoản
+            <ul>
+                <li class="get-customer-info" th:id="${customer.getCustomerId()}">Thông tin cá nhân</li>
+                <li class="logout" th:text="${login}"></li>
+            </ul>
+        </li>
     </ul>
-    <div class="content home-container">
+    <div th:class="${'content '+ page.home}">
         <div class="left-menu-bar">
             <div class="menu-content">
                 <h3>Tìm xe</h3>
@@ -81,9 +86,38 @@
 
         </div>
     </div>
-    <div class="search-container">
-        oke rồi
+    <div th:class="${'content history-container '+ page.history}">
+
     </div>
+    <div th:class="${'content info-container '+ page.info }">
+        <i class="icon"></i>
+        <div class="customer-info-wrapper">
+            <div>Họ và tên: </div>
+            <input th:value="${customer.customerName}" readonly></input>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Số CMND: </div>
+            <input th:value="${customer.customerId}" readonly></input>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Giới tính:  </div>
+            <input th:value="${customer.getGender()}" readonly></input>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Ngày sinh:  </div>
+            <input th:value="${customer.birthday}" readonly></input>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Công ty: </div>
+            <input th:value="${customer.customerCompany}" readonly></input>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Số điện thoại </div>
+            <input th:value="${customer.customerPhone}" readonly></input>
+        </div>
+
+    </div>
+    <div th:class="${'content guide-container '+ page.guide}"></div>
 </div>
 </body>
 </html>

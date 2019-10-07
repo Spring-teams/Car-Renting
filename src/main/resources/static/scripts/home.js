@@ -1,6 +1,20 @@
 $(document).ready(function(){
     var car= new Car();
+    var islogin=$(".get-customer-info").attr("id")!="0";
 
+    $(".header").on("click","li",function(){
+        if($(this).attr("class")!="account" && $(".get-customer-info").attr("id")!="0"){
+
+            window.location.href="/"+$(this).attr("class");
+
+        }
+        if($(".get-customer-info").attr("id")=="0"&& $(this).attr("id")!="home-container"){
+            window.location.href="/login";
+            return;
+        }
+
+
+    })
     $(".menu-content").on("click",".filter",function(){
 
         if($(this).hasClass("color-button")){
@@ -23,12 +37,20 @@ $(document).ready(function(){
         car.filterCar(seatNumber,branch);
 
     });
-    $(".car-info").on("click",".let-rent",function(){
+    $(".wrapper").on("click",".let-rent",function(){
+        if(!islogin){
+            window.location.href="/login";
+            return ;
+        }
         var parent=$(this).parent();
         var carId=parent.find(".carId").attr('name');
-        window.open('/getSubmitForm?id='+carId);
+        window.open('/getSubmitForm?carid='+carId+"&customerid="+$(".get-customer-info").attr("id"));
 
     });
+
+    doHistory();
+
+
 });
 
 function Car(){
@@ -72,15 +94,21 @@ Car.prototype={
             "                            Hộp số: Tự động\n" +
             "                        </div>\n" +
             "                        <div class='number-seat'><i class='icon'></i> Số ghế: " + item.numberSeat+" chỗ</div>\n" +
-            "                        <div class=\"ventor\">\n" +
+            "                        <div class=\"owner\" name="+item.carID+">\n" +
             "                            <i class=\"icon\"></i>\n" +
-            "                            Máy lạnh: có\n" +
+            "                            Chủ xe: " + item.ownerName+"\n"+
             "                        </div>\n" +
+
             "                        <div class=\"battery\">\n" +
             "                            <i class=\"icon\"></i>\n" +
             "                            Tiêu hao: 5 L/100km\n" +
             "                        </div>\n" +
-            "                        <button class=\"let-rent\">Thuê Ngay</button>\n" +
+            "                        <div class=\"ventor\">\n" +
+            "                            <i class=\"icon\"></i>\n" +
+            "                            Máy lạnh: có\n" +
+            "                        </div>\n" +
+
+
             "                        <div class=\"carId\" name="+item.carID+">\n" +
             "                            <i class=\"icon\"></i>\n" +
             "                            Biển số: " + item.carID+"\n"+
@@ -92,6 +120,7 @@ Car.prototype={
             "                        <div class='category'><i class='icon'></i>Loại xe: " +item.categoryName +"</div>\n" +
             "\n" +
             "                    </div>\n" +
+            "                        <button class=\"let-rent\">Thuê Ngay</button>\n" +
             "                </div>\n" +
             "\n" +
             "            </div>");
@@ -130,6 +159,44 @@ Car.prototype={
         })
 
     }
+}
+function getRentalInfor(){
+    var customerId=$(".get-customer-info").attr("id");
+
+    var data={};
+    $.ajax({
+        url: "api/getrental/"+customerId,
+        type:"GET",
+        dataType: "json",
+        async: false,
+        success: function (res) {
+            data=res['rentals'];
+        },
+        error: function(res){
+            alert("Lỗi lấy mã đơn thuê!");
+        }
+    });
+    return data;
+}
+function doHistory() {
+    var data=getRentalInfor();
+    if(data=="no"){
+        return ;
+    }
+    $.each(data,function(index,item){
+        var divTag=$("        <div class=\"rent-info-wrapper\">\n" +
+            "            <div>Mã hóa đơn: " + item.rentalId +"</div>\n" +
+            "            <div>Mã chủ xe: "+item.ownerId+" </div>\n" +
+            "            <div>Ngày bắt đầu: "+item.beginDate+" </div>\n" +
+            "            <div>Ngày trả xe: "+item.endDate+"</div>\n" +
+            "            <div>Tổng số tiền: "+ formatNumber(item.totalMoney)+"</div>\n" +
+            "            <div>Đã thanh toán: "+item.isPay+"</div>\n" +
+            "            <div>Biển số xe: "+item.carId+"</div>\n" +
+            "            <div>Tên chủ xe: "+item.ownerName+"</div>\n" +
+            "            <div></div>\n" +
+            "        </div>");
+        $(".history-container").append(divTag);
+    });
 }
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')

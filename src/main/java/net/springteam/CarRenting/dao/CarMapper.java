@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class CarMapper  implements RowMapper<Car> {
     public Car mapRow(ResultSet rs,int numRow) throws SQLException{
         Car car = new Car();
-        car.setAdminID(rs.getString("adminId"));
+        car.setOwnerId(rs.getString("ownerId"));
         car.setBranch(rs.getString("branch"));
         car.setCarID(rs.getString("carID"));
         car.setCarName(rs.getString("carName"));
@@ -18,6 +18,9 @@ public class CarMapper  implements RowMapper<Car> {
         car.setCategoryName(rs.getString("categoryName"));
         car.setPrice(rs.getInt("price"));
         car.setNumberSeat(rs.getInt("numberSeat"));
+        car.setOwnerName(rs.getString("ownerName"));
+        car.setOwnerEmail(rs.getString("email"));
+        car.setOwnerCompany(rs.getString("companyName"));
         return car;
     }
 }

@@ -10,6 +10,15 @@ public class Customer {
     String gender;
     Date birthday;
     String email;
+    String pass;
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     public String getEmail() {
         return email;

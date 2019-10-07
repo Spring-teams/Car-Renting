@@ -70,7 +70,8 @@ div{
     width: calc(100% - 400px - 20px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
+    /*justify-content: space-between;*/
 }
 .form-car-info-header{
     width: 100%;
@@ -138,11 +139,11 @@ div{
     font-size: 18px;
     padding-left: 5px;
 }
-.form-customer-info .infor-wrapper input[name=gender]{
-    width: 20px;
-    text-align: center;
-    height: 15px;
-}
+/*.form-customer-info .infor-wrapper input[name=gender]{*/
+/*    width: 20px;*/
+/*    text-align: center;*/
+/*    height: 15px;*/
+/*}*/
 font{
     color: red;
 }
@@ -161,6 +162,7 @@ font{
     background-color: blue;
     border-radius: 5px;
     font-size: 16px;
+    color: white;
 }
 .confirm-button:hover{
     background: rgba(77, 19, 209, 1);
@@ -183,4 +185,26 @@ font{
     margin: 10px 0px auto 10px;
     background-position: center;
     display: none;
+}
+
+.owner-info{
+    width: 90%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    color: rgb(210, 82, 127);
+    font-size: 16px;
+    font-weight: bold;
+}
+.owner-info div{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+input[belong=customer]{
+    background-color: rgb(243, 241, 239);
+    border: 0px;
 }
