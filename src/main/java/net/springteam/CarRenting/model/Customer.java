@@ -4,36 +4,44 @@ import java.sql.Date;
 
 public class Customer {
     String customerId;
-    String customerName;
-    String customerPhone;
-    String customerCompany;
+    String name;
+    String phone;
+    String companyName;
     String gender;
     Date birthday;
     String email;
     String pass;
 
-    public String getPass() {
-        return pass;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCustomerCompany() {
-        return customerCompany;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCustomerCompany(String customerCompany) {
-        this.customerCompany = customerCompany;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getGender() {
@@ -52,28 +60,19 @@ public class Customer {
         this.birthday = birthday;
     }
 
-
-    public String getCustomerId() {
-        return customerId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCustomerId(String customerID) {
-        this.customerId = customerID;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getPass() {
+        return pass;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 }

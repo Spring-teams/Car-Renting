@@ -1302,7 +1302,7 @@ a.ui-button:active,
 
 /* Overlays */
 .ui-widget-overlay {
-	background: rgba(41, 241, 195, 1);
+	background: rgba(228, 241, 254, 1);
 	opacity: .5;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }

@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Hệ Thống Cho Thuê Xe Trực Tuyến</title>
     <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/jquery-ui.css">
+
     <script src="./scripts/jquery-1.12.4.js"></script>
     <script src="./scripts/jquery-3.4.1.min.js"></script>
+    <script src="./scripts/jquery-ui.min.js"></script>
+
     <script src="./scripts/home.js"></script>
 
 
@@ -93,31 +97,66 @@
         <i class="icon"></i>
         <div class="customer-info-wrapper">
             <div>Họ và tên: </div>
-            <input th:value="${customer.customerName}" readonly></input>
+            <input th:value="${customer.name}" readonly class="must-fill" name="name">
+            <span class="warning"></span>
         </div>
         <div class="customer-info-wrapper">
             <div>Số CMND: </div>
-            <input th:value="${customer.customerId}" readonly></input>
+            <input th:value="${customer.customerId}" readonly class="must-fill" name="customerId">
+            <span class="warning"></span>
         </div>
+
+
         <div class="customer-info-wrapper">
             <div>Giới tính:  </div>
-            <input th:value="${customer.getGender()}" readonly></input>
+            <input th:value="${customer.getGender()}" readonly name="gender">
+            <span class="warning"></span>
         </div>
+
         <div class="customer-info-wrapper">
             <div>Ngày sinh:  </div>
-            <input th:value="${customer.birthday}" readonly></input>
+            <input th:value="${customer.birthday}" readonly class="must-fill" name="birthday">
+            <span class="warning"></span>
         </div>
         <div class="customer-info-wrapper">
+            <div>Email:  </div>
+            <input th:value="${customer.email}" readonly class="must-fill" name="email">
+            <span class="warning"></span>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Mật khẩu:  </div>
+            <input type="password" th:value="${customer.pass}" readonly class="must-fill" name="pass">
+            <span class="warning"></span>
+        </div>
+        <div class="customer-info-wrapper">
+            <div>Nhập lại mật khẩu:  </div>
+            <input type="password" th:value="${customer.pass}" readonly class="must-fill">
+            <span class="warning"></span>
+        </div>
+
+        <div class="customer-info-wrapper">
             <div>Công ty: </div>
-            <input th:value="${customer.customerCompany}" readonly></input>
+            <input th:value="${customer.companyName}" readonly name="companyName">
+            <span class="warning" style="opacity: 0"></span>
         </div>
         <div class="customer-info-wrapper">
             <div>Số điện thoại </div>
-            <input th:value="${customer.customerPhone}" readonly></input>
+            <input th:value="${customer.phone}" readonly class="must-fill" name="phone">
+            <span class="warning"></span>
         </div>
-
+        <div class="info-button-wrapper">
+            <button class="update-info-discard">Bỏ qua</button>
+            <button class="update-info-save">Lưu</button>
+        </div>
     </div>
     <div th:class="${'content guide-container '+ page.guide}"></div>
+</div>
+<div id="confirm-dialog" >
+    <div>
+        <div class="icon success-icon"></div>
+        <div style="color: blue; margin-left: 5px;">Bạn đã sửa thông tin thành công</div>
+    </div>
+    <button class="confirm-button">OK</button>
 </div>
 </body>
 </html>

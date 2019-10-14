@@ -108,7 +108,7 @@ function getInforFromForm(price){
     rental['customerId']=customer['customerId'];
     rental['ownerId']=$(".owner").attr('id');
     rental['carId']=$(".form-car-content").attr("id");
-    rental['confirm']=0;
+    rental['isConfirm']=0;
     debugger
     return [customer,rental];
 }

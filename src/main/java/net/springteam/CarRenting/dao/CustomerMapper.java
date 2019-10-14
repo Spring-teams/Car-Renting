@@ -11,11 +11,11 @@ public class CustomerMapper implements RowMapper<Customer> {
     public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
         Customer customer = new Customer();
         customer.setCustomerId(resultSet.getString("customerId"));
-        customer.setCustomerName(resultSet.getString("customerName"));
-        customer.setCustomerPhone(resultSet.getString("customerPhone"));
+        customer.setName(resultSet.getString("name"));
+        customer.setPhone(resultSet.getString("phone"));
         customer.setBirthday(resultSet.getDate("birthday"));
         customer.setGender(resultSet.getString("gender"));
-        customer.setCustomerCompany(resultSet.getString("customerCompany"));
+        customer.setCompanyName(resultSet.getString("companyName"));
         customer.setEmail(resultSet.getString("email"));
         customer.setPass(resultSet.getString("pass"));
         return customer;

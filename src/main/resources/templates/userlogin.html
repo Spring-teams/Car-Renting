@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+
 
     <title>Title</title>
-    <link rel="stylesheet" href="css/jquery-ui.css">
-<!--    <script src="scripts/jquery-1.12.4.js"></script>-->
     <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
+
+    <script src="scripts/userLogin.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+<!--    <script src="scripts/jquery-1.12.4.js"></script>-->
+
 </head>
 <body>
 <div class="container">
@@ -15,7 +20,7 @@
         <h1>Đăng nhập</h1>
         <div class="js-txtb">
             <input type="text" th:field="*{customerId}">
-            <span data-placeholder="Tên đăng nhập"></span>
+            <span data-placeholder="Số CMND"></span>
         </div>
 
         <div class="js-txtb">
@@ -23,9 +28,67 @@
             <span data-placeholder="password"></span>
         </div>
         <button class="js-logbutton" >Đăng nhập</button>
-        <div class="button-text">Bạn chưa có tài khoản? <a href="#">Đăng ký</a></div>
+        <div class="button-text">Bạn chưa có tài khoản? <a href="#" class="form-register">Đăng ký</a></div>
     </form>
+    <div title="Đăng ký" id="sign-up-dialog">
+        <p>Bạn phải nhập tất cả các trường có dấu *</p>
+        <div class="sign-up-container">
+            <div class="sign-up-wrapper">
+                <div>Họ và tên:<font>*</font> </div>
+                <input name="name" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Số CMND: <font>*</font> </div>
+                <input name="customerId" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Ngày sinh:<font>*</font> </div>
+                <input placeholder="yy-mm-dd" name="birthday" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Số điện thoại:<font>*</font> </div>
+                <input name="phone" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Email:<font>*</font> </div>
+                <input name="email" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Tên công ty: </div>
+                <input name="companyName">
+            </div>
 
+            <div class="sign-up-wrapper">
+                <div>Giới tính:<font>*</font> </div>
+                <input type="radio" name="gender" value="Nam" checked>Nam
+                <input type="radio" name="gender" value="Nữ">Nữ
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Mật khẩu:<font>*</font> </div>
+                <input name="pass" class="must-fill">
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Nhập lại mật khẩu:<font>*</font> </div>
+                <input>
+                <span class="warning"></span>
+            </div>
+            <div class="sign-up-wrapper">
+                <div>Bạn muốn:<font>*</font>  </div>
+                <input type="radio">Thuê xe
+                <input type="radio" >Cho thuê xe
+            </div>
+            <div class="sign-up-button-wrapper">
+                <button class="regis-discard">Bỏ qua</button>
+                <button class="register">Đăng ký</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript">

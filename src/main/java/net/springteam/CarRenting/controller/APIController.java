@@ -52,7 +52,7 @@ public class APIController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String doLogOut(){
         isUserLogin=false;
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping(value="/getSubmitForm",method = RequestMethod.GET)

@@ -1,5 +1,19 @@
 $(document).ready(function(){
     var car= new Car();
+    $(".customer-info-wrapper input[name=birthday]").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        autoClose: true
+    });
+    $("#confirm-dialog").dialog({
+        modal: true,
+        height: 170,
+        width: 400,
+        show: {effect: 'fade', duration: 200},
+        autoOpen: false
+
+    })
     var islogin=$(".get-customer-info").attr("id")!="0";
 
     $(".header").on("click","li",function(){
@@ -49,6 +63,8 @@ $(document).ready(function(){
     });
 
     doHistory();
+    editCustomerInfo();
+    blurInput();
 
 
 });
@@ -200,4 +216,82 @@ function doHistory() {
 }
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+function editCustomerInfo(){
+    $(".info-container").on("click",".icon",function(){
+        $(".info-button-wrapper").css("display","flex");
+        $(".customer-info-wrapper input").attr("readonly",false);
+        $(".customer-info-wrapper input").addClass('black-border');
+    });
+    $(".info-container").on("click",".update-info-discard",function(){
+        $(".info-button-wrapper").css("display","none");
+        $(".customer-info-wrapper input").attr("readonly",true);
+        $(".customer-info-wrapper input").removeClass('black-border');
+        location.reload();
+    });
+    $(".info-container").on("click",".update-info-save",function () {
+        if(!checkInput()){
+            return ;
+        }
+        else {
+            var data=getInforFromInput();
+            $.ajax({
+                url: "/api/updatecustomer",
+                type: "PATCH",
+                contentType:"application/json",
+                dataType:'text',
+                data: JSON.stringify(data),
+                success: function(res){
+                    if(res=='fail'){
+                        alert("Lỗi từ server");
+                    }
+                    else {
+                        $("#confirm-dialog").dialog('open');
+                    }
+                },
+                error: function(res){
+                    alert("Lỗi từ client");
+                }
+            });
+
+        }
+    })
+    $("#confirm-dialog").on("click","button",function () {
+        $("#confirm-dialog").dialog("close");
+        location.reload();
+    })
+};
+function checkInput(){
+    var listInput=$(".must-fill");
+    var flag=true;
+    $.each(listInput, function(index,item){
+        if($(this).val()==""){
+            $(this).next('span').css("opacity","1");
+            $(this).removeClass('black-border');
+            $(this).addClass('red-border');
+            flag=false;
+
+        }
+    });
+    return flag;
+}
+
+function blurInput(){
+    $('.must-fill').blur(function(){
+        if($(this).val()!=''){
+            $(this).next('span').css("opacity","0");
+            $(this).removeClass("red-border");
+            $(this).addClass('back-border');
+        }
+    });
+}
+function getInforFromInput(){
+    var listInputs=$(".customer-info-wrapper input[name]");
+    var object={};
+    $.each(listInputs,function(index,item){
+        object[$(this).attr('name')]=$(this).val();
+    });
+
+    return object;
 }

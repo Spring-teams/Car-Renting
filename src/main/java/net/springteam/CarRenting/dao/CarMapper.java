@@ -18,7 +18,7 @@ public class CarMapper  implements RowMapper<Car> {
         car.setCategoryName(rs.getString("categoryName"));
         car.setPrice(rs.getInt("price"));
         car.setNumberSeat(rs.getInt("numberSeat"));
-        car.setOwnerName(rs.getString("ownerName"));
+        car.setOwnerName(rs.getString("name"));
         car.setOwnerEmail(rs.getString("email"));
         car.setOwnerCompany(rs.getString("companyName"));
         return car;

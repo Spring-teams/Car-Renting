@@ -2,6 +2,7 @@ package net.springteam.CarRenting.controller;
 
 import net.springteam.CarRenting.dao.DaoFactory;
 import net.springteam.CarRenting.model.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -37,11 +38,7 @@ public class RestAPI {
     }
 
 
-    @RequestMapping(value = "api/getcustomerbyid/{id}",method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public Customer getCustomerById(@PathVariable("id") String id){
-        return DaoFactory.customerDao.getCustomerById(id);
-    }
+
 
     @RequestMapping(value="api/addcustomerandrental", method = RequestMethod.POST)
     @ResponseBody
@@ -66,4 +63,6 @@ public class RestAPI {
         else map.put("rentals",rentals);
         return map;
     }
+
+
 }

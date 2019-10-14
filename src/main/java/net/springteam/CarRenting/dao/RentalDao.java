@@ -14,7 +14,7 @@ public class RentalDao {
         this.template=new JdbcTemplate(this.dataSource);
     }
     public void addRental(Rental rental){
-        String SQL="insert into rental (customerId,ownerId,beginDate,endDate,totalMoney,isRent,ispay,carId,confirm)" +
+        String SQL="insert into rental (customerId,ownerId,beginDate,endDate,totalMoney,isRent,ispay,carId,isConfirm)" +
                 " values(?,?,?,?,?,?,?,?,?)";
         this.template.update(SQL,rental.getCustomerId(),rental.getOwnerId(),rental.getBeginDate(),rental.getEndDate(),rental.getTotalMoney(),rental.getIsRent(),rental.getIsPay(),rental.getCarId(),rental.getConfirm());
     }

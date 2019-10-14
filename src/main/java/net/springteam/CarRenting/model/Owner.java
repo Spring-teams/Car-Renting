@@ -1,11 +1,16 @@
 package net.springteam.CarRenting.model;
 
+import java.sql.Date;
+
 public class Owner {
     String ownerId;
-    String ownerName;
-    String ownerPass;
-    String ownerEmail;
+    String name;
+    String pass;
+    String email;
     String companyName;
+    Date birthday;
+    String gender;
+    String phone;
 
     public String getOwnerId() {
         return ownerId;
@@ -15,28 +20,28 @@ public class Owner {
         this.ownerId = ownerId;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public String getName() {
+        return name;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getOwnerPass() {
-        return ownerPass;
+    public String getPass() {
+        return pass;
     }
 
-    public void setOwnerPass(String ownerPass) {
-        this.ownerPass = ownerPass;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
-    public String getOwnerEmail() {
-        return ownerEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCompanyName() {
@@ -45,5 +50,29 @@ public class Owner {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

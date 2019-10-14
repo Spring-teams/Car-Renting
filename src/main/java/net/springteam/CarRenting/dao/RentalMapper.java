@@ -18,11 +18,11 @@ public class RentalMapper implements RowMapper<Rental> {
         rental.setTotalMoney(resultSet.getInt("totalmoney"));
         rental.setIsRent(resultSet.getInt("isRent"));
         rental.setIsPay(resultSet.getInt("isPay"));
-        rental.setOwnerName(resultSet.getString("ownerName"));
+        rental.setOwnerName(resultSet.getString("name"));
         rental.setOwnerCompany(resultSet.getString("companyName"));
         rental.setOwnerEmail(resultSet.getString("email"));
         rental.setCarId(resultSet.getString("carId"));
-        rental.setConfirm(resultSet.getInt("confirm"));
+        rental.setConfirm(resultSet.getInt("isConfirm"));
         return rental;
     }
 }

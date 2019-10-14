@@ -10,10 +10,10 @@ public class AdminMapper implements RowMapper<Owner> {
     public Owner mapRow(ResultSet rs, int numRow) throws SQLException{
         Owner owner= new Owner();
         owner.setOwnerId(rs.getString("ownerId"));
-        owner.setOwnerEmail(rs.getString("email"));
-        owner.setOwnerName(rs.getString("ownerName"));
+        owner.setEmail(rs.getString("email"));
+        owner.setName(rs.getString("name"));
         owner.setCompanyName(rs.getString("companyName"));
-        owner.setOwnerPass("unknown");
+        owner.setPass("unknown");
         return owner;
     }
 }
