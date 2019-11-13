@@ -1,0 +1,32 @@
+.container{
+	width: 800px;
+}
+.timkiem{
+	padding-left: 20px;
+	background: lightgray;
+	height: 50px;
+}
+.container .timkiem input[type="submit"]
+{
+	background: red;
+	color: white;
+	height: 30px;
+	margin-top:  10px;
+}
+.container .timkiem select
+
+{
+	height: 30px;
+	margin-top:  10px;
+}
+.container .timkiem input{
+	height: 25px;
+	margin-top:  10px;
+}
+table thead tr td{
+	border: 1px solid black;
+
+}
+table{
+	border-collapse:collapse;
+}

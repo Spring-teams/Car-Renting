@@ -1,0 +1,64 @@
+let util = require("util");
+let mysql = require("mysql");
+const db = require("../../db");
+
+module.exports={
+    searchCar: (req,res)=>{
+        let body ={};
+        body['branch']= req.params.branch=="Tất cả"?"no":req.params.branch;
+        body['category']=req.params.category=="Tất cả"?"no":req.params.category;
+        body['numberSeat']=req.params.numberSeat=="Tất cả"?"no":req.params.numberSeat;
+        
+        let branch = body['branch']=='no'?"":" car.branch = '"+body['branch']+"'";
+        let category=body['category']=='no'?"":" category.categoryId="+body['category']+"";
+        let numberSeat=body['numberSeat']=='no'?"":" car.numberSeat="+body['numberSeat'];
+        let isWhere="";
+        let isAnd=" and ";
+        
+        if(body['branch']!="" || body['category']!="" || body['numberSeat']!=""){
+            isWhere=" where ";
+        }
+        let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId"+isWhere+branch+(body['numberSeat']=="no" || body['branch']=='no'?" ":isAnd)+numberSeat+(body['category']=="no" ||(body['branch']=='no' && body['numberSeat']=='no')?" ":isAnd)+category;
+        console.log(sql);
+        db.query(sql,(err,response)=>{
+            res.send(response);
+        })
+
+    },
+    get:(req,res)=>{
+        let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId";
+
+        db.query(sql,(err,response)=>{
+            res.json(response);
+        })
+    },
+    getCarById:(req,res)=>{
+        let carId = req.params.carid;
+        let sql="select * from car inner join category on car.categoryId=category.categoryId  inner join owner on car.ownerId=owner.ownerId where carId = '"+ carId+"'";
+    
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            res.json(response);
+        })
+    },
+    getCarByOwnerId:(req,res)=>{
+        
+        let OwnerId = req.params.ownerId;
+        if(typeof OwnerId ==='undefined'){
+            
+            res.send("false");
+            
+            return 
+        }
+        else {
+            let sql = "select * from car inner join category on car.categoryId=category.categoryId where car.ownerId = "+ OwnerId;
+            db.query(sql,(err,response)=>{
+            if(err) throw err;
+            res.json(response);
+        })
+        }
+        
+    }
+    
+    
+}

@@ -1,0 +1,119 @@
+
+.panel.panel-primary{
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+}.panel-warning>.panel-heading{
+	background-color:  #fff;
+	color: #000;
+} 
+table {
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	
+}
+table thead {
+	width: 100%;
+	font-size: 16px;
+	background: #0025ff26
+
+}
+table tbody{
+	font-size: 15px;
+}
+table thead tr th{
+	padding: 10px;
+}
+table thead,tbody tr td,th{
+	border: 1px solid #ccc;
+	width: 30%;
+}
+table tbody tr{
+	height: 100px !important;
+}
+table thead,tbody tr td,th:last-child{
+	border: 1px solid #ccc;
+	width: 30%;
+	padding: 4px 50px;
+}
+ tr td input{
+	width: 100%;
+	outline: none;
+}
+#search-box.col-9 input{
+	width: 60%;
+}
+tr td p{
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	text-align: left;
+}
+tr td p span{
+	color: black;
+	font-weight: bold;
+	font-size: 17px;
+}
+#seach-box p{
+	margin: 0;
+	padding: 0;
+}
+#add-sort{
+	display: flex;
+	justify-content: flex-end;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.price-rent{
+	font-size: 17px;
+	color: black;
+	font-weight: bold;
+}
+@media (min-width: 576px)
+{
+	.modal-dialog {
+		margin: 0px;
+	}
+} 
+
+.text-center{
+	/* height: 100px; */
+	overflow: hidden;
+}  
+
+.form-control{
+	height: 30px;
+	font-size: 16px;
+	padding: 0px;
+	outline: none;
+}
+.modal-body h3{
+	height: 30px;
+}
+.form-group{
+	height: 50px;
+}
+input[type=file]{
+	height: 30px;
+	font-size: 16px;
+}
+label{
+	font-size: 16px;
+}
+.float-right{
+	margin-top: 3px;
+}
+.btn-success{
+	background-color: blue;
+	border-color: blue;
+}
+.btn-success:hover{
+	background-color: rgba(26, 1, 252, 0.959) !important;
+}
+nav i{
+	color: white !important;
+}
+i{
+	color: white ;
+}

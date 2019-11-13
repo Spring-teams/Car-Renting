@@ -1,0 +1,185 @@
+.slider-wrapper{
+    position: relative;
+    width: 680px;
+    height: 380px;
+
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+    }
+.slider-description{
+    background: white;
+    /*box-shadow: 0 0 2px #000,0 0 3px #000,0 0 4px #000, 0 0 1px #000;    */
+}
+h6{
+    line-height: 100%;
+}
+i{
+    color: blue !important;
+}
+#DiaChiNhanXe i{
+    color: white !important;
+}
+#customerInput {
+    overflow: visible;
+}
+#submit{
+    color: white;
+}
+@media screen and (max-width:800px) {
+    .slider-wrapper{
+    position: relative;
+    width: 550px;
+    height: 300px;
+
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+    }    
+}
+@media screen and (max-width:650px) {
+    .slider-wrapper{
+    position: relative;
+    width: 400px;
+    height: 250px;
+    background: blue;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+    }    
+}
+.swiper-container {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.swiper-slide {
+    background-size: cover;
+    background-position: center;
+}
+.gallery-top {
+    height: 100%;
+    width: 90%;
+}
+.gallery-thumbs {
+    margin: 0 auto;
+    height: 15%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    position: absolute;
+}
+.gallery-thumbs .swiper-slide {
+    width: 10%;
+    height: 100%;
+    opacity: 0.4;
+}
+.gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+#slider-des{
+    margin: 0 auto;
+}
+#des-car{
+    width: 300px; background: #00bcd400; margin: 0 auto;
+    padding-top: 10px;
+}
+#des-car p,h5{
+    color: #000 !important;
+    line-height: 18px;
+    padding-left: 10px;
+}
+#DiaChiNhanxes font{
+    color: black !important;    
+}
+#address{
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+}
+#DiaChiNhanXe{
+        /* background: #e5d9d921; */
+    padding-bottom: 15px;
+}
+#description-car p{
+    padding-left: 10px;
+}
+#DonGiaXe,#submit-customer-info{
+    width: 90%;
+    margin: 0 auto;
+
+}
+.DonGiaXe-row{
+    width:100%;
+    height: 38px;
+    border-bottom: 1px solid #e5d9d921;
+        
+}
+.DonGiaXe-row div p{
+    margin: 0px
+}
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+button{
+    background: blue;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    float: right;
+    font-weight: 600;
+    transition: 1s;
+}
+button:hover{
+    background: rgb(77, 5, 232);
+    transform: scale(1);
+}
+.border-box{
+    margin-top: 30px;
+    border: 1px solid #f1f1f1;
+    /*box-shadow: 0 0 2px #000,0 0 3px #000,0 0 4px #000, 0 0 1px #000;*/
+}
+.border-box h5{
+    padding-top: 20px;
+    padding-left: 20px;
+
+}
+
+#discription{
+    width: 95%;
+    margin: 0 auto;
+}
+.image-class{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+#first-day h6,#last-day h6{
+    line-height: 30px;
+}
+.DonGiaXe-row{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.red-border{
+    /*border: 1px solid red;*/
+    border: 0px;
+    box-shadow: 0 0 1px red,0 0 1px red,0 0 3px red, 0 0 1px red;
+}
+button{
+    margin-left: 2px;
+}
+#footer i{
+    color: white !important;
+}
+.hide{
+    opacity: 0;
+}
