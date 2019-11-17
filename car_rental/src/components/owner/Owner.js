@@ -3,9 +3,11 @@ import OwnerHead from "./OwnerHead";
 import CarList from "./CarList";
 import Footer from "../footer";
 import OwnerLogin from "./Login";
+import Login from "../login";
 import "../../css/O_DanhSachSanPham.css";
 // import "../.../css/boostrap.min.css";
 import Modal from "./Dialog";
+import { lstat } from "fs";
 class Owner extends React.Component{
 
     constructor(props){
@@ -49,6 +51,13 @@ class Owner extends React.Component{
         })
     }
     getListCar(){
+    if(typeof this.state.owner =="undefined"){
+        let listCar;
+        this.setState({
+            listCar: listCar
+        })
+        return ;
+    }
       fetch("/api/getCarByOwnerId/"+this.state.owner.ownerId)
       .then((res=>res.json()))
       .then((data)=>{
@@ -59,7 +68,7 @@ class Owner extends React.Component{
     }
     render(){
         if(this.state.isLogin==false){
-            return <OwnerLogin/>
+            return <Login role={"owner"} url={"/chothuexe"}/>
         }
         return (
             <div>

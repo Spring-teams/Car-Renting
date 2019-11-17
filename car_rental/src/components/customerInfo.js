@@ -14,24 +14,15 @@ class CustomerInfo extends React.Component {
       old_info: {},
       birthday: new Date(),
       showSuccessDialog: false,
-      warning:{}
+      warning: {},
+      openIdError: " ",
+      errorContent:"ID đã được sử dụng"
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.openButton = this.openButton.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.closeButton = this.closeButton.bind(this);
-    this.handleName = this.handleName.bind(this);
-    this.handleId = this.handleId.bind(this);
-    this.handlePass = this.handlePass.bind(this);
-    this.handleCompany = this.handleCompany.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handlePhone = this.handlePhone.bind(this);
-    this.handleBirthDay = this.handleBirthDay.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.showDialogSuccess=this.showDialogSuccess.bind(this);
+    // this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
     this.validInput=this.validInput.bind(this);
   }
-  componentDidMount() {
+  componentDidMount = () => {
     fetch("/api/getCurrentCustomer/")
       .then(res => res.json())
       .then(data => {
@@ -39,147 +30,226 @@ class CustomerInfo extends React.Component {
           customerInfo: data[0],
           old_info: data[0]
         });
-      });
-      let obj = {
-        "name": 0,
-        "customerId":0,
-        'birthday':0,
-        'email':0,
-        'pass':0,
-        'companyName':0,
-        'phone':0
-      }
-      this.setState({
-        warning: obj
       })
+      .then(() => {
+        let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
+        obj["birthday"] = new Date(
+          obj["birthday"].slice(0, 4),
+          parseInt(obj["birthday"].slice(5, 7)) < 10
+            ? parseInt(obj["birthday"].slice(5, 7)) - 1
+            : "0" + (parseInt(obj["birthday"].slice(5, 7)) - 1),
+          parseInt(obj["birthday"].slice(8, 10)) + 1 < 10
+            ? parseInt(obj["birthday"].slice(8, 10)) + 1
+            : "0" + (parseInt(obj["birthday"].slice(8, 10)) + 1)
+        );
+        this.setState({
+          OwnerInfo: obj,
+          isload: true,
+          birthday: obj["birthday"]
+        });
+        // console.log(obj['birthday'].slice(0,4) +" "+ obj['birthday'].slice(5,7) +" "+obj['birthday'].slice(8,10))
+      });
+    let obj = {
+      name: 0,
+      customerId: 0,
+      birthday: 0,
+      email: 0,
+      pass: 0,
+      companyName: 0,
+      phone: 0
+    };
+    this.setState({
+      warning: obj
+    });
+  };
+  componentWillMount() {
+    fetch("/api/checkLogin")
+      .then(res => res.text())
+      .then(data => {
+        if (data == "false") {
+          window.location.href = "/login";
+        }
+      });
   }
-  validInput(){
+  async validInput(){
     let obj = this.state.customerInfo;
-    let warning=this.state.warning;
-    let isOk=true;
-    for(let proper in obj){
-      if(obj[proper]=="" && warning.hasOwnProperty(proper)){
-        warning[proper]=1;
-        isOk=false;
-      }
-    }
+    let warning = this.state.warning;
+    let isOk = true;
+    
+    
     this.setState({
       warning: warning
-    })
+    });
+    if (this.state.customerInfo["customerId"] != this.state.old_info["customerId"]) {
+      await fetch("/api/customer/checkExist/" + this.state.customerInfo["customerId"])
+        .then(res => res.text())
+        .then(data => {
+          if (data == "true") {
+            this.setState({ openIdError: "show" , errorContent:"ID đã được sử dụng"});
+            isOk = false;
+          } else this.setState({ openIdError: " " });
+        })
+        .then(()=>{
+          return isOk;
+        })
+    }
+    if(!phoneValidate(obj['phone'])){
+      isOk=false;
+      warning['phone']=1;
+      
+        this.setState({
+          errorContent: "Định dạng điện thoại không hợp lệ",
+          openIdError: "show"
+        })
+    }
+    for (let proper in obj) {
+      if (obj[proper] == "" && warning.hasOwnProperty(proper)) {
+        warning[proper] = 1;
+        isOk = false;
+        this.setState({
+          errorContent: "Bạn phải nhập các trường có dấu *",
+          openIdError: "show"
+        })
+      }
+    }
     return isOk;
-  }
+  };
 
-  showDialogSuccess(){
+  showDialogSuccess = () => {
     this.setState({
       showSuccessDialog: true
-    })
-  }
-  openButton() {
+    });
+  };
+  openButton = () => {
     this.setState({
-      show: "block",
+      show: "inline",
       readOnly: false
     });
-  }
-  closeButton() {
+  };
+  closeButton = () => {
+    let obj = JSON.parse(JSON.stringify(this.state.old_info))
+    obj["birthday"] = new Date(obj['birthday'].slice(0,4),parseInt(obj['birthday'].slice(5,7))<10?parseInt(obj['birthday'].slice(5,7))-1:"0"+(parseInt(obj['birthday'].slice(5,7))-1),parseInt(obj['birthday'].slice(8,10))+1<10?parseInt(obj['birthday'].slice(8,10))+1:"0"+(parseInt(obj['birthday'].slice(8,10))+1));
+
     this.setState({
       show: "none",
       readOnly: true,
-      customerInfo: this.state.old_info
+      customerInfo: obj
     });
-  }
-  handleEdit() {
+  };
+  handleEdit = () => {
+    
     this.openButton();
-  }
-  handleName(event) {
+  };
+  handleName = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["name"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['name']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    if (event.target.value != "") {
+      warning["name"] = 0;
+      this.setState({openIdError:" "})
+
     }
     this.setState({
       customerInfo: obj,
       warning: warning
     });
-  }
-  handleId(event) {
+  };
+  handleId = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["customerId"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['customerId']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    if (event.target.value != "") {
+      warning["customerId"] = 0;
+      
+      this.setState({
+        openIdError: " "
+      })
     }
     this.setState({
       customerInfo: obj
     });
-  }
-  handleBirthDay(event) {
+  };
+  handleBirthDay = event => {
     this.setState({
       birthday: event
     });
-    let e = new Date(event);
-    let begin = new Date(e.getFullYear(), e.getMonth(), e.getDate());
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
-    obj["birthday"] = formatDate(begin);
+    // obj["birthday"] = begin;
+    obj["birthday"] = event;
     this.setState({
       customerInfo: obj
     });
-  }
-  handleEmail(event) {
+  };
+  handleEmail = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["email"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['email']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    obj["birthday"] = this.state.birthday;
+    if (event.target.value != "") {
+      warning["email"] = 0;
+      this.setState({openIdError:" "})
+
     }
     this.setState({
       customerInfo: obj,
       warning: warning
     });
-  }
-  handlePass(event) {
+  };
+  handlePass = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["pass"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['pass']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    obj["birthday"] = this.state.birthday;
+    if (event.target.value != "") {
+      warning["pass"] = 0;
+      this.setState({openIdError:" "})
+
     }
     this.setState({
       customerInfo: obj,
       warning: warning
     });
-  }
-  handleCompany(event) {
+  };
+  handleCompany = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["companyName"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['companyName']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    obj["birthday"] = this.state.birthday;
+    if (event.target.value != "") {
+      warning["companyName"] = 0;
+      this.setState({openIdError:" "})
+
     }
     this.setState({
       customerInfo: obj,
       warning: warning
     });
-  }
-  handlePhone(event) {
+  };
+  handlePhone = event => {
     let obj = JSON.parse(JSON.stringify(this.state.customerInfo));
     obj["phone"] = event.target.value;
-    let warning=JSON.parse(JSON.stringify(this.state.warning))
-    if(event.target.value!=""){
-      warning['phone']=0
+    let warning = JSON.parse(JSON.stringify(this.state.warning));
+    obj["birthday"] = this.state.birthday;
+    if (event.target.value != "") {
+      warning["phone"] = 0;
+      this.setState({openIdError:" "})
+
     }
     this.setState({
       customerInfo: obj,
       warning: warning
     });
-  }
-  handleSubmit() {
-    if(!this.validInput()){
-      return ;
+  };
+  async handleSubmit(){
+    let result = await this.validInput();
+    if (!result) {
+      return;
     }
-    let data = this.state.customerInfo;
+    let data = JSON.parse(JSON.stringify(this.state.customerInfo));
     data["old_id"] = this.state.old_info["customerId"];
-
+    let e = new Date(data["birthday"]);
+    let begin = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+    data["birthday"] = formatDate(begin);
     fetch("/api/updateCustomer", {
       method: "POST",
       headers: {
@@ -188,24 +258,26 @@ class CustomerInfo extends React.Component {
       },
       body: JSON.stringify(data)
     })
-    .then(res=>res.text())
-    .then(data=>{
-      if(data=='true'){
-        this.showDialogSuccess();
-      }
-    })
+      .then(res => res.text())
+      .then(data => {
+        if (data == "true") {
+          this.showDialogSuccess();
+        }
+      });
     console.log(data);
-  }
+  };
   render() {
     let customer = this.state.customerInfo;
     return (
       <div>
-        <Head isLogin={this.props.isLogin} />
+        <Head isLogin={this.props.isLogin} url={"/"} />
         <div className="info-container">
           <i className="fas fa-edit icon" onClick={this.handleEdit}></i>
           <h2>Thông tin cá nhân</h2>
           <div className="customer-info-wrapper">
-            <div className="label">Họ và tên: </div>
+            <div className="label">
+              Họ và tên<font style={{ display: this.state.show }}>*</font>
+            </div>
             <input
               readOnly={this.state.readOnly}
               className="must-fill"
@@ -213,11 +285,16 @@ class CustomerInfo extends React.Component {
               value={customer.name}
               onChange={this.handleName}
             />
-            <span className="warning" style={{opacity: this.state.warning['name']}}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["name"] }}
+            ></span>
             <font></font>
           </div>
           <div className="customer-info-wrapper">
-            <div className="label">Số CMND: </div>
+            <div className="label">
+              Số CMND<font style={{ display: this.state.show }}>*</font>{" "}
+            </div>
             <input
               readOnly={this.state.readOnly}
               className="must-fill"
@@ -225,10 +302,15 @@ class CustomerInfo extends React.Component {
               value={customer.customerId}
               onChange={this.handleId}
             />
-            <span className="warning" style={{opacity: this.state.warning['customerId']}}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["customerId"] }}
+            ></span>
           </div>
           <div className="customer-info-wrapper birthday">
-            <div className="label">Ngày sinh: </div>
+            <div className="label">
+              Ngày sinh <font style={{ display: this.state.show }}>*</font>
+            </div>
             <DatePicker
               className="must-fill"
               selected={this.state.birthday}
@@ -236,17 +318,19 @@ class CustomerInfo extends React.Component {
               dateFormat="yyyy-MM-dd"
               timeCaption="Heure"
               showDisabledMonthNavigation
-            />
-            {/* <input
               readOnly={this.state.readOnly}
-              className="must-fill"
-              name="birthday"
-              value={customer == "" ? "" : customer.birthday.slice(0, 10)}
-            /> */}
-            <span className="warning" style={{opacity: this.state.warning['birthday']}}></span>
+            />
+
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["birthday"] }}
+            ></span>
           </div>
           <div className="customer-info-wrapper">
-            <div className="label">Email: </div>
+            <div className="label">
+              {" "}
+              Email<font style={{ display: this.state.show }}>*</font>
+            </div>
             <input
               readOnly={this.state.readOnly}
               className="must-fill"
@@ -254,10 +338,16 @@ class CustomerInfo extends React.Component {
               value={customer.email}
               onChange={this.handleEmail}
             />
-            <span className="warning" style={{opacity: this.state.warning['email']}}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["email"] }}
+            ></span>
           </div>
           <div className="customer-info-wrapper">
-            <div className="label">Mật khẩu: </div>
+            <div className="label">
+              {" "}
+              Mật khẩu<font style={{ display: this.state.show }}>*</font>{" "}
+            </div>
             <input
               type="password"
               readOnly={this.state.readOnly}
@@ -266,7 +356,10 @@ class CustomerInfo extends React.Component {
               value={customer.pass}
               onChange={this.handlePass}
             />
-            <span className="warning" style={{opacity: this.state.warning['pass']}}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["pass"] }}
+            ></span>
           </div>
           {/* <div className="customer-info-wrapper">
           <div>Nhập lại mật khẩu: </div>
@@ -275,17 +368,22 @@ class CustomerInfo extends React.Component {
         </div> */}
 
           <div className="customer-info-wrapper">
-            <div className="label">Công ty: </div>
+            <div className="label">Công ty </div>
             <input
               readOnly={this.state.readOnly}
               name="companyName"
               value={customer.companyName}
               onChange={this.handleCompany}
             />
-            <span className="warning" style={{ opacity: this.state.warning['companyName'] }}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["companyName"] }}
+            ></span>
           </div>
           <div className="customer-info-wrapper">
-            <div className="label">Số điện thoại </div>
+            <div className="label">
+              Số điện thoại<font style={{ display: this.state.show }}>*</font>{" "}
+            </div>
             <input
               readOnly={this.state.readOnly}
               className="must-fill"
@@ -293,7 +391,10 @@ class CustomerInfo extends React.Component {
               value={customer.phone}
               onChange={this.handlePhone}
             />
-            <span className="warning" style={{opacity: this.state.warning['phone']}}></span>
+            <span
+              className="warning"
+              style={{ opacity: this.state.warning["phone"] }}
+            ></span>
           </div>
           <div className="info-button-wrapper">
             <button
@@ -312,7 +413,10 @@ class CustomerInfo extends React.Component {
             </button>
           </div>
         </div>
-        <UpdateSuccess show = {this.state.showSuccessDialog} url="/info"/>
+        <UpdateSuccess show={this.state.showSuccessDialog} url="/info" />
+        <div className={"id-error " + this.state.openIdError}>
+      <p>{this.state.errorContent}</p>
+        </div>
       </div>
     );
   }
@@ -323,5 +427,8 @@ function formatDate(date) {
   let a = temp.getDate() > 9 ? temp.getDate() : "0" + temp.getDate();
   return temp.getFullYear() + "-" + (temp.getMonth() + 1) + "-" + a;
 }
-
+function phoneValidate(number){
+  let regex=/((09|03|07|08|05)+([0-9]{8})\b)/g;
+  return regex.test(number);
+}
 export default CustomerInfo;

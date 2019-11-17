@@ -1,5 +1,6 @@
-body{
+body,html{
 	/* background: #CCC; */
+	overflow-x: hidden;
 }
 nav.navbar-expand-lg{
 	background-image: linear-gradient(#3f7af0 10%,rgba(69,0,202,0.1) 50%),linear-gradient(60deg,#3f7af0 20%,#253eb9 60%,#0f3bff 50%);
@@ -363,7 +364,9 @@ div.price:hover{
     border: none;
     outline: none;
     font-size: 16px;
-    padding-left: 5px;
+	padding-left: 5px;
+	margin-top:5px;
+	
 }
 .info-container .icon{
     /* background-image: url("images/edit-icon.png"); */
@@ -394,7 +397,7 @@ div.price:hover{
 
 }
 
-.warning{
+.info-container .warning{
     height: 20px; 
 	 width: 20px; 
     background-image: url('/images/warning-icon.png');
@@ -493,4 +496,28 @@ div.price:hover{
 	height: 30px;
 	border: 1px solid blue;
 
+}
+
+.id-error{
+	height: 50px;
+	width: 300px;
+	position: absolute;
+	top: 150px;
+	left: 100%;
+	border: 1px solid red;
+	font-size: 13px;
+	background-color: rgba(241, 169, 160, 0.1);
+	/* background-color: white; */
+	border-radius: 10px;
+	/* display: none; */
+	transition: 1s;
+	/* color: red; */
+}
+.id-error p {
+	text-align: center;
+	line-height: 50px;
+  }
+.id-error.show{
+	display: block;
+	left: 70%;
 }

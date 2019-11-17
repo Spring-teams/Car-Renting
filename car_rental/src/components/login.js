@@ -26,14 +26,15 @@ class Login extends React.Component {
         showLoading: "none"
     }
   }
-  handleClick(event){
+  async handleClick(event){
       event.preventDefault();
-      this.showLoading();
+      await this.showLoading();
       let customer={};
       customer['customerId']=this.state.username;
       customer['pass']=this.state.pass;
       // console.log(user);
-      fetch("/api/confirmuser",{
+
+      fetch("/api/"+this.props.role+"/confirm",{
         method: "POST",
         // body: JSON.stringify(user)
         headers: {
@@ -46,8 +47,6 @@ class Login extends React.Component {
       .then((data)=>{
         if(data=="true"){
           this.setState({isLogin: true});
-          // this.props.history.push("/");
-          // this.props.doLogin(true);
         }
         else {
           this.setState({
@@ -92,7 +91,7 @@ class Login extends React.Component {
   
   render() {
     if(this.state.isLogin){
-      window.location.href="/";
+      window.location.href=this.props.url;
       return;
     }
     return (

@@ -8,6 +8,7 @@ import Order from "./components/order/order";
 import CustomerInfo from "./components/customerInfo";
 import Owner from "./components/owner/Owner";
 import Customer from "./components/owner/Customer";
+import OwnerInfo from "./components/owner/OwnerInfo";
 import "react-datepicker/dist/react-datepicker.css";
 
 class  App extends React.Component {
@@ -65,21 +66,25 @@ class  App extends React.Component {
       <BrowserRouter>
       <Switch>
         <Route path="/login">
-          <Login />
+          <Login role={"customer"} url={"/"}/>
         </Route>
         <Route path="/carinfo/:id" render={(props) => <SubmitBody {...props} />}>
           
         </Route>
         <Route path="/order">
-          <Order isLogin={this.state.isCustomerLogin} handleLog={this.handleLog} customer={this.state.currentCustomer}/>
+          <Order isLogin={this.state.isCustomerLogin} url={"/"} customer={this.state.currentCustomer}/>
         </Route>
         <Route path="/info">
-          <CustomerInfo isLogin={this.state.isCustomerLogin}/>
+          <CustomerInfo isLogin={this.state.isCustomerLogin} url={"/"} role={"customer"}/>
         </Route>
        
-        <Route path="/chothuexe/khachhang">
+        <Route path="/chothuexe/khach-hang">
           <Customer/>
         </Route>
+        <Route path="/chothuexe/thong-tin-ca-nhan">
+        <OwnerInfo/>
+        </Route>
+
         <Route path="/chothuexe">
           <Owner/>
         </Route>

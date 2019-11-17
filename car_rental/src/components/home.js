@@ -31,7 +31,7 @@ class Home extends React.Component{
     render(){
         return (
             <div id="nothing">
-                <Head isLogin={this.props.isLogin} handleLog={this.props.handleLog}/>
+                <Head isLogin={this.props.isLogin} />
                 
                 <Slider />
                 

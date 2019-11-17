@@ -142,7 +142,7 @@ class SubmitBody extends React.Component {
 
     return (
       <div>
-        <Head isLogin={this.state.isLogin} hide={"hide"} />
+        <Head isLogin={this.state.isLogin} hide={"hide"} handleLog={this.props.handleLog}/>
         <div className="text-center mt-3" style={{ color: "blue" }}>
           <h3>{car.carName}</h3>
         </div>

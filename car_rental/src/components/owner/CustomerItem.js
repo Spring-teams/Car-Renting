@@ -10,7 +10,7 @@ class CustomerItem extends React.Component{
             <div className="row" style={{fontSize: "16px"}}>
               <div className="col-3">
                 <img
-                  src={"/images/" + this.props.rental.image + ".png"}
+                  src={"/images/" + this.props.rental.image }
                   className="img-fluid"
                   alt="Responsive image"
                 />

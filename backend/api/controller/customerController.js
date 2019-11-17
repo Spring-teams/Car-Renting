@@ -37,24 +37,39 @@ module.exports={
     },
     updateCustomerInfo:(req,res)=>{
         let body= req.body;
-        currentCusId=body['customerId'],
+        currentCusId=body['customerId'];
+        let sql = "alter table rental drop foreign key `rental_ibfk_1`";
+        db.query(sql);
         sql = "update rental set customerId = '"+body['customerId']+"' where customerId = '"+body['old_id']+"' ;";
+        db.query(sql);
+        body['birthday']=body['birthday'].slice(0,10);
+        console.log(sql)
         db.query(sql);
         sql = "delete from customer where customerId='"+body['old_id']+"' ;";
         db.query(sql);
         delete body['old_id']
-        body['birthday']=body['birthday'].slice(0,10);
         sql = "insert into customer SET ? ";
         db.query(sql,[body],(err,response)=>{
             if(err) throw err ;
-            else res.send("true");
+            else {
+                sql ="ALTER TABLE rental ADD CONSTRAINT rental_ibfk_1 FOREIGN KEY (customerId) REFERENCES customer(customerId);"
+                db.query(sql);
+                res.send("true");
+            }
         });
         
     },
     checkLogin: (req,res)=>{
         res.send(isLogin);
     },
-    doLogout: (red,res)=>{
+    doLogout: (req,res)=>{
         isLogin= false;
+    },
+    checkExist: (req,res)=>{
+        let id = req.params.customerId;
+        let sql = "select * from customer where customerId = "+ id;
+        db.query(sql,(err,response)=>{
+            res.send(response.length!=0)
+        })
     }
 }

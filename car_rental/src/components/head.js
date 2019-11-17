@@ -9,6 +9,14 @@ class Head extends React.Component{
 	handleInfo(){
 		window.location.href="/info";
 	}
+	handleLog=()=>{
+		if(this.props.isLogin){
+			fetch("/api/logout");
+			window.location.href=this.props.url;
+			
+		}
+		else window.location.href="/login";
+	}
     render(){
 		let Log = this.props.isLogin ? "Đăng xuất" : "Đăng nhập";
         return(
@@ -31,7 +39,7 @@ class Head extends React.Component{
 						Tài khoản</a>
 							<div className="dropdown-menu" aria-labelledby="navbarDropdown" id="Account">
 								<a className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={this.handleInfo}>Thông tin cá nhân</a>
-								<a className="dropdown-item"  data-toggle="modal" data-target="#loginModal" onClick={this.props.handleLog}>{Log}</a>
+								<a className="dropdown-item"  data-toggle="modal" data-target="#loginModal" onClick={this.handleLog}>{Log}</a>
 							</div>
 						</li>
 					</ul>

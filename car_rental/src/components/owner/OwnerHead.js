@@ -7,10 +7,7 @@ class OwnerHead extends React.Component{
     }
     doLogout(){
         fetch("/api/ownerLogout")
-        .then(res=>res.text())
-        .then((res)=>{
-            window.location.href="/chothuexe";
-        })
+        window.location.href="/chothuexe";
     }
 
     render(){

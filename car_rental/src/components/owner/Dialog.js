@@ -15,7 +15,8 @@ class Modal extends React.Component {
 			image: "",
 			price:0,
 			categoryId:0,
-			car : {}
+			car : {},
+			isLoad: false
 		}
 		// this.componentWillMount=this.componentWillMount.bind(this);
 		this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this);
@@ -27,10 +28,15 @@ class Modal extends React.Component {
 		this.handlePrice=this.handlePrice.bind(this);
 		this.handleCate=this.handleCate.bind(this);
 		this.handleSubmit=this.handleSubmit.bind(this);
+		this.validInput=this.validInput.bind(this);
 	}
 	componentWillReceiveProps(props){
-		this.setState({car: props['car']})
-		this.setState({old_carId: props['car']['carId']})
+		
+		if(this.state.isLoad==false){
+			this.setState({car: props['car']})
+			this.setState({old_carId: props['car']['carId']})
+		}
+		
 		
 	}
 	handleFile(event){
@@ -41,11 +47,11 @@ class Modal extends React.Component {
 			file: event.target.files[0],
 			car: _car
 		});
-		console.log(_car)
 	}
 	handleCarName(event){
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.carName=event.target.value;
+		_car['carName']=event.target.value;
+
 		this.setState({
 			carName: event.target.value,
 			car: _car
@@ -54,8 +60,9 @@ class Modal extends React.Component {
 	}
 
 	handleCarId(event){
+		console.log(this.state.car)
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.carId=event.target.value;
+		_car['carId']=event.target.value;
 		this.setState({
 			carId: event.target.value,
 			car: _car
@@ -63,7 +70,8 @@ class Modal extends React.Component {
 	}
 	handlePrice(event){
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.price=event.target.value;
+		_car['price']=event.target.value;
+
 		this.setState({
 			price: event.target.value,
 			car: _car
@@ -71,7 +79,8 @@ class Modal extends React.Component {
 	}
 	handleNumberSeat(event){
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.numberSeat=event.target.value;
+		_car['numberSeat']=event.target.value;
+
 		this.setState({
 			numberSeat: event.target.value,
 			car: _car
@@ -79,7 +88,8 @@ class Modal extends React.Component {
 	}
 	handleBranch(event){
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.branch=event.target.value;
+		_car['branch']=event.target.value;
+
 		this.setState({
 			branch: event.target.value,
 			car: _car
@@ -93,8 +103,9 @@ class Modal extends React.Component {
 			"Other": 4
 		}
 		let _car = JSON.parse(JSON.stringify(this.state.car));
-		_car.categoryId=cateDict[event.target.value];
-		_car.categoryName=event.target.value
+		_car['categoryId']=cateDict[event.target.value];
+		_car['categoryName']=event.target.value;
+
 		this.setState({
 			categoryId: cateDict[event.target.value],
 			car: _car
@@ -102,25 +113,79 @@ class Modal extends React.Component {
 		
 		// this.setState({categoryid: cateDict[event.target.value]})
 	}
-	handleSubmit(event){
-		event.preventDefault();
+	async validInput(car){
+		let listProper=["branch","carId","carName","categoryId","numberSeat","price"];
+		let isOk= true;
+		console.log(car)
+		for(let i of listProper){
+			if(typeof car[i] =="undefined"){
+				this.props.showError("Xin nhập tất cả thông tin của xe!");
+				console.log(i)
+				isOk= false;
+				return isOk;
+			}
+		}
+		if(typeof car['image'] =="undefined" && typeof car['file']=="undefined"){
+			this.props.showError("Xin nhập thêm ảnh xe!");
+			isOk=false;
+			return isOk;
+		}
+		if(typeof car['carId']!="undefined" && (car['carId']!=car['old_carId'])){
+			await fetch("/api/car/checkExist/"+car['carId'])
+			.then(res=>res.text())
+			.then(data=>{
+				console.log(data)
+				if(data=="true"){
+				this.props.showError("Biển số xe "+car['carId']+" đã tồn tại!")
+				isOk=false;
+				}
+			});
+			}
+		return isOk;
+	}
+
+	async handleSubmit(event){
+		// event.preventDefault();
+		this.setState({
+			isLoad: true
+		})
 		let car = this.state.car;
 		car['old_carId']=this.state.old_carId;
 		// car['file']=this.state.file
 		let form_data= new FormData();
-		form_data.append("car","no");
-		form_data.append("file",car['file']);
-		// console.log(form_data.entries());
-		fetch("/api/addCarByOwner/",{
-			method: "POST",
-			headers: {
-                'content-type': 'multipart/form-data'
-            },
-			// headers:{
-			// 	"Accept":"*/*"
-			// 	// "Content-Type":"multipart/form-data"
-			// },
-			body: form_data
+		console.log(this.state.car)
+		let result = await this.validInput(car);
+		if(!result){
+			// this.props.closeError();
+			return
+		};
+
+		this.props.openLoading();
+		
+		form_data.append("myImage",car['file']);
+		
+		delete car['file'];
+		
+		fetch("/api/addCarByOwner",{
+			method:"POST",
+			headers:{
+				"Accept":"*/*",
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify(car)
+		})
+		.then(res=>res.text())
+		.then((data)=>{
+		})
+		.then(()=>{
+			fetch('/api/addImageCar',{
+				method: "POST",
+				body: form_data
+			})
+		})
+		.then(()=>{
+			this.props.closeLoading();
+			// this.props.onClose();
 		})
 		
 	}
@@ -188,7 +253,7 @@ class Modal extends React.Component {
 							</div>
 							<div className="form-group">
 								<label>Số ghế</label>
-								<select className="form-control">
+								<select className="form-control" onChange={this.handleNumberSeat}>
 									<option selected={selectedNumberSeat==2?"selected":""}>2</option>
 									<option selected={selectedNumberSeat==4?"selected":""}>4</option>
 									<option selected={selectedNumberSeat==7?"selected":""}>7</option>

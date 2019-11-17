@@ -4,9 +4,9 @@ class Search extends React.Component {
   constructor(props) {
 	super(props);
 	this.state={
-		branch: "",
-		numberSeat: "",
-		category:"",
+		branch: "Tất cả",
+		numberSeat: "Tất cả",
+		category:"Tất cả",
 	}
 	this.handleChangeBranch=this.handleChangeBranch.bind(this);
 	this.handleChangeCategory=this.handleChangeCategory.bind(this);

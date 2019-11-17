@@ -14,8 +14,8 @@ module.exports={
         let numberSeat=body['numberSeat']=='no'?"":" car.numberSeat="+body['numberSeat'];
         let isWhere="";
         let isAnd=" and ";
-        
-        if(body['branch']!="" || body['category']!="" || body['numberSeat']!=""){
+        console.log(body)
+        if(body['branch']!="no" || body['category']!="no" || body['numberSeat']!="no"){
             isWhere=" where ";
         }
         let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId"+isWhere+branch+(body['numberSeat']=="no" || body['branch']=='no'?" ":isAnd)+numberSeat+(body['category']=="no" ||(body['branch']=='no' && body['numberSeat']=='no')?" ":isAnd)+category;
@@ -23,7 +23,6 @@ module.exports={
         db.query(sql,(err,response)=>{
             res.send(response);
         })
-
     },
     get:(req,res)=>{
         let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId";
@@ -51,13 +50,21 @@ module.exports={
             return 
         }
         else {
-            let sql = "select * from car inner join category on car.categoryId=category.categoryId where car.ownerId = "+ OwnerId;
+            let sql = "select * from car inner join category on car.categoryId=category.categoryId where car.ownerId = "+ OwnerId +" order by createTime desc";
             db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
         })
         }
         
+    },
+    checkExist: (req,res)=>{
+        let carId = req.params.carId;
+        let sql = "select * from car where carId = '" + carId+"'";
+        console.log(carId)
+        db.query(sql,(err,response)=>{
+            res.send(response.length!=0);
+        })
     }
     
     
