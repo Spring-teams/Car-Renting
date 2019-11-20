@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/bootstrap.min.css";
+import "../../css/bootstrap.min.css";
 class Search extends React.Component {
   constructor(props) {
 	super(props);
@@ -38,7 +38,10 @@ class Search extends React.Component {
 	}
 	if(event.target.value=="Xe thương mại"){
 		this.setState({category: "3"})
-	}
+  }
+  if(event.target.value=="Khác"){
+    this.setState({category: "4"})
+  }
   }
   
 
@@ -60,7 +63,7 @@ class Search extends React.Component {
                   <option>Honda</option>
                   <option>Mazda</option>
                   <option>Toyota</option>
-                  <option>Other</option>
+                  <option>Khác</option>
                 </select>
               </div>
             </div>
@@ -91,6 +94,7 @@ class Search extends React.Component {
                   <option id="1">Xe du lịch</option>
                   <option id="2">Xe thể thao</option>
                   <option id="3">Xe thương mại</option>
+                  <option id="4">Khác</option>
                 </select>
               </div>
             </div>

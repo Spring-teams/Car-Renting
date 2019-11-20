@@ -1,9 +1,9 @@
 import React from "react";
 import Head from "./head";
-import "../css/Home.css";
+import "../../css/Home.css";
 import { NONAME } from "dns";
 import DatePicker from "react-datepicker";
-import UpdateSuccess from "./dialog/UpdateSuccess";
+import UpdateSuccess from "../dialog/UpdateSuccess";
 class CustomerInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,8 @@ class CustomerInfo extends React.Component {
       showSuccessDialog: false,
       warning: {},
       openIdError: " ",
-      errorContent:"ID đã được sử dụng"
+      errorContent:"ID đã được sử dụng",
+      defaultWarning:{}
     };
     // this.componentDidMount = this.componentDidMount.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -59,7 +60,8 @@ class CustomerInfo extends React.Component {
       phone: 0
     };
     this.setState({
-      warning: obj
+      warning: obj,
+      defaultWarning:JSON.parse(JSON.stringify(obj))
     });
   };
   componentWillMount() {
@@ -133,7 +135,9 @@ class CustomerInfo extends React.Component {
     this.setState({
       show: "none",
       readOnly: true,
-      customerInfo: obj
+      OwnerInfo: obj,
+      openIdError: " ",
+      warning: JSON.parse(JSON.stringify(this.state.defaultWarning))
     });
   };
   handleEdit = () => {
@@ -240,6 +244,13 @@ class CustomerInfo extends React.Component {
       warning: warning
     });
   };
+  handleChange=(event)=>{
+    let proper=event.target.name;
+    let obj =JSON.parse(JSON.stringify(this.state.customerInfo));
+    
+    obj[proper]=event.target.value;
+    
+  } 
   async handleSubmit(){
     let result = await this.validInput();
     if (!result) {
@@ -264,7 +275,6 @@ class CustomerInfo extends React.Component {
           this.showDialogSuccess();
         }
       });
-    console.log(data);
   };
   render() {
     let customer = this.state.customerInfo;
@@ -319,6 +329,7 @@ class CustomerInfo extends React.Component {
               timeCaption="Heure"
               showDisabledMonthNavigation
               readOnly={this.state.readOnly}
+              name="birthday"
             />
 
             <span
@@ -361,11 +372,7 @@ class CustomerInfo extends React.Component {
               style={{ opacity: this.state.warning["pass"] }}
             ></span>
           </div>
-          {/* <div className="customer-info-wrapper">
-          <div>Nhập lại mật khẩu: </div>
-          <input type="password" readOnly className="must-fill" value={customer.pass} />
-          <span className="warning"></span>
-        </div> */}
+          
 
           <div className="customer-info-wrapper">
             <div className="label">Công ty </div>

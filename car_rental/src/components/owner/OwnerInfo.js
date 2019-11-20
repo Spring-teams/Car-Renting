@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "../head";
+import Head from "../customer/head";
 import "../../css/Home.css";
 import { NONAME } from "dns";
 import DatePicker from "react-datepicker";
@@ -18,7 +18,8 @@ class OwnerInfo extends React.Component {
       warning:{},
       isload: false,
       openIdError: " ",
-      errorContent:"ID đã được sử dụng"
+      errorContent:"ID đã được sử dụng",
+      defaultWarning:{}
     };
     // this.componentDidMount = this.componentDidMount.bind(this);
     this.validInput=this.validInput.bind(this);
@@ -55,7 +56,8 @@ class OwnerInfo extends React.Component {
         'phone':0
       }
       this.setState({
-        warning: obj
+        warning: obj,
+        defaultWarning: JSON.parse(JSON.stringify(obj))
       })
       
   }
@@ -126,11 +128,12 @@ async validInput(){
   closeButton=()=> {
     let obj = JSON.parse(JSON.stringify(this.state.old_info))
     obj["birthday"] = new Date(obj['birthday'].slice(0,4),parseInt(obj['birthday'].slice(5,7))<10?parseInt(obj['birthday'].slice(5,7))-1:"0"+(parseInt(obj['birthday'].slice(5,7))-1),parseInt(obj['birthday'].slice(8,10))+1<10?parseInt(obj['birthday'].slice(8,10))+1:"0"+(parseInt(obj['birthday'].slice(8,10))+1));
-
     this.setState({
       show: "none",
       readOnly: true,
-      OwnerInfo: obj
+      OwnerInfo: obj,
+      openIdError: " ",
+      warning: JSON.parse(JSON.stringify(this.state.defaultWarning))
     });
   }
   handleEdit=()=> {

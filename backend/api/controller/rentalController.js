@@ -21,5 +21,14 @@ module.exports={
             }
             else res.json(response);
         })
+    },
+    getRentalPerMonth: (req,res)=>{
+        let month = req.params.month;
+        let year = req.params.year;
+        let sql="select * from rental where month(endDate) = "+month+" year(endDate)= "+year;
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            else res.send(response);
+        })
     }
 }

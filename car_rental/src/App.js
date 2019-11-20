@@ -2,10 +2,10 @@ import React from 'react';
 import {Route,Switch,BrowserRouter} from "react-router-dom";
 
 import Login from "./components/login";
-import Home from "./components/home";
+import Home from "./components/customer/home";
 import SubmitBody from "./components/submit/submitBody";
 import Order from "./components/order/order";
-import CustomerInfo from "./components/customerInfo";
+import CustomerInfo from "./components/customer/customerInfo";
 import Owner from "./components/owner/Owner";
 import Customer from "./components/owner/Customer";
 import OwnerInfo from "./components/owner/OwnerInfo";

@@ -1,7 +1,7 @@
 
 import React from "react";
-import "../css/bootstrap.min.css";
-import "../css/Home.css";
+import "../../css/bootstrap.min.css";
+import "../../css/Home.css";
 class Head extends React.Component{
     constructor(props){
         super(props);

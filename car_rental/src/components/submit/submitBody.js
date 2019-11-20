@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "../head";
+import Head from "../customer/head";
 import Footer from "../footer";
 import DatePicker from "react-datepicker";
 import UpdateSuccess from "../dialog/UpdateSuccess";

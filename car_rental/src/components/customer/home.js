@@ -1,14 +1,14 @@
 import React from "react";
 
 // import {Login,Head,Search,CarTable,Slider} from "./index";
-import Login from "./login";
+import Login from "../login";
 import CarTable from "./cartable";
 import Search from "./search";
 import Slider from "./slider";
 import Head from "./head";
-import "../css/Home.css";
-import Footer from "./footer";
-import "../font/fontawesome-free-5.11.2-web/css/all.css";
+import "../../css/Home.css";
+import Footer from "../footer";
+import "../../font/fontawesome-free-5.11.2-web/css/all.css";
 // import "../css/boostrap.min.css";
 
 class Home extends React.Component{

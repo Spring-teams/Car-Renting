@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "../head";
+import Head from "../customer/head";
 import Orderdetail from "./orderdetail";
 import { timingSafeEqual } from "crypto";
 class Order extends React.Component {

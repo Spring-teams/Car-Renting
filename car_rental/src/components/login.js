@@ -122,7 +122,7 @@ class Login extends React.Component {
         </div>
         {/* <Dialog visible={this.state.dialog}></Dialog> */}
         <Loading show = {this.state.showLoading}/>
-        <Register show ={this.state.showRegis}/>
+        <Register show ={this.state.showRegis} role={"customer"}/>
       </form>
       
     );

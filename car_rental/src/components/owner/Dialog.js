@@ -100,7 +100,7 @@ class Modal extends React.Component {
 			"Xe du lịch":1,
 			"Xe thể thao":2,
 			"Xe thương mại": 3,
-			"Other": 4
+			"Khác": 4
 		}
 		let _car = JSON.parse(JSON.stringify(this.state.car));
 		_car['categoryId']=cateDict[event.target.value];
@@ -248,7 +248,7 @@ class Modal extends React.Component {
 									<option selected={selectedBranch=="Ford"?"selected":""}>Ford</option>
 									<option selected={selectedBranch=="Honda"?"selected":""}>Honda</option>
 									<option selected={selectedBranch=="Mazda"?"selected":""}>Mazda</option>
-									<option selected={selectedBranch=="Other"?"selected":""}>Other</option>
+									<option selected={selectedBranch=="Khác"?"selected":""}>Khác</option>
 								</select>
 							</div>
 							<div className="form-group">
@@ -257,8 +257,8 @@ class Modal extends React.Component {
 									<option selected={selectedNumberSeat==2?"selected":""}>2</option>
 									<option selected={selectedNumberSeat==4?"selected":""}>4</option>
 									<option selected={selectedNumberSeat==7?"selected":""}>7</option>
-									<option selected={selectedNumberSeat=="16"?"selected":""}>16</option>
-									<option selected={selectedNumberSeat=="29"?"selected":""}>29</option>
+									<option selected={selectedNumberSeat==16?"selected":""}>16</option>
+									<option selected={selectedNumberSeat==29?"selected":""}>29</option>
 								</select>
 							</div>
 							<div className="form-group">
@@ -267,7 +267,7 @@ class Modal extends React.Component {
 									<option selected={selectedCategory==1?"selected":""}>Xe du lịch</option>
 									<option selected={selectedCategory==2?"selected":""}>Xe thể thao</option>
 									<option selected={selectedCategory==3?"selected":""}>Xe thương mại</option>
-									<option selected={selectedCategory==4?"selected":""}>Other</option>
+									<option selected={selectedCategory==4?"selected":""}>Khác</option>
 									{/* <option selected={selectedNumberSeat=="29"?"selected":""}>29</option> */}
 								</select>
 							</div>

@@ -43,6 +43,7 @@ class Orderdetail extends React.Component {
               src={"/images/" + this.state.car.image}
               className="img-fluid"
               alt="Responsive image"
+              style={{height: "150px"}}
             />
           </div>
           <div className="col-4" style={{ fontSize: "15px" }}>
@@ -55,6 +56,7 @@ class Orderdetail extends React.Component {
               Ngày thuê: {rental.beginDate==null ? "":rental.beginDate.slice(0,10)} đến  {rental.endDate==null ? "":rental.endDate.slice(0,10)}
             </p>
             <p>Đơn giá: {formatNumber(this.state.car.price)}</p>
+           
           </div>
           {/* <div className="col-2 gio-hang-card-status">
             <button type="button" className="btn btn-success da-nhan">
@@ -73,6 +75,7 @@ class Orderdetail extends React.Component {
             
             <p className="orange">
               Tổng: <span>{formatNumber(rental.totalmoney)} VND</span>
+              {rental.isConfirm==0&&" Hủy "}
             </p>
           </div>
         </div>

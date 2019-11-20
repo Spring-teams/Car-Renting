@@ -1,6 +1,6 @@
 import React from "react";
 import CarItem from "./car";
-import "../css/bootstrap.min.css";
+import "../../css/bootstrap.min.css";
 
 class CarTable extends React.Component {
   constructor(props) {

@@ -2,7 +2,7 @@ let util = require("util");
 const mysql = require("mysql");
 const db=require("../../db");
 let isLogin= false;
-let currentCusId;
+let currentCusId="'0'"
 module.exports={
     get: (req,res)=>{
         let sql="select * from customer where customerId = "+ currentCusId;
