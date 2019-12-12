@@ -47,7 +47,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div id="menu-bar">
+      <div id="menu-bar" style={{width: "70%", margin:"0 auto"}}>
         <div className="row text-center">
           
         </div>

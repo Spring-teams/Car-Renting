@@ -15,5 +15,7 @@ module.exports=function(app){
 
     app.route("/api/customer/checkExist/:customerId").get(customerCtrl.checkExist);
 
+    app.route("/api/customer/insert").post(customerCtrl.insert)
+
 
 }

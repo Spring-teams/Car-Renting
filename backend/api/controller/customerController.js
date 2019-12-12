@@ -71,5 +71,18 @@ module.exports={
         db.query(sql,(err,response)=>{
             res.send(response.length!=0)
         })
+    },
+    insert: (req,res)=>{
+        let body=req.body;
+        let customer= {};
+        let sql = "insert into customer (customerId,name,phone,pass,companyName,birthday,email) values ( '"+body['id']+"','"+body['name']+"',"
+                + body['phone']+",'"+body['pass']+"','"+body['companyName']+"','"+body['birthday']+"','"+body['email']+"')";
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            isLogin=true;
+            currentCusId=body['id'];
+            res.send(true);
+        })
+        
     }
 }

@@ -10,6 +10,7 @@ import Owner from "./components/owner/Owner";
 import Customer from "./components/owner/Customer";
 import OwnerInfo from "./components/owner/OwnerInfo";
 import "react-datepicker/dist/react-datepicker.css";
+import Analysis from './components/owner/analysis';
 
 class  App extends React.Component {
   constructor(props){
@@ -84,7 +85,9 @@ class  App extends React.Component {
         <Route path="/chothuexe/thong-tin-ca-nhan">
         <OwnerInfo/>
         </Route>
-
+        <Route path="/chothuexe/thong-ke">
+          <Analysis/>
+        </Route>
         <Route path="/chothuexe">
           <Owner/>
         </Route>

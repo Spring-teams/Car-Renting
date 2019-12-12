@@ -1,0 +1,27 @@
+#thong-ke .char{
+    width: 70%;
+    margin: 0 auto;
+}
+#thong-ke .row{
+    width: 100%;
+}
+#tk-doanh-so p{
+    padding: 0;
+    margin: 5px;
+    font-size: 20px;
+}
+#tk-doanh-so p:last-child{
+    font-size: 22px;
+    color: orangered;
+}
+#thong-ke .year-selection{
+    width: 300px;
+    margin: 30px 0px 0px auto;
+    display:flex;
+    flex-direction: row;
+}
+#thong-ke .year-selection select{
+    height: 30px;
+    width: 100px;
+    margin-left: 20px;
+}

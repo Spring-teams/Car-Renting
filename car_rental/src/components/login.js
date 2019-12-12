@@ -88,6 +88,11 @@ class Login extends React.Component {
           showRegis: "block"
       })
   }
+  closeRegis=()=>{
+    this.setState({
+      showRegis: "none"
+    })
+  }
   
   render() {
     if(this.state.isLogin){
@@ -95,7 +100,7 @@ class Login extends React.Component {
       return;
     }
     return (
-      
+      <div>
       <form className="container">
         <div className={"loginError "+this.state.showError}>
           <p>Tên đăng nhập hoặc mật khẩu không chính xác!</p>
@@ -122,9 +127,10 @@ class Login extends React.Component {
         </div>
         {/* <Dialog visible={this.state.dialog}></Dialog> */}
         <Loading show = {this.state.showLoading}/>
-        <Register show ={this.state.showRegis} role={"customer"}/>
+        
       </form>
-      
+      <Register show ={this.state.showRegis} role={this.props.role} close = {this.closeRegis} url={this.props.url}/>
+      </div>
     );
   }
 }

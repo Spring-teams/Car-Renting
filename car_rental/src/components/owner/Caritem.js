@@ -42,6 +42,7 @@ class CarItem extends React.Component{
                   className="btn btn-danger mt-1"
                   data-toggle="modal"
                   data-target="#delete"
+                  onClick={()=>{this.props.deleteCar(this.props.car.carId)}}
                 >
                   Xóa
                 </button>

@@ -4,5 +4,7 @@ module.exports= function(app){
     
     app.route("/api/getrental/:customerId").get(rentalCtrl.getrental);
 
-    app.route("/api/getRentalPermonth/:month/:year").get(rental.getRentalPerMonth)
+    app.route("/api/getRentalPermonth/:month/:year").get(rentalCtrl.getRentalPerMonth);
+
+    app.route("/api/confirmCar/:carId").get(rentalCtrl.confirmCar);
 }

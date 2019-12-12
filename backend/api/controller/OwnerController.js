@@ -39,7 +39,7 @@ module.exports={
     confirmOwner: (req,res)=>{
         let body = req.body;
         let sql = "select * from owner where ownerId = "+ body['customerId']+ " and pass = "+ body['pass']; 
-        console.log(sql);
+        // console.log(sql);
         db.query(sql,(err,response)=>{
             if(!response.length){
                 isLogin=false;
@@ -60,8 +60,8 @@ module.exports={
         res.send("true")
     },
     getCustomer: (req,res)=>{
-        let sql = "select * from customer inner join rental on customer.customerId = rental.customerId  inner join car on car.carId = rental.carId where rental.ownerId = 1234 order by customer.customerId ";
-         
+        let sql = "select * from customer inner join rental on customer.customerId = rental.customerId  inner join car on car.carId = rental.carId where rental.ownerId = '"+currentOwnerId+"' order by customer.customerId ";
+        //  console.log(sql)
         db.query(sql,(err,response)=>{
             res.json(response)
         })
@@ -78,7 +78,7 @@ module.exports={
         let body=req.body
        
         body['ownerId']=currentOwnerId;
-        console.log(body)
+        // console.log(body)
         let sql ="update rental set carId = '"+body['carId'] +"' where carId = '"+body['old_carId']+"'";
         db.query(sql);
         if(typeof body['old_carId']!="undefined"){
@@ -88,8 +88,8 @@ module.exports={
         
         delete body['old_carId'];
         delete body['categoryName']
-        sql = "insert into car (carId,categoryId,ownerId,price,carName,branch,numberSeat,image,createTime) values('"+body['carId']+"',"+body['categoryId']+",'"+body['ownerId']+"',"+body['price']+",'"+body['carName']+"','"+body['branch']+"',"+body['numberSeat']+",'"+body['image']+"',now());";
-        console.log(sql);
+        sql = "insert into car (carId,categoryId,ownerId,price,carName,branch,numberSeat,image,createTime,isActive,isDelete) values('"+body['carId']+"',"+body['categoryId']+",'"+body['ownerId']+"',"+body['price']+",'"+body['carName']+"','"+body['branch']+"',"+body['numberSeat']+",'"+body['image']+"',now(),1,0);";
+        // console.log(sql);
         db.query(sql,(err,response)=>{
             res.send("ok");
         })
@@ -103,15 +103,6 @@ module.exports={
         db.query(sql);
         body['birthday']=body['birthday'].slice(0,10);
 
-        // if(body['customerId']==body['old_id']){
-        //     sql ="update customer set name='"+body['name']+"',phone="+body['phone']+",pass='"+body['pass']+"',companyName='"+body['companyName']+"',birthday='"+body['birthday']+"',email='"+body['email']+"'";
-        //     db.query(sql,(err,response)=>{
-        //         if(err) throw err;
-        //         res.send("true");
-        //         return;
-        //     })
-        // }
-        console.log(sql)
         sql ="alter table car drop foreign key `car_ibfk_1`"
         db.query(sql);
         sql = "update car set ownerId = '"+body['ownerId']+"' where ownerId = '"+body['old_id']+"' ;";
@@ -139,5 +130,37 @@ module.exports={
         db.query(sql,(err,response)=>{
             res.send(response.length!=0)
         })
+    }, 
+    deleteCar: (req,res)=>{
+        let carId = req.params.carId;
+        let sql = "update car set carIsDelete = 1 where carId = '"+carId+"'"
+        // console.log(sql)
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            res.send("true")
+        }) 
+    },
+    updateRental: (req,res)=>{
+        let body = req.body
+        let rental={};
+        let sql ="delete from rental where rentalId = " + body['rentalId'];
+        db.query(sql);
+        sql = "insert into rental (rentalId,customerId,carId,ownerId,beginDate,endDate,totalMoney,isRent,isPay,isConfirm,address,isDelete) values("+
+        body['rentalId']+",'"+body['customerId']+"','"+body['carId']+"','"+body['ownerId']+"','"+body['beginDate'].slice(0,10)+"','"+body['endDate'].slice(0,10)+"',"+body['totalmoney']+","+body['isRent']+","+body['isPay']+","+body['isConfirm']+",'"+body['address']+"',"+body['isDelete']+")";
+        db.query(sql)
+        res.send(true)
+    },
+    insert: (req,res)=>{
+        let body=req.body;
+        let customer= {};
+        let sql = "insert into owner (ownerId,ownerName,phone,pass,companyName,birthday,email) values ( '"+body['id']+"','"+body['name']+"',"
+                + body['phone']+",'"+body['pass']+"','"+body['companyName']+"','"+body['birthday']+"','"+body['email']+"')";
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            isLogin=true;
+            currentOwnerId=body['id'];
+            res.send(true);
+        })
+        
     }
 }

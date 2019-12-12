@@ -127,11 +127,14 @@ h5{
 	font-weight: bold !important;
 }
 #XeTheThao div.card-car div img{
-	height: 153px;
+	height: 200px;
+	width: 100%;
 }
 #XeDuLich div.card-car div img{
 
-	height: 153px;
+	height: 360px;
+	width: 100%;
+
 }
 #XeCuoi div.card-car div img{
 	height: 153px;
@@ -211,7 +214,7 @@ div.price:after {
 
 }
 i{
-	color: #0000dcde !important;
+	color: #0000dcde ;
 }
 a{
 	cursor: pointer;

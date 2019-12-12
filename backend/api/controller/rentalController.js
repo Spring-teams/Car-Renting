@@ -16,11 +16,11 @@ module.exports={
     getrental: (req,res)=>{
         let sql = "select * from rental where customerId = "+ req.params.customerId;
         db.query(sql,(err,response)=>{
-            if(err){
+            if(err){ 
                 throw err;
             }
             else res.json(response);
-        })
+        }) 
     },
     getRentalPerMonth: (req,res)=>{
         let month = req.params.month;
@@ -30,5 +30,20 @@ module.exports={
             if(err) throw err;
             else res.send(response);
         })
+    },
+    confirmCar: (req,res)=>{
+        let carId = req.params.carId;
+        let sql = "select * from rental where carId = '"+ carId + "' and endDate < now() and isDelete = 0";
+        console.log(sql)
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            else if(response == undefined){
+                res.send("false");
+            }
+            else {
+                res.send(response.length!=0)
+            }
+        })
+
     }
 }

@@ -7,7 +7,7 @@ module.exports=function(app){
 
     app.route("/api/getCustomerByOwner").get(OwnerCtrl.getCustomer);
 
-
+    
     app.route("/api/checkOwnerLogin").get(OwnerCtrl.checkLogin);
 
     app.route("/api/ownerLogout").get(OwnerCtrl.doLogout);
@@ -19,4 +19,10 @@ module.exports=function(app){
     app.route("/api/updateOwner").post(OwnerCtrl.updateOwner);
 
     app.route("/api/owner/checkExist/:ownerId").get(OwnerCtrl.checkExist);
+
+    app.route("/api/deleteCar/:carId").get(OwnerCtrl.deleteCar);
+
+    app.route("/api/updateRental").post(OwnerCtrl.updateRental);
+
+    app.route("/api/owner/insert").post(OwnerCtrl.insert)
 }

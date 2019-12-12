@@ -36,7 +36,7 @@ class CarTable extends React.Component {
     let obj = {};
     
     if (JSON.stringify(con)!="{}") {
-      console.log(con);
+     
       console.log(
         "/api/searchCar/" +
           (con["branch"]==""||con['branch']=="Tất cả"?"no":con['branch']) +
@@ -62,7 +62,6 @@ class CarTable extends React.Component {
       )
         .then(res => res.json())
         .then(data => {
-			console.log(data);
           this.setState({object: data});
 		  // this.resetCars(data);
 		  

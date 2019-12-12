@@ -2,12 +2,12 @@ import React from "react";
 import OwnerHead from "./OwnerHead";
 import CarList from "./CarList";
 import Footer from "../footer";
-import OwnerLogin from "./Login";
-import Login from "../login";
+// import OwnerLogin from "./Login";
 import "../../css/O_DanhSachSanPham.css";
 // import "../.../css/boostrap.min.css";
 import Modal from "./Dialog";
 import { lstat } from "fs";
+import Login from "../login";
 class Owner extends React.Component{
 
     constructor(props){
@@ -71,8 +71,9 @@ class Owner extends React.Component{
             return <Login role={"owner"} url={"/chothuexe"}/>
         }
         return (
-            <div>
+            <div className="owner">
                 <OwnerHead/>
+                
                 {this.state.isLoad==true ? <CarList cars={this.state.listCar} owner = {this.state.owner}/>: " "}
                 <Footer/>
                 

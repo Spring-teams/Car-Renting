@@ -25,7 +25,7 @@ module.exports={
         })
     },
     get:(req,res)=>{
-        let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId";
+        let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId where car.carIsDelete !=1 and car.carId not in (select carId from rental where isDelete=0 and isPay = 0 ) " ;
 
         db.query(sql,(err,response)=>{
             res.json(response);
@@ -50,7 +50,7 @@ module.exports={
             return 
         }
         else {
-            let sql = "select * from car inner join category on car.categoryId=category.categoryId where car.ownerId = "+ OwnerId +" order by createTime desc";
+            let sql = "select * from car inner join category on car.categoryId=category.categoryId where car.ownerId = '"+ OwnerId +"' and car.carIsDelete != 1 order by createTime desc";
             db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
@@ -60,7 +60,7 @@ module.exports={
     },
     checkExist: (req,res)=>{
         let carId = req.params.carId;
-        let sql = "select * from car where carId = '" + carId+"'";
+        let sql = "select * from car where carId = '" + carId+"' and carIsDelete !=1 ";
         console.log(carId)
         db.query(sql,(err,response)=>{
             res.send(response.length!=0);

@@ -97,110 +97,6 @@ h1 {
 
 /*dialog*/
 
-.ui-dialog-titlebar {
-  /*background-color: rgba(34, 167, 240, 1);*/
-  color: blue;
-  height: 100%;
-  border: none;
-  background-color: white;
-  border-bottom: 1px solid blue;
-}
-.ui-dialog-titlebar-close {
-  display: none;
-}
-.sign-up-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-}
-#sign-up-dialog{
-    height: 500px;
-    width: 400px;
-    position: relative;
-    background-color:white;
-    padding-left: 20px;
-    margin: 0 auto;
-    margin-top: 50px;
-    border-radius: 20px;
-    padding-top: 30px;
-    border: 1px solid blue; 
-
-}
-#sign-up-dialog p {
-  font-size: 14px;
-  color: red;
-  margin-bottom: 20px;
-}
-.sign-up-container .sign-up-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  
-  width: 400px;
-  margin-top: 10px;
-  font-size: 16px;
-}
-.sign-up-container .sign-up-wrapper div {
-  width: 150px;
-  line-height: 20px;
-}
-.sign-up-container .sign-up-wrapper input {
-  height: 25px;
-
-}
-.sign-up-container .sign-up-wrapper input[type="radio"] {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: -2px;
-}
-.sign-up-button-wrapper {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  right: 50px;
-  bottom: 30px;
-  width: 200px;
-  justify-content: space-around;
-  font-size: 15px;
-}
-.sign-up-button-wrapper button {
-  height: 25px;
-  width: 80px;
-  border: none;
-  background-color: rgb(58, 83, 155);
-  color: white;
-  border-radius: 2px;
-  cursor: pointer;
-}
-.sign-up-button-wrapper button:hover {
-  background: rgb(31, 58, 147);
-  letter-spacing: 0.5px;
-  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
-  transition: all 0.4s ease 0s;
-}
-font {
-  color: red !important ;
-}
-.sign-up-wrapper .warning {
-  height: 20px;
-  width: 20px;
-  background-image: url("../images/warning-icon.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  margin: 0px 0px auto 5px;
-  background-position: center;
-  display: none;  
-}
-.sign-up-wrapper .show{
-  display: block
-}
-a {
-  cursor: pointer;
-}
 .regis-background {
   position: fixed;
   top: 0;
@@ -208,7 +104,7 @@ a {
   left: 0;
   right: 0;
   background-color: rgb(235, 240, 245);
-  padding: 50;
+  padding-top: 100px;
 }
 
 /* Login error */
@@ -248,3 +144,104 @@ a {
 }
 
 /* Register */
+#register-form .register-rwd-table {
+  margin: 1em 0;
+  min-width: 600px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size: 16px;
+}
+#register-form .register-rwd-table tr {
+  /* border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; */
+}
+#register-form .register-rwd-table th {
+  display: none;
+}
+#register-form .register-rwd-table td {
+  display: block;
+}
+#register-form .register-rwd-table td:first-child {
+  padding-top: .5em;
+}
+#register-form .register-rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+#register-form .register-rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 9.5em;
+  display: inline-block;
+}
+@media (min-width: 480px) {
+  #register-form .register-rwd-table td:before {
+    display: none;
+  }
+}
+#register-form .register-rwd-table th, #register-form .register-rwd-table td {
+  text-align: left;
+}
+@media (min-width: 480px) {
+  #register-form .register-rwd-table th, #register-form .register-rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  #register-form .register-rwd-table th:first-child, #register-form .register-rwd-table td:first-child {
+    padding-left: 0;
+  }
+  #register-form .register-rwd-table th:last-child, #register-form .register-rwd-table td:last-child {
+    padding-right: 0;
+  }
+}
+#register-form{
+  background: #fff;
+  color: #000;
+  border-radius: .4em;
+  overflow: hidden; 
+}
+#register-form .register-rwd-table tr {
+	height: 40px;
+  border-color: #46627f;
+}
+#register-form .register-rwd-table th, #register-form .register-rwd-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  #register-form .register-rwd-table th, .rwd-table td {
+    padding: 1em !important;
+  }
+}
+#register-form .register-rwd-table th, #register-form .register-rwd-table td:before {
+  color: #dd5;
+}
+body{
+	position: relative;
+}
+#register-form {
+	width: 450px;
+  box-shadow: 0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000;
+	margin: 0 auto;
+	padding: 20px;
+}
+#register-form .register-rwd-table td:nth-child(1){
+	width: 70px;
+}
+#register-form .register-rwd-table td:nth-child(2){
+	width: 200px;
+}
+#register-form .register-rwd-table td span{
+	color: orangered;
+}
+#register-form .register-rwd-table td input{
+	width: 200px;
+	height: 25px;
+}
+
+#register-form span i {
+  color: red;
+  opacity: 0;
+}
+#register-form span .show{
+  opacity: 1;
+}
+

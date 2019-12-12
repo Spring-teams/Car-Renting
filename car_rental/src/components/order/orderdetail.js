@@ -1,4 +1,5 @@
 import React from "react";
+import { runInThisContext } from "vm";
 // import { deflate } from "zlib";
 class Orderdetail extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Orderdetail extends React.Component {
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.callApi=this.callApi.bind(this);
+    this.checkRental=this.checkRental.bind(this);
   }
   componentDidMount() {
       this.callApi()
@@ -23,16 +25,22 @@ class Orderdetail extends React.Component {
 
       
   }
-  componentDidCatch
+  checkRental(rental){
+    let firstDay = rental.beginDate;
+    let lastDay=rental.endDate;
+    lastDay=new Date(lastDay.slice(0,4),lastDay.slice(5,7)-1,lastDay.slice(8,10));
+    return lastDay< new Date();
+  }
+  
   callApi(){
     return fetch("/api/getcarbyid/" + this.props.rental.carId)
   }
   render() {
     let rental = this.props.rental;
-    
+    this.checkRental(rental)
     // let car = this.state.car;
     if (this.state.car == null) {
-      return null;
+      return this.props.rental.carId;
     }
     
     return (
@@ -75,7 +83,7 @@ class Orderdetail extends React.Component {
             
             <p className="orange">
               Tổng: <span>{formatNumber(rental.totalmoney)} VND</span>
-              {rental.isConfirm==0&&" Hủy "}
+              {this.checkRental(rental)?" ":<div className="outOfDate">Quá hạn</div>}
             </p>
           </div>
         </div>
