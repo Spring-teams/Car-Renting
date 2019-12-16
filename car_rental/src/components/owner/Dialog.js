@@ -15,8 +15,12 @@ class Modal extends React.Component {
 			image: "",
 			price:0,
 			categoryId:0,
-			car : {},
-			isLoad: false
+			car : {
+				
+			},
+			isLoad: false,
+			isActive: 1,
+			carIsDelete: 0
 		}
 		// this.componentWillMount=this.componentWillMount.bind(this);
 		this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this);
@@ -43,6 +47,7 @@ class Modal extends React.Component {
 		let _car = JSON.parse(JSON.stringify(this.state.car));
 		_car['file']=event.target.files[0];
 		_car['image']=_car['file'].name;
+		
 		this.setState({
 			file: event.target.files[0],
 			car: _car
@@ -60,7 +65,7 @@ class Modal extends React.Component {
 	}
 
 	handleCarId(event){
-		console.log(this.state.car)
+		
 		let _car = JSON.parse(JSON.stringify(this.state.car));
 		_car['carId']=event.target.value;
 		this.setState({
@@ -116,11 +121,11 @@ class Modal extends React.Component {
 	async validInput(car){
 		let listProper=["branch","carId","carName","categoryId","numberSeat","price"];
 		let isOk= true;
-		console.log(car)
+		
 		for(let i of listProper){
 			if(typeof car[i] =="undefined"){
 				this.props.showError("Xin nhập tất cả thông tin của xe!");
-				console.log(i)
+				
 				isOk= false;
 				return isOk;
 			}
@@ -153,16 +158,16 @@ class Modal extends React.Component {
 		car['old_carId']=this.state.old_carId;
 		// car['file']=this.state.file
 		let form_data= new FormData();
-		console.log(this.state.car)
+		
 		let result = await this.validInput(car);
 		if(!result){
 			// this.props.closeError();
 			return
 		};
-
-		this.props.openLoading();
 		
-		form_data.append("myImage",car['file']);
+		this.props.openLoading();
+		console.log(car['file'])
+		form_data.append("myImage",this.state.file);
 		
 		delete car['file'];
 		
@@ -176,6 +181,7 @@ class Modal extends React.Component {
 		})
 		.then(res=>res.text())
 		.then((data)=>{
+			console.log(data)
 		})
 		.then(()=>{
 			fetch('/api/addImageCar',{
@@ -183,7 +189,8 @@ class Modal extends React.Component {
 				body: form_data
 			})
 		})
-		.then(()=>{
+		.then((res)=>{
+			
 			this.props.closeLoading();
 			// this.props.onClose();
 		})

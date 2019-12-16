@@ -14,12 +14,12 @@ module.exports={
         let numberSeat=body['numberSeat']=='no'?"":" car.numberSeat="+body['numberSeat'];
         let isWhere="";
         let isAnd=" and ";
-        console.log(body)
+        // console.log(body)
         if(body['branch']!="no" || body['category']!="no" || body['numberSeat']!="no"){
             isWhere=" where ";
         }
         let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId"+isWhere+branch+(body['numberSeat']=="no" || body['branch']=='no'?" ":isAnd)+numberSeat+(body['category']=="no" ||(body['branch']=='no' && body['numberSeat']=='no')?" ":isAnd)+category;
-        console.log(sql);
+        // console.log(sql);
         db.query(sql,(err,response)=>{
             res.send(response);
         })
@@ -61,7 +61,7 @@ module.exports={
     checkExist: (req,res)=>{
         let carId = req.params.carId;
         let sql = "select * from car where carId = '" + carId+"' and carIsDelete !=1 ";
-        console.log(carId)
+        // console.log(carId)
         db.query(sql,(err,response)=>{
             res.send(response.length!=0);
         })

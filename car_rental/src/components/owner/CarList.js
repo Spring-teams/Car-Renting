@@ -36,7 +36,6 @@ class CarList extends React.Component {
             carItems: data
         })
     })
-
     }
     // console.log(this.props.ow)
     

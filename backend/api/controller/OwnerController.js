@@ -67,19 +67,20 @@ module.exports={
         })
     },
     addImageCar:(req,res)=>{
+        
         upload=multer({storage: storage}).single("myImage");
         
         upload(req,res,(err)=>{
+            if(err) throw err;
             res.send("true")
         })
-
     },
     addCarByOwner: (req,res)=>{
         let body=req.body
-       
         body['ownerId']=currentOwnerId;
         // console.log(body)
         let sql ="update rental set carId = '"+body['carId'] +"' where carId = '"+body['old_carId']+"'";
+        
         db.query(sql);
         if(typeof body['old_carId']!="undefined"){
             sql = "delete from car where carId = '"+ body['old_carId']+"'";
@@ -88,10 +89,12 @@ module.exports={
         
         delete body['old_carId'];
         delete body['categoryName']
-        sql = "insert into car (carId,categoryId,ownerId,price,carName,branch,numberSeat,image,createTime,isActive,isDelete) values('"+body['carId']+"',"+body['categoryId']+",'"+body['ownerId']+"',"+body['price']+",'"+body['carName']+"','"+body['branch']+"',"+body['numberSeat']+",'"+body['image']+"',now(),1,0);";
+        sql = "insert into car (carId,categoryId,ownerId,price,carName,branch,numberSeat,image,createTime,isActive,carIsDelete) values('"+body['carId']+"',"+body['categoryId']+",'"+body['ownerId']+"',"+body['price']+",'"+body['carName']+"','"+body['branch']+"',"+body['numberSeat']+",'"+body['image']+"',now(),1,0);";
         // console.log(sql);
+        
         db.query(sql,(err,response)=>{
             res.send("ok");
+            
         })
     },
     updateOwner: (req,res)=>{

@@ -20,7 +20,7 @@ class Orderdetail extends React.Component {
         this.setState({ car: data[0] });
       })
       .catch(error => {
-        console.log(error);
+       
       });
 
       

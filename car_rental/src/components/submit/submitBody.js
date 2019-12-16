@@ -42,7 +42,8 @@ class SubmitBody extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({ car: data[0] });
+        this.setState({ car: data[0], totalMoney: data[0]['price'] });
+        
         
       });
     this.getCurrentCustomer();

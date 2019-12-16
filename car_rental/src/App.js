@@ -88,6 +88,7 @@ class  App extends React.Component {
         <Route path="/chothuexe/thong-ke">
           <Analysis/>
         </Route>
+        
         <Route path="/chothuexe">
           <Owner/>
         </Route>
