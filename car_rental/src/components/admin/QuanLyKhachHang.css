@@ -1,0 +1,81 @@
+#quan-ly-khach-hang>.container-fluid>table {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    font-size: 1rem;
+}
+
+#quan-ly-khach-hang>.container-fluid>table th,
+table td {
+    /* padding: 0.5em 1em; */
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    white-space: pre;
+    padding: 2px;
+    font-weight: 500;
+}
+
+#quan-ly-khach-hang>.container-fluid>table thead th,
+table tbody td {
+    text-align: center;
+}
+
+#quan-ly-khach-hang>.container-fluid>table thead {
+    color: white;
+    background: #3f51b5;
+}
+
+#quan-ly-khach-hang>.container-fluid>table thead th {
+    padding: 1em;
+}
+
+#quan-ly-khach-hang>.container-fluid>table[data-comparing="active"] tbody th {
+    border-bottom: none;
+    font-size: 0.75em;
+    color: #767676;
+    padding-bottom: 0;
+}
+
+#quan-ly-khach-hang>.container-fluid>table tbody td img {
+    width: 60px;
+}
+
+#quan-ly-khach-hang>.container-fluid>table tbody tr .modal .modal-dialog img {
+    width: 100%;
+}
+#ADMIN-LIST-PRODUCT > .container > div >div> input{
+    width: calc(100% - 100px);
+    height: 38px;
+    float: left;
+    font-size: 1rem;
+}
+#quan-ly-khach-hang>.container-fluid>table tbody tr td span.label-info{
+    padding: 2px 10px;
+    background:#4caf50;
+    border-radius: 4px;
+    color: #fff;
+}
+#quan-ly-khach-hang>.container-fluid>table tbody tr td span.label-danger{
+    padding: 2px 10px;
+    color: #fff;
+    border-radius: 4px;
+    background:#f44336;
+}
+#quan-ly-khach-hang>.container-fluid>table tbody tr td button.label-danger{
+    padding: 2px 10px;
+    color: #000;
+    background:#f44336;
+    margin-left: 3px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+#quan-ly-khach-hang>.container-fluid>table tbody tr td button.label-info{
+    border-radius: 4px;
+    padding: 2px 10px;
+    color: #000;
+    background:#4caf50;
+    margin-left: 3px;
+    box-sizing: border-box;
+}

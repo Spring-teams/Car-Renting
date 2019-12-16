@@ -28,7 +28,7 @@ module.exports={
         let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId where car.carIsDelete !=1 and car.carId not in (select carId from rental where isDelete=0 and isPay = 0 ) " ;
 
         db.query(sql,(err,response)=>{
-            res.json(response);
+            res.json(response); 
         })
     },
     getCarById:(req,res)=>{
@@ -64,6 +64,20 @@ module.exports={
         // console.log(carId)
         db.query(sql,(err,response)=>{
             res.send(response.length!=0);
+        })
+    },
+    paging: (req,res)=>{
+        let pageNumber = Number(req.params.pageNumber);
+        let limit = Number(req.params.limit);
+
+        pageNumber=(pageNumber-1)*limit;
+        limit+=pageNumber;
+        let sql = "select * from car inner join category on car.categoryId=category.categoryId inner join owner on car.ownerId=owner.ownerId where car.carIsDelete !=1 and car.carId not in (select carId from rental where isDelete=0 and isPay = 0 ) "
+        +"order by car.createTime limit "+pageNumber+","+limit+";";
+        console.log(sql);
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            res.json(response)
         })
     }
     

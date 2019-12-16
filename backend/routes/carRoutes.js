@@ -10,5 +10,7 @@ module.exports=function(app){
     app.route("/api/searchCar/:branch/:category/:numberSeat").get(carCtrl.searchCar);
 
     app.route("/api/getCarByOwnerId/:ownerId").get(carCtrl.getCarByOwnerId);
+
+    app.route("/api/getcar/:pageNumber/:limit").get(carCtrl.paging)
     
 }

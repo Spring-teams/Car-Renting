@@ -3,9 +3,9 @@ let customer=require("./routes/customerRoutes");
 let owner = require("./routes/ownerRoutes");
 let rental = require("./routes/rentalReoutes");
 let car = require("./routes/carRoutes");
+let admin = require("./routes/adminRoutes");
 module.exports=function(app){
-    let AdminCtrl = require("./api/controller/adminController");
-    app.route("/api/admin/getAllCustomer").get(AdminCtrl.getAllCustomer);
+    admin(app)
     customer(app)
     rental(app)
     car(app)
