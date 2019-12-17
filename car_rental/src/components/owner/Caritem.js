@@ -17,7 +17,7 @@ class CarItem extends React.Component{
               </td>
               <td>
                 <img
-                  src={"images/"+this.props.car.image}
+                  src={"/images/"+this.props.car.image}
                   className="img-fluid"
                   alt="Responsive image"
                 />
@@ -35,6 +35,7 @@ class CarItem extends React.Component{
                   data-toggle="modal"
                   data-target="#edit"
                   onClick={()=>{this.props.toggleModal(this.props.car)}}
+                  disabled={this.props.role=="admin"?true:false}
                 >
                   Sửa
                 </button>
@@ -43,6 +44,7 @@ class CarItem extends React.Component{
                   data-toggle="modal"
                   data-target="#delete"
                   onClick={()=>{this.props.deleteCar(this.props.car.carId)}}
+                  disabled={this.props.role=="admin"?true:false}  
                 >
                   Xóa
                 </button>

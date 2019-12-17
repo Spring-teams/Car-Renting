@@ -24,5 +24,15 @@ module.exports=function(app){
 
     app.route("/api/updateRental").post(OwnerCtrl.updateRental);
 
-    app.route("/api/owner/insert").post(OwnerCtrl.insert)
+    app.route("/api/owner/insert").post(OwnerCtrl.insert);
+
+    app.route("/api/befinite/:id/:year").get(OwnerCtrl.getBefinitMonth);
+
+    app.route("/api/branchanalysis/:id/:year").get(OwnerCtrl.getAnalysisBranch);
+
+    app.route("/api/getanalysis/:id/:year").get(OwnerCtrl.getAnalysis);
+
+    app.route("/api/getowner/:id").get(OwnerCtrl.getById);
+
+    app.route("/api/getCustomerByOwner/:id").get(OwnerCtrl.getCustomerById);
 }

@@ -56,7 +56,7 @@ class Login extends React.Component {
         }
       })
       .catch(function(error){
-        console.log(error);
+        
       }).then(()=>{
         this.closeLoading();
       })
@@ -106,7 +106,8 @@ class Login extends React.Component {
           <p>Tên đăng nhập hoặc mật khẩu không chính xác!</p>
         </div>
         <div className="login-form">
-          <h1>Đăng nhập</h1>
+          {this.props.role =="admin"? <h1>Admin</h1> :<h1>Đăng nhập</h1>}
+          
           <div className="js-txtb">
             <input type="text"  onChange={this.handleEmail}/>
             <span data-placeholder="Số CMND"></span>
@@ -114,12 +115,12 @@ class Login extends React.Component {
 
           <div className="js-txtb">
             <input type="password" onChange={this.handlePass}/>
-            <span data-placeholder="password"></span>
+            <span data-placeholder="Password"></span>
           </div>
           <button className="js-logbutton" onClick={this.handleClick}>Đăng nhập</button>
-          <div className="button-text">
+          <div className="button-text" style={{display: this.props.role=="admin"? "none":" "}}>
             Bạn chưa có tài khoản?{" "}
-            <a  className="form-register" onClick={this.openDialog}>
+            <a  className="form-register" onClick={this.openDialog} >
               Đăng ký
             </a>
           </div>

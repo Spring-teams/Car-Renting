@@ -133,7 +133,7 @@ class CarList extends React.Component {
   render() {
     
     let owner = this.props.owner;
-    let renderedCar= typeof this.state.carItems=="undefined" || this.props.cars=="" ?"Bạn chưa có xe cho thuê!":this.state.carItems.map((car)=><CarItem car = {car} toggleModal = {this.toggleModal}  deleteCar = {this.handleDeleteCar}/>)
+    let renderedCar= typeof this.state.carItems=="undefined" || this.props.cars=="" ?"Bạn chưa có xe cho thuê!":this.state.carItems.map((car)=><CarItem car = {car} toggleModal = {this.toggleModal}  deleteCar = {this.handleDeleteCar} role = {this.props.role}/>)
     return (
       <div className="container mt-5">
         <div className="row">
@@ -150,6 +150,7 @@ class CarList extends React.Component {
               data-toggle="modal"
               data-target="#add"
               onClick = {()=>this.addToggleModal("")}
+              disabled={this.props.role=="admin"? true: false}
             >
               Thêm xe
             </button>

@@ -10,7 +10,19 @@ class OwnerHead extends React.Component{
         window.location.href="/chothuexe";
 	}
 	getAnalysis=()=>{
-		window.location.href="/chothuexe/thong-ke";
+		if(this.props.role=="admin"){
+			window.location.href="/owner/thong-ke/"+this.props.id;
+			
+		}
+		else {
+			window.location.href="/chothuexe/thong-ke";
+		}
+	}
+	handleCustomer=()=>{
+		if(this.props.role=="admin"){
+			window.location.href="/owner/khach-hang/"+this.props.id;
+		}
+		else window.location.href="/chothuexe/khach-hang";
 	}
     render(){
         // let Log = this.props.isOwnerLogin
@@ -27,15 +39,15 @@ class OwnerHead extends React.Component{
 					</form>
 					<ul className="navbar-nav ml-auto w-100 ml-5">
 						<li className="nav-item active ml-4">
-							<a className="nav-link" href="/chothuexe/khach-hang"><i className="fas fa-users" ></i> Danh sách đơn hàng<span className="sr-only">(current)</span></a>
+							<a className="nav-link" onClick={this.handleCustomer}><i className="fas fa-users" ></i> Danh sách đơn hàng<span className="sr-only">(current)</span></a>
 						</li>
 						<li className="nav-item dropdown active ml-4">
 						<a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user"></i>
 						 Tài khoản</a>
 							<div className="dropdown-menu" aria-labelledby="navbarDropdown" id="Account">
-								<a className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={()=>window.location.href="/chothuexe/thong-tin-ca-nhan"}>Thông tin cá nhân</a>
+								{this.props.role=="admin"?" ":<a className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={()=>window.location.href="/chothuexe/thong-tin-ca-nhan"}>Thông tin cá nhân</a>}
 								<a className="dropdown-item"  data-toggle="modal" onClick={this.getAnalysis}>Thống kê</a>
-								<a className="dropdown-item"  data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>Đăng xuất</a>
+								{this.props.role=="admin"?" ":<a className="dropdown-item"  data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>Đăng xuất</a>}
 							</div>
 						</li>
 					</ul>

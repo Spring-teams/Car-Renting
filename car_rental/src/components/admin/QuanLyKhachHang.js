@@ -4,9 +4,24 @@ import ItemQLKH from './ItemQLKH';
 class QuanLyKhachHang extends Component {
     constructor(props) {
         super(props);
-        this.state = {status: 0};
+        this.state = {
+            status: 0,
+            customers:[]
+        };
       }
+    componentDidMount=()=>{
+        fetch("/api/admin/getAllCustomer")
+        .then((res)=>res.json())
+        .then((res)=>{
+            
+            this.setState({
+                customers: res
+            })
+        })
+    }
+
     render() {
+        let rendered = this.state.customers.length==0?" ":this.state.customers.map((customer,index)=><ItemQLKH customer={customer} index = {index}/>)
         return (
             <div id="quan-ly-khach-hang" className="mt-5">
                 <div className="container-fluid">
@@ -17,15 +32,15 @@ class QuanLyKhachHang extends Component {
                                 <th>Mã khách hàng</th>
                                 <th>Tên khách hàng</th>
                                 <th>Số  điện thoại</th>
-                                <th>Địa chỉ</th>
-                                <th>Giới tính</th>
                                 <th>Ngày sinh</th>
                                 <th>Email</th>
+                                <th>Công ty</th>
+                                
                                 <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <ItemQLKH/>
+                            {rendered}
                         </tbody>
                         <tfoot></tfoot>
                     </table>

@@ -15,8 +15,7 @@ module.exports={
     confirmUser: (req,res)=>{
         let body = req.body;
         
-        let sql = "select * from customer where customerId= "+body['customerId']+" and pass="+body['pass'];
-        
+        let sql = "select * from customer where customerId= "+body['customerId']+" and pass="+body['pass'] + " and isCustomerActive =1;";
         db.query(sql,(err,response)=>{
             if(response == undefined){
                 res.send("false")
@@ -84,5 +83,11 @@ module.exports={
             res.send(true);
         })
         
+    },
+    getById: (req,res)=>{
+        let sql = "select * from customer where customerId = "+req.params.id;
+        db.query(sql,(err,response)=>{
+            res.json(response)
+        })
     }
 }

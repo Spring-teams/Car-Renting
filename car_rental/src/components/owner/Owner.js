@@ -25,7 +25,8 @@ class Owner extends React.Component{
     }
 
     componentWillMount(){
-        fetch("/api/getowner")
+        if(this.props.role!="admin"){
+            fetch("/api/getowner")
         .then((res)=>res.json())
         .then(data=>{
             this.setState({
@@ -38,6 +39,24 @@ class Owner extends React.Component{
         .then(()=>{
             this.setState({isLoad: true})
         })
+        }
+        else {
+            fetch("/api/getowner/"+this.props.match.params.id)
+            .then((res)=>res.json())
+        .then(data=>{
+            this.setState({
+                owner: data[0]
+            })
+        })
+        .then(()=>{
+            this.getListCar();
+        })
+        .then(()=>{
+            this.setState({isLoad: true})
+        })
+
+        }
+        
     }
     componentDidMount(){
         fetch("/api/checkOwnerLogin")
@@ -51,6 +70,11 @@ class Owner extends React.Component{
         })
     }
     getListCar(){
+    let id ;
+    if(this.props.role=="admin"){
+        id = this.props.match.params.id;
+    }
+    else id =this.state.owner.ownerId;
     if(typeof this.state.owner =="undefined"){
         let listCar;
         this.setState({
@@ -58,7 +82,8 @@ class Owner extends React.Component{
         })
         return ;
     }
-      fetch("/api/getCarByOwnerId/"+this.state.owner.ownerId)
+    
+      fetch("/api/getCarByOwnerId/"+id)
       .then((res=>res.json()))
       .then((data)=>{
           this.setState({
@@ -67,14 +92,14 @@ class Owner extends React.Component{
       })
     }
     render(){
-        if(this.state.isLogin==false){
+        if(this.state.isLogin==false&&this.props.role!="admin"){
             return <Login role={"owner"} url={"/chothuexe"}/>
         }
         return (
             <div className="owner">
-                <OwnerHead/>
+                <OwnerHead role={this.props.role} id = {this.props.role=="admin"?this.props.match.params.id:-1}/>
                 
-                {this.state.isLoad==true ? <CarList cars={this.state.listCar} owner = {this.state.owner}/>: " "}
+                {this.state.isLoad==true ? <CarList cars={this.state.listCar} owner = {this.state.owner} role={this.props.role}/>: " "}
                 <Footer/>
                 
             </div>

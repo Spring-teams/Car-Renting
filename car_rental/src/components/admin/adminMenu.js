@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import './adminMenu.css';
 import {NavLink} from 'react-router-dom'
+import Login from "../login";
 class adminMenu extends Component {
+    constructor(props){
+        super(props);
+       
+    }
+    
     render() {
+        
         return (
             
             <div id="ADMIN-MENU">
@@ -15,7 +22,7 @@ class adminMenu extends Component {
                         <div className="collapse navbar-collapse ml-5" id="nav-menu-content">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <NavLink to='/'>
+                                    <NavLink to='/admin'>
                                         Trang chủ
                                     </NavLink>
                                 </li>

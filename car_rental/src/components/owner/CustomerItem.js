@@ -26,6 +26,9 @@ class CustomerItem extends React.Component {
    
   }
   handleChange(event){
+    if(this.props.role=="admin"){
+      return
+    }
     let name =event.target.name;
     let obj = JSON.parse(JSON.stringify(this.state.status));
     let rental = JSON.parse(JSON.stringify(this.props.rental));

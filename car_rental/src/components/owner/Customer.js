@@ -17,7 +17,8 @@ class Customer extends React.Component {
         }
     }
     componentDidMount() {
-        fetch("/api/getCustomerByOwner")
+        if(typeof this.props.match.params.id =="undefined"){
+            fetch("/api/getCustomerByOwner")
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -26,6 +27,19 @@ class Customer extends React.Component {
                     isLoad: true
                 })
             })
+        }
+        else {
+            fetch("/api/getCustomerByOwner/"+this.props.match.params.id)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+                this.setState({ customers: data, origin: data })
+                this.setState({
+                    isLoad: true
+                })
+            })
+        }
+        
     }
     handleFilter=(event)=>{
         let name = event.target.id;
@@ -78,7 +92,7 @@ class Customer extends React.Component {
         
         return (
             <div>
-                <OwnerHead />
+                <OwnerHead role={this.props.role} id = {this.props.role=="admin"?this.props.match.params.id:-1}/>
 
                 <div id="owner-rent-car">
                     <div className="container mt-3">
@@ -127,7 +141,7 @@ class Customer extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.isLoad == true ? this.state.customers.map((customer) => <CustomerItem  key = {customer.rentalId} rental={customer}/>) : null}
+                                        {this.state.isLoad == true ? this.state.customers.map((customer) => <CustomerItem  key = {customer.rentalId} rental={customer} role={this.props.role}/>) : null}
                                     </tbody>
                                 </table>
                             </div>

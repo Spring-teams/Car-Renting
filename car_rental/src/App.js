@@ -14,7 +14,8 @@ import Analysis from "./components/owner/analysis";
 import AdminMenu from './components/admin/adminMenu';
 import QuanLyKhachHang from './components/admin/QuanLyKhachHang';
 import QuanLyCuaHang from './components/admin/QuanLyCuaHang';
-
+import AdOrder from "./components/admin/customer";
+import AdminHome from "./components/admin/home";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +30,7 @@ class App extends React.Component {
     };
   }
   handleCarID(carId) {
-    console.log(carId);
+    
   }
   componentDidMount() {
     fetch("/api/checkLogin")
@@ -96,7 +97,7 @@ class App extends React.Component {
             <Analysis />
           </Route>
           <Route path="/admin" exact>
-            <AdminMenu />
+            <AdminHome />
           </Route>
           <Route path="/admin/quan-ly-khach-hang">
             <AdminMenu />
@@ -106,8 +107,26 @@ class App extends React.Component {
             <AdminMenu />
             <QuanLyCuaHang />
           </Route>
+          <Route
+            path="/customer/:id"
+            render={props => <AdOrder {...props} />}
+          ></Route>
+           <Route path="/owner/khach-hang/:id"
+            render={props => <Customer {...props} role={"admin"} />}
+           >
+            
+          </Route>
+          <Route path="/owner/thong-ke/:id"
+            render={props => <Analysis {...props} role={"admin"} />}
+           >
+            
+          </Route>
+          <Route
+            path="/owner/:id"
+            render={props => <Owner role={"admin"} {...props} />}
+          ></Route>
           <Route path="/chothuexe">
-            <Owner />
+            <Owner role={"owner"}/>
           </Route>
           {/* <Route path="/admin">
           
