@@ -94,6 +94,15 @@ class Register extends React.Component {
           });
       }
     }
+    if(data['pass']!=data['repass']){
+      isError=true;
+      errorContent="Mật khẩu nhập không khớp!"
+    }
+    regex= /(09|01[2|6|8|9])+([0-9]{8})\b/
+    if(!regex.test(data['phone'])){
+      isError=true;
+      errorContent="Số điện thoại không hợp lệ!"
+    }
     const res = this.setState({
       warning: warning,
       inputError: isError == true ? "show" : " ",
