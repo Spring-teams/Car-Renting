@@ -15,4 +15,12 @@ module.exports=function(app){
     app.route("/api/admin/branchanalysis/:year").get(AdminCtrl.getBranchAnalysis);
 
     app.route("/api/admin/getanalysis/:year").get(AdminCtrl.getAnalysis);
+
+    app.route("/api/disablecustomer").post(AdminCtrl.disableCustomer);
+
+    app.route("/api/undisablecustomer").post(AdminCtrl.activeCustomer);
+
+    app.route("/api/disableowner").post(AdminCtrl.disableOwner);
+
+    app.route("/api/undisableowner").post(AdminCtrl.activeOwner)
 }

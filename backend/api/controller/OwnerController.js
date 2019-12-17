@@ -38,7 +38,7 @@ module.exports={
     },
     confirmOwner: (req,res)=>{
         let body = req.body;
-        let sql = "select * from owner where ownerId = "+ body['customerId']+ " and pass = "+ body['pass']; 
+        let sql = "select * from owner where ownerId = "+ body['customerId']+ " and pass = "+ body['pass']+ " and isOwnerActive = 1"; 
         // console.log(sql);
         db.query(sql,(err,response)=>{
             if(!response.length){

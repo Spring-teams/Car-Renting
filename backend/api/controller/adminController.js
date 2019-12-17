@@ -55,6 +55,50 @@ module.exports={
             if(err) throw err;
             res.json(response);
         });
+    },
+    disableCustomer: (req,res)=>{
+        let body = req.body;
+        let sql = "update customer set isCustomerActive = 0 where customerId = "+body['customerId'];
+        db.query(sql,(err,response)=>{
+            if(err){
+                res.send(false);
+            }
+            else res.send(true)
+        })
+        
+    },
+    activeCustomer: (req,res)=>{
+        let body=req.body;
+        let sql = "update customer set isCustomerActive = 1 where customerId = "+body['customerId'];
+        db.query(sql,(err,response)=>{
+            if(err){
+                res.send(false);
+            }
+            else res.send(true)
+        })
+    },
+    disableOwner: (req,res)=>{
+        let body = req.body;
+        let sql = "update owner set isOwnerActive = 0 where ownerId = "+body['ownerId'];
+        console.log(sql)
+        db.query(sql,(err,response)=>{
+            if(err){
+                res.send(false);
+            }
+            else res.send(true)
+        })
+
+    },
+    activeOwner: (req,res)=>{
+        let body = req.body;
+        let sql = "update owner set isOwnerActive = 1 where ownerId = "+body['ownerId'];
+        db.query(sql,(err,response)=>{
+            if(err){
+                res.send(false);
+            }
+            else res.send(true)
+        })
+
     }
     
 }

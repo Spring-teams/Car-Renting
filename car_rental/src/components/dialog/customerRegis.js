@@ -98,7 +98,7 @@ class Register extends React.Component {
       isError=true;
       errorContent="Mật khẩu nhập không khớp!"
     }
-    regex= /(09|01[2|6|8|9])+([0-9]{8})\b/
+    let regex= /(09|01[2|6|8|9])+([0-9]{8})\b/
     if(!regex.test(data['phone'])){
       isError=true;
       errorContent="Số điện thoại không hợp lệ!"

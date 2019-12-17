@@ -3,10 +3,56 @@ import React, { Component } from 'react';
 class ItemQLKH extends Component {
 	constructor(props){
 		super(props);
+		this.state={
+			isActive:1
+		}
 
 	}
 	handleClick=()=>{
 		window.location.href="/customer/"+this.props.customer.customerId;
+	}
+	componentDidMount=()=>{
+		this.setState({
+			isActive: this.props.customer.isCustomerActive
+		})
+	}
+	disable=()=>{
+		let customer= this.props.customer;
+		fetch("/api/disablecustomer",{
+			method: "POST",
+			headers:{
+				"Accept":"*/*",
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify(customer)
+		})
+		.then(res=>res.text())
+		.then(res=>{
+			if(res=="true"){
+				this.setState({
+					isActive: 0
+				})
+			}
+		})
+	}
+	undisable=()=>{
+		let customer= this.props.customer;
+		fetch("/api/undisablecustomer",{
+			method: "POST",
+			headers:{
+				"Accept":"*/*",
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify(customer)
+		})
+		.then(res=>res.text())
+		.then(res=>{
+			if(res=="true"){
+				this.setState({
+					isActive: 1
+				})
+			}
+		})
 	}
 	render() {
 		return (
@@ -23,9 +69,9 @@ class ItemQLKH extends Component {
 				</td>
 				
 				<td>
-					{ this.props.customer.isCustomerActive ==0? 
-					<button className=' btn-danger'>Deleted</button>
-					: <button className=' btn-success'>Active</button>
+					{ this.state.isActive ==0? 
+					<button className=' btn-danger'onClick={this.undisable}>Deleted</button>
+					: <button className=' btn-success'onClick={this.disable}>Active</button>
 				}
 				</td>
 			</tr>
