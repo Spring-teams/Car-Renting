@@ -78,7 +78,7 @@ class Analysis extends React.Component {
     );
   };
   getData = () => {
-    let id = -1;
+    let id = "/"+-1+"/";
     let isAdmin="";
     if(this.props.isAdmin==true){
       id="/";
@@ -132,7 +132,7 @@ class Analysis extends React.Component {
           pieData: pieData
         });
       });
-      fetch("/api"+isAdmin+"/getanalysis/"+id+this.state.year)
+      fetch("/api"+isAdmin+"/getanalysis"+id+this.state.year)
       .then(res=>res.json())
       .then(res=>{
         let obj ={

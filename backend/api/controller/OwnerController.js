@@ -178,6 +178,7 @@ module.exports={
     },
     getAnalysisBranch: (req,res)=>{
         let id = req.params.id;
+        if(id==-1) id = currentOwnerId;
         let year = req.params.year;
         let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car  where rental.ownerId = "+id+" and year(beginDate) = "+year+" group by car.branch order by car.branch";
         db.query(sql,(err,response)=>{
@@ -188,6 +189,7 @@ module.exports={
     },
     getAnalysis: (req,res)=>{
         let id = req.params.id;
+        if (id ==-1) id = currentOwnerId;
         let year = req.params.year;
         let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental where isDelete = 0 and ownerId = "+ id+ " and year(beginDate) = "+ year;
         db.query(sql,(err,response)=>{
