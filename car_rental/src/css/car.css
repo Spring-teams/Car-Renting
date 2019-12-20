@@ -18,4 +18,5 @@
     border: 1px solid #ee4d2d;
     box-sizing: content-box;
     transform: scale(1.01);
+    cursor: pointer;
 }

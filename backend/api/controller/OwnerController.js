@@ -61,9 +61,7 @@ module.exports={
         res.send("true")
     },
     getCustomer: (req,res)=>{
-        let sql = "call rentalTrack()"
-        db.query(sql);
-        sql = "select * from customer inner join rental on customer.customerId = rental.customerId inner join car on car.carId = rental.carId  inner join owner on owner.ownerId = rental.ownerId  where rental.ownerId = '"+currentOwnerId+"' order by customer.customerId ";
+        let sql = "select * from customer inner join rental on customer.customerId = rental.customerId inner join car on car.carId = rental.carId  inner join owner on owner.ownerId = rental.ownerId  where rental.ownerId = '"+currentOwnerId+"' order by customer.customerId ";
         //  console.log(sql)
         db.query(sql,(err,response)=>{
             res.json(response)
@@ -166,10 +164,8 @@ module.exports={
         let rental={};
         let sql ="delete from rental where rentalId = " + body['rentalId'];
         db.query(sql);
-        
         sql = "insert into rental (rentalId,customerId,carId,ownerId,beginDate,endDate,totalMoney,isRent,isPay,isConfirm,address,isDelete) values("+
         body['rentalId']+",'"+body['customerId']+"','"+body['carId']+"','"+body['ownerId']+"','"+body['beginDate'].slice(0,10)+"','"+body['endDate'].slice(0,10)+"',"+body['totalmoney']+","+body['isRent']+","+body['isPay']+","+body['isConfirm']+",'"+body['address']+"',"+body['isDelete']+")";
-        // console.log(sql)
         db.query(sql)
         res.send(true)
     },

@@ -3,7 +3,6 @@
     width: 100%;
     overflow-y: hidden;
     overflow-x: auto;
-    font-size: 16px;
 }
 #owner-order-details > table tr{
     width: 100%;
@@ -17,13 +16,12 @@
     box-shadow: 0 0.0625rem 0.125rem 0 rgba(0,0,0,.1);
 }
 #owner-order-details > table tr th:nth-child(1){
-    width: 15%;
-    min-width: 70px;
-    min-width: 100px;
+    width: 10%;
+    min-width: 50px;
 }
 #owner-order-details > table tr th:nth-child(2){
     width: 15%;
-    min-width: 150px;
+    min-width: 80px;
 }
 #owner-order-details > table tr th:nth-child(3){
     width: 7%;

@@ -99,7 +99,7 @@ class SubmitBody extends React.Component {
 		rental['isConfirm'] = 0;
 		rental['address'] = this.state.address;
 		rental['totalMoney'] = this.state.totalMoney;
-		
+
 		fetch('/api/addrental/', {
 			method: 'POST',
 			headers: {

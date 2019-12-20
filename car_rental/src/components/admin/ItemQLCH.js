@@ -1,76 +1,76 @@
 import React, { Component } from 'react';
 
 class ItemQLCH extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
-		this.state={
+		this.state = {
 			isActive: 0
 		}
 	}
-	handleClick=()=>{
-		window.location.href="/owner/"+this.props.owner.ownerId;
+	handleClick = () => {
+		window.location.href = "/owner/" + this.props.owner.ownerId;
 	}
-	componentDidMount=()=>{
+	componentDidMount = () => {
 		this.setState({
 			isActive: this.props.owner.isOwnerActive
 		})
 	}
-	disable=()=>{
-		let customer= this.props.owner;
-		fetch("/api/disableowner",{
+	disable = () => {
+		let customer = this.props.owner;
+		fetch("/api/disableowner", {
 			method: "POST",
-			headers:{
-				"Accept":"*/*",
-				"Content-Type":"application/json"
+			headers: {
+				"Accept": "*/*",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(customer)
 		})
-		.then(res=>res.text())
-		.then(res=>{
-			if(res=="true"){
-				this.setState({
-					isActive: 0
-				})
-			}
-		})
+			.then(res => res.text())
+			.then(res => {
+				if (res == "true") {
+					this.setState({
+						isActive: 0
+					})
+				}
+			})
 	}
-	undisable=()=>{
-		let customer= this.props.owner;
-		fetch("/api/undisableowner",{
+	undisable = () => {
+		let customer = this.props.owner;
+		fetch("/api/undisableowner", {
 			method: "POST",
-			headers:{
-				"Accept":"*/*",
-				"Content-Type":"application/json"
+			headers: {
+				"Accept": "*/*",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(customer)
 		})
-		.then(res=>res.text())
-		.then(res=>{
-			if(res=="true"){
-				this.setState({
-					isActive: 1
-				})
-			}
-		})
+			.then(res => res.text())
+			.then(res => {
+				if (res == "true") {
+					this.setState({
+						isActive: 1
+					})
+				}
+			})
 	}
 	render() {
 		return (
-			<tr  onClick={this.handleClick}>
-	<td>{this.props.index}</td>
-	<td>{this.props.owner.ownerId}</td>
-		<td>{this.props.owner.ownerName}</td>
+			<tr>
+				<td>{this.props.index}</td>
+				<td onClick={this.handleClick} className="id" style={{cursor:'pointer'}} title="Click để xem chi tiết cửa hàng">{this.props.owner.ownerId}</td>
+				<td onClick={this.handleClick} className="id"  style={{cursor:'pointer'}}  title="Click để xem chi tiết cửa hàng">{this.props.owner.ownerName}</td>
 				<td data-toggle="modal" data-target={`#modal${this.props.index}`}>
 					{this.props.owner.phone}
 				</td>
-				
-		<td>{this.props.owner.birthday.slice(0,10)}</td>
-		<td>{this.props.owner.email}</td>
-		<td>{this.props.owner.companyName}</td>
+
+				<td>{this.props.owner.birthday.slice(0, 10)}</td>
+				<td>{this.props.owner.email}</td>
+				<td>{this.props.owner.companyName}</td>
 				<td>
-				{ this.state.isActive ==0? 
-					<button className=' btn-danger'onClick={this.undisable}>Deleted</button>
-					: <button className=' btn-success'onClick={this.disable}>Active</button>
-				}
+					{this.state.isActive == 0 ?
+						<button className=' btn-danger' onClick={this.undisable}>Deleted</button>
+						: <button className=' btn-success' onClick={this.disable}>Active</button>
+					}
 				</td>
 			</tr>
 		);

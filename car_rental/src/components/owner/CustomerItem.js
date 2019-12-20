@@ -33,30 +33,27 @@ class CustomerItem extends React.Component {
         let obj = JSON.parse(JSON.stringify(this.state.status));
         let rental = JSON.parse(JSON.stringify(this.props.rental));
         if (obj['isDelete'] == 1) {
-            
-           
+            return
         }
-        else if (name == "isPay") {
+        if (name == "isPay") {
             if (obj['isRent'] == 0 || obj['isConfirm'] == 0) {
                 return
             }
         }
-        else if (name == 'isDelete') {
+        if (name == 'isDelete') {
             if (obj['isPay'] == 1) {
                 return;
             }
         }
-        else if (name == 'isRent') {
+        if (name == 'isRent') {
             if (obj['isConfirm'] == 0) {
                 return;
             }
         }
 
         obj[name] = obj[name] == 0 ? 1 : 0;
-        
+        alert(name)
         rental[name] = obj[name];
-        rental['beginDate']= rental.beginDate.slice(0, 8) + (Number(rental.beginDate.slice(8, 10)) + 1)
-        rental['endDate']= rental.endDate.slice(0, 8) + (Number(rental.endDate.slice(8, 10)) + 1)
         fetch("/api/updateRental", {
             method: "POST",
             headers: {
@@ -67,7 +64,7 @@ class CustomerItem extends React.Component {
         })
             .then(res => res.text)
             .then(data => {
-                //console.log(data)
+                console.log(data)
             })
         this.setState({
             status: obj
@@ -90,7 +87,7 @@ class CustomerItem extends React.Component {
                         width="100px"
                     />
                 </td>
-                <td>{this.props.rental.beginDate.slice(0, 8) + (Number(this.props.rental.beginDate.slice(8, 10)) + 1)} đến {this.props.rental.endDate.slice(0, 8) + (Number(this.props.rental.endDate.slice(8, 10)) + 1)}</td>
+                <td>{this.props.rental.beginDate.slice(0, 10)} đến {this.props.rental.endDate.slice(0, 10)}</td>
                 <td>{formatNumber(this.props.rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(this.props.rental.totalmoney)}<sup>đ</sup></td>
                 <td>

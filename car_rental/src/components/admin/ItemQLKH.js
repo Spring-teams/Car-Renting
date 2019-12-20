@@ -56,10 +56,10 @@ class ItemQLKH extends Component {
 	}
 	render() {
 		return (
-			<tr onClick={this.handleClick}>
+			<tr>
 				<td>{this.props.index}</td>
-				<td>{this.props.customer.customerId}</td>
-				<td>{this.props.customer.name}</td>
+				<td onClick={this.handleClick} className="id" style={{cursor:'pointer'}} title="Click để xem chi tiết khách hàng">{this.props.customer.customerId}</td>
+				<td onClick={this.handleClick} className="id" style={{cursor:'pointer'}}  title="Click để xem chi tiết khách hàng">{this.props.customer.name}</td>
 
 				<td>{this.props.customer.phone}</td>
 				<td>{this.props.customer.birthday.slice(0, 10)}</td>

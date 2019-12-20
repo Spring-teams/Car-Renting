@@ -232,9 +232,9 @@ class Analysis extends React.Component {
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="char" id="tk-doanh-so">
                                     <p>Tổng số đơn hàng: {this.state.total['num']}</p>
-                                    <p>Doanh thu cả năm: {this.state.total['totalmoney']} VND</p>
-                                    <p>Chiết khấu: 5% = {this.state.total['totalmoney'] * 0.05} VND</p>
-                                    <p>Tổng: {this.props.isAdmin == true ? this.state.total['totalmoney'] * 0.05 : this.state.total['totalmoney'] - this.state.total['totalmoney'] * 0.05} VND</p>
+                                    <p>Doanh thu cả năm: {formatNumber(this.state.total['totalmoney'])}<sup>đ</sup></p>
+                                    <p>Chiết khấu: 5% = {formatNumber(this.state.total['totalmoney'] * 0.05)}<sup>đ</sup></p>
+                                    <p>Tổng: {this.props.isAdmin == true ? formatNumber(this.state.total['totalmoney'] * 0.05) : formatNumber(this.state.total['totalmoney'] - this.state.total['totalmoney'] * 0.05)} VND</p>
                                 </div>
                             </div>
                         </div>
@@ -243,6 +243,12 @@ class Analysis extends React.Component {
                 <Footer />
             </div>
         );
+        function formatNumber(num) {
+            if (num == null) {
+                return;
+            }
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        }
     }
 }
 export default Analysis;

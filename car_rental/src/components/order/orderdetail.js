@@ -43,22 +43,16 @@ class Orderdetail extends React.Component {
         }
         // console.log(rental);
         let lastDay = rental.endDate;
-        
         lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, lastDay.slice(8, 10));
-        
-
         let status = "";
-        if (rental.isConfirm == 0 && rental.isDelete == 0) status = "Đang đợi xác nhận";
+        if (rental.isConfirm == 0 && rental.isDelete == 0) status = "Đợi xác nhận";
         else if (rental.isConfirm == 1 && rental.isRent == 0 && rental.isDelete == 0) status = "Đã xác nhận";
         else if (rental.isRent == 1 && rental.isDelete == 0 && rental.isPay == 0) {
             let lastDay = rental.endDate;
-            console.log(lastDay)
             lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
             var date = new Date();
-
-            // add a day
             date.setDate(date.getDate() + 1);
-            if (lastDay >= date) status = "Quá hạn";
+            if (lastDay < date) status = "Quá hạn";
             else status = "Đang thuê";
         }
         else if (rental.isRent == 1 && rental.isPay == 1 && rental.isDelete == 0) {
@@ -67,22 +61,23 @@ class Orderdetail extends React.Component {
         else status = "Bị hủy";
         return (
             <tr>
-                <td>{"" + this.state.car.carName}</td>
+                <td>{rental.carName}</td>
                 <td>
-                    <img src={"/images/" + this.state.car.image} style={{ width: "100px", padding: '1px 0' }} class="img-fluid" alt="" />
+                    <img src={"/images/" + rental.image} style={{ width: "100px", padding: '1px 0' }} class="img-fluid" alt="" />
                 </td>
-                <td>{this.state.car.carId}</td>
-                <td>{this.state.car.ownerName}</td>
+                <td>{rental.carId}</td>
+                <td>{rental.ownerName}</td>
+                <td>{rental.phone}</td>
                 <td>{rental.address}</td>
-
                 <td>{rental.beginDate == null ? "" : rental.beginDate.slice(0, 8) + (Number(rental.beginDate.slice(8, 10)) + 1)} đến  {rental.endDate == null ? "" : rental.endDate.slice(0, 8) + (Number(rental.endDate.slice(8, 10)) + 1)}</td>
-                <td>{formatNumber(this.state.car.price)}<sup>đ</sup></td>
+                <td>{formatNumber(rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(rental.totalmoney)}<sup>đ</sup></td>
                 <td>
                     <label className="label-status">
                         {status}
                     </label>
                 </td>
+                <td><label className={status ==="Đợi xác nhận"? "label-huy": ""}>{status ==="Đợi xác nhận"? "Hủy": ""}</label></td>
             </tr>
         );
     }

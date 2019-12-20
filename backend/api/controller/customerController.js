@@ -42,7 +42,7 @@ module.exports={
         sql = "update rental set customerId = '"+body['customerId']+"' where customerId = '"+body['old_id']+"' ;";
         db.query(sql);
         body['birthday']=body['birthday'].slice(0,10);
-        
+        console.log(sql)
         db.query(sql);
         sql = "delete from customer where customerId='"+body['old_id']+"' ;";
         db.query(sql);

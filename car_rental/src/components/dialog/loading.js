@@ -7,7 +7,7 @@ class Loading extends React.Component{
     render(){
         
         return (
-            <div style={{display: this.props.show, zIndex: 100}} className="loading">
+            <div style={{display: this.props.show}} className="loading">
 
             </div>
         )

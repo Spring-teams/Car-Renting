@@ -13,40 +13,43 @@ class Customer extends React.Component {
             isLoad: false,
             car_search: "",
             customer_search: "",
-            owner:{}
+            owner: {},
+            searchKey: '',
+            key: '',
+            sortStartDate: 0
         }
     }
-    componentDidMount() {
-
+    componentDidMount =() => {
         if (typeof this.props.match == "undefined") {
             fetch("/api/getCustomerByOwner")
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data)
                     this.setState({ customers: data, origin: data })
                     this.setState({
-                        isLoad: true
+                        isLoad: true,
+                        owner: data[0],
                     })
                 })
+
         }
         else {
             fetch("/api/getCustomerByOwner/" + this.props.match.params.id)
                 .then((res) => res.json())
                 .then((data) => {
-                   
-                    
+
                     this.setState({ customers: data, origin: data })
                     this.setState({
                         isLoad: true
                     })
                 })
-            fetch("/api/getowner/"+this.props.match.params.id)
-            .then((res=>res.json()))
-            .then(((data)=>{
-                this.setState({
-                    owner: data[0]
-                })
-            }))
+            fetch("/api/getowner/" + this.props.match.params.id)
+                .then((res => res.json()))
+                .then(((data) => {
+                    console.log(data);
+                    this.setState({
+                        owner: data[0]
+                    })
+                }))
         }
 
     }
@@ -95,16 +98,35 @@ class Customer extends React.Component {
             this.setState({ customers: customers, customer_search: value })
         }
     }
-
-    render() {
+    onChange = (e) => {
+        if (e.target.name === "searchKey") {
+			this.setState({
+				searchKey: e.target.value
+			})
+		}
+    }
+    onSearch = (searchKey) => {
+		console.log(searchKey);
+		this.setState({
+			key: searchKey
+		})
+    }
+    onSort = (e,value) => {
+        e.preventDefault();
+        if(value==="new"){
+            this.setState({
+                sortStartDate: 1,
+            })
+        }else if(value==="old"){
+            this.setState({
+                sortStartDate: -1,
+            })
+        }
+    }
+     render() {
         // {this.state.isLoad==true ? this.state.customers.map((customer)=> <CustomerItem rental={customer}/>) : " "}
-       
-        let customers = this.state.customers;
-        let customerName = {};
-        let customer = customers.map((customer, indexedDB) => {
-            
-            customerName = customer;
-        })
+        console.log(this.state.owner);
+
         let styleSearchBox = {
             width: '70%',
             height: '35px',
@@ -120,6 +142,30 @@ class Customer extends React.Component {
             borderRadius: '3px',
             border: '1px solid #ccc'
         };
+        let {customers,searchKey, key,sortStartDate} =this.state;
+        if(sortStartDate === 1){
+           customers = customers.sort((a,b)=>(new Date(a.beginDate.slice(0,4),a.beginDate.slice(5,7)-1,a.beginDate.slice(8,10)) < new Date(b.beginDate.slice(0,4),b.beginDate.slice(5,7)-1,b.beginDate.slice(8,10)))?1:-1);
+        }
+        if(sortStartDate === -1){
+            customers.sort((a,b)=>(new Date(a.beginDate.slice(0,4),a.beginDate.slice(5,7)-1,a.beginDate.slice(8,10)) > new Date(b.beginDate.slice(0,4),b.beginDate.slice(5,7)-1,b.beginDate.slice(8,10)))?1:-1);
+        }
+        if (key) {
+			// console.log(key);
+			customers = customers.filter((customer) => {
+				console.log(customer);
+				return customer.name.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.phone.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.ownerId.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+                    customer.address.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.price.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.totalmoney.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.beginDate.slice(0,10).toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.endDate.slice(0,10).toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					customer.carName.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1
+                    
+			})
+			// console.log(carItems);/
+		}
         return (
             <div>
                 <OwnerHead owner={this.state.owner} role={this.props.role} id={this.props.role == "admin" ? this.props.match.params.id : -1} />
@@ -127,8 +173,8 @@ class Customer extends React.Component {
                     <h2 className="text-center p-3">Danh sách đơn hàng</h2>
                     <div className="row">
                         <div className="col">
-                            <input type="text" style={styleSearchBox} />
-                            <button style={styleButtonSearch}>Tìm Kiếm</button>
+                            <input type="text" name="searchKey" value={searchKey} onChange={this.onChange} style={styleSearchBox}  />
+                            <button style={styleButtonSearch} onClick={() => this.onSearch(searchKey)}>Tìm Kiếm</button>
                         </div>
                         <div className="col">
                             <div className="btn-group" style={{ float: 'right' }}>
@@ -156,8 +202,8 @@ class Customer extends React.Component {
                                     Sắp xếp
                                     </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <a className="dropdown-item" href="#">Mới nhất</a>
-                                    <a className="dropdown-item" href="#">Cũ nhất</a>
+                                    <a className="dropdown-item" href="#" onClick={(e) => this.onSort(e,"new")}>Mới nhất</a>
+                                    <a className="dropdown-item" href="#" onClick={(e) => this.onSort(e,"old")}>Cũ nhất</a>
                                 </div>
                             </div>
                         </div>
@@ -165,84 +211,29 @@ class Customer extends React.Component {
                 </div>
                 <div className="container-fluid" id="owner-order-details">
                     <table className="mt-3">
-						<thead>
-							<tr>
-								<th>Mã đơn hàng</th>
-								<th>Tên khách hàng</th>
-								<th>Số điện thoại</th>
-								<th>Địa chỉ nhận</th>
-								<th>Tên xe</th>
-								<th>Ảnh</th>
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ nhận</th>
+                                <th>Tên xe</th>
+                                <th>Ảnh</th>
                                 <th>Ngày thuê</th>
-								<th>Đơn giá</th>
-								<th>Thành tiền</th>
-								<th>Đã lấy xe</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                                <th>Đã lấy xe</th>
                                 <th>Đã trả xe</th>
                                 <th>Xác nhận thuê</th>
                                 <th>Hủy</th>
-							</tr>
-						</thead>
-						<tbody>
-                        {this.state.isLoad == true ? this.state.customers.map((customer) => <CustomerItem key={customer.rentalId} rental={customer} role={this.props.role} />) : null}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.isLoad == true ? customers.map((customer) => <CustomerItem key={customer.rentalId} rental={customer} role={this.props.role} />) : null}
                         </tbody>
-						<tfoot />
-					</table>
+                        <tfoot />
+                    </table>
                 </div>
-                {/* <div id="owner-rent-car">
-                    <div className="container mt-3">
-                        <div className="card border-dark mb-3">
-                            <div className="card-header">
-                                <p className="float-left">Danh sách đơn hàng</p>
-                                <div className="dropdown float-right mr-3" >
-                                    <button style={{ width: '150px' }} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Lọc đơn hàng
-                                    </button>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item" id="all" onClick={this.handleFilter}>Tất cả</a>
-                                        <a className="dropdown-item" id="isConfirm" onClick={this.handleFilter}>Đang đợi xác nhận</a>
-                                        <a className="dropdown-item" id="isRent" onClick={this.handleFilter}>Đang thuê</a>
-                                        <a className="dropdown-item" id="isLose" onClick={this.handleFilter}>Quá hạn</a>
-                                        <a className="dropdown-item" id="isPay" onClick={this.handleFilter}>Đã thuê</a>
-                                        <a className="dropdown-item" id="isDelete" onClick={this.handleFilter}>Bị hủy</a>
-                                    </div>
-                                </div>
-                                <div className="dropdown float-right mr-3" style={{ width: '100px' }}>
-                                    <button style={{ width: '120px' }} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Sắp xếp
-                                    </button>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <a className="dropdown-item" href="#">Mới nhất</a>
-                                        <a className="dropdown-item" href="#">Cũ nhất</a>
-                                    </div>
-                                </div>
-                                <div className="float-right" style={{ height: "40px", marginRight: "30px" }}>
-                                    <label style={{ fontWeight: "bold" }}>Tìm kiếm xe  </label>  <input type="text" style={{ height: "90%" }} name="car-search" onChange={this.handleSearch} value={this.state.car_search} />
-                                </div >
-                                <div className="float-right" style={{ height: "40px", marginRight: "10px" }}>
-                                    <label style={{ fontWeight: "bold" }}>Tìm khách hàng  </label> <input type="text" style={{ height: "90%" }} name="customer-search" onChange={this.handleSearch} />
-                                </div>
-                            </div>
-                            <div className="card-body text-dark">
-                                <table className="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Ảnh</th>
-                                            <th scope="col">Thông tin xe</th>
-                                            <th scope="col">Đã lấy xe</th>
-                                            <th scope="col">Đã trả xe</th>
-                                            <th scope="col">Xác nhận cho thuê</th>
-                                            <th scope="col">Hủy</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.isLoad == true ? this.state.customers.map((customer) => <CustomerItem key={customer.rentalId} rental={customer} role={this.props.role} />) : null}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> */}
             </div>
         )
     }

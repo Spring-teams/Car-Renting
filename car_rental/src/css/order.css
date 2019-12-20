@@ -22,7 +22,7 @@
 }
 #order > table tr th:nth-child(2){
     width: 15%;
-    min-width: 150px;
+    min-width: 70px;
 }
 #order > table tr th:nth-child(3){
     width: 7%;
@@ -48,17 +48,29 @@
 #order > table tr th:nth-child(8){
     width: 10%;
     min-width: 120px;
+    padding: 0;
+    margin: 0;
 }
 #order > table tr td{
     background: #fff;
     padding: 0px 10px;
+    word-wrap:break-word !important;
 }
 #order > table tr td img{
     background: #fff;
-    padding: 1px 10px;
+    padding: 1px 0px;
 }
 .label-status{
     background: orangered;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.label-huy{
+    background: red;
+    border-radius: 5px;
     padding: 5px 10px;
     color: white;
     font-weight: 500;

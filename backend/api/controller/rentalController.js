@@ -5,7 +5,7 @@ module.exports={
     addrental: (req,res)=>{
         let data=req.body;
         let sql ="insert into rental SET ?";
-        console.log(data)
+        
         db.query(sql,[data],(err,response)=>{
             if(err){
                 throw err;
@@ -20,7 +20,7 @@ module.exports={
         db.query(sql,(err,response)=>{
             if(err) throw err;
         })
-        sql = "select * from rental where customerId = "+ req.params.customerId;
+        sql = "select * from rental inner join owner on rental.ownerId = owner.ownerId inner join car on car.carId = rental.carId where customerId = "+ req.params.customerId;
         
         db.query(sql,(err,response)=>{
             if(err){ 

@@ -55,7 +55,7 @@ class Home extends React.Component {
                 });
     }
     onFilter = (filterCategory, filterBranch, filterNumberSeat) => {
-      //  console.log(filterCategory, filterBranch, filterNumberSeat);
+        console.log(filterCategory, filterBranch, filterNumberSeat);
         this.setState({
             filterBranch: filterBranch,
             filterNumberSeat: filterNumberSeat,
@@ -73,7 +73,7 @@ class Home extends React.Component {
         })
             .then((res) => res.json())
             .then((data) => {
-                
+                console.log(data);
                 this.setState({
                     cars: data.cars,
                     maxPage: (data.count % 12 === 0) ? Math.floor(data.count / 12): Math.floor(data.count / 12)+1
@@ -82,7 +82,7 @@ class Home extends React.Component {
 
     }
     onChangeNumberPage = (pageNumber) => {
-       
+        console.log("page " + pageNumber);
         this.setState({
             pageNumber: pageNumber
         })
@@ -103,7 +103,8 @@ class Home extends React.Component {
     }
     render() {
         let {maxPage} = this.state;
-       
+        console.log(maxPage);
+        
         return (
             <div id="nothing" style={{ backgroundColor: '#f5f5f5' }}>
                 <Head isLogin={this.props.isLogin} />
@@ -114,7 +115,7 @@ class Home extends React.Component {
                             <Slider />
                         </div>
                         <div className="col-4" style={{ margin: '0px', padding: '3px' }}>
-                            <img src="images/2.png" className="d-block w-100 mt-1" alt="..." />
+                            <img src="images/image/image/2018 MERCEDES S-CLASS.jpg" className="d-block w-100 mt-1" alt="..." />
                             <img src="images/image/image/2018 MERCEDES S-CLASS.jpg" className="d-block w-100 mt-1" alt="..." />
                         </div>
                     </div>

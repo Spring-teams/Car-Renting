@@ -19,7 +19,9 @@ class CarList extends React.Component {
 			showConfirm: 'none',
 			confirmContent: ' asf',
 			canDeleteCar: true,
-			deletedCarId: ''
+			deletedCarId: '',
+			searchKey: '',
+			key: ''
 		};
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.addToggleModal = this.addToggleModal.bind(this);
@@ -29,7 +31,7 @@ class CarList extends React.Component {
 	componentDidMount() {
 		if (typeof this.props.owner != 'undefined') {
 			fetch('/api/getCarByOwnerId/' + this.props.owner.ownerId).then((res) => res.json()).then((data) => {
-				
+				console.log(data);
 
 				this.setState({
 					carItems: data
@@ -101,7 +103,7 @@ class CarList extends React.Component {
 	};
 	handleList = (event) => {
 		let listCar = JSON.parse(JSON.stringify(this.state.carItems));
-		
+
 		if (event.target.id == 'inorder') {
 			listCar.sort((a, b) => (a.price > b.price ? 1 : -1));
 			this.setState({
@@ -113,10 +115,25 @@ class CarList extends React.Component {
 				carItems: listCar
 			});
 		} else if (event.target.id == 'newest') {
-		
-			window.location.reload();
+			let cars = listCar.sort((a,b)=>(new Date(a.createTime.slice(0,4),a.createTime.slice(5,7)-1,a.createTime.slice(8,10)) > new Date(b.createTime.slice(0,4),b.createTime.slice(5,7)-1,b.createTime.slice(8,10)))?1:-1);
+			this.setState({
+				carItems: cars
+			});
 		}
 	};
+	onChange = (e) => {
+		if (e.target.name === "searchKey") {
+			this.setState({
+				searchKey: e.target.value
+			})
+		}
+	}
+	onSearch = (searchKey) => {
+		console.log(searchKey);
+		this.setState({
+			key: searchKey
+		})
+	}
 	render() {
 		let styleSearchBox = {
 			width: '70%',
@@ -134,10 +151,24 @@ class CarList extends React.Component {
 			border: '1px solid orangered'
 		};
 		let owner = this.props.owner;
+		// console.log(this.state.carItems);
+		let { searchKey, key, carItems } = this.state;
+		if (key) {
+			
+			carItems = carItems.filter((car) => {
+				
+				return car.carId.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					car.carName.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					car.branch.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
+					car.price.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1
+			})
+		
+		}
+
 		let renderedCar =
 			typeof this.state.carItems == 'undefined' || this.props.cars == ''
 				? 'Bạn chưa có xe cho thuê!'
-				: this.state.carItems.map((car) => (
+				: carItems.map((car) => (
 					<CarItem
 						car={car}
 						toggleModal={this.toggleModal}
@@ -151,8 +182,8 @@ class CarList extends React.Component {
 				<div className="container">
 					<div className="row" style={{ padding: "10px" }}>
 						<div className="col">
-							<input type="text" style={styleSearchBox} />
-							<button style={styleButtonSearch}>Tìm Kiếm</button>
+							<input type="text" name="searchKey" value={this.state.searchKey} onChange={this.onChange} style={styleSearchBox} />
+							<button style={styleButtonSearch} onClick={() => this.onSearch(searchKey)}>Tìm Kiếm</button>
 						</div>
 						<div className="col">
 							<div className="btn-group" style={{ float: 'right' }}>
@@ -169,13 +200,13 @@ class CarList extends React.Component {
 								<div className="dropdown-menu" >
 									<button className="dropdown-item" id="newest" onClick={this.handleList} >
 										Mới nhất
-								</button>
-									<button className="dropdown-item" id="inorder" onClick={this.handleList}>
-										Giá tăng dần
-								</button>
-									<button className="dropdown-item" id="postorder" onClick={this.handleList}>
-										Giá giảm dần
-								</button>
+									</button>
+										<button className="dropdown-item" id="inorder" onClick={this.handleList}>
+											Giá tăng dần
+									</button>
+										<button className="dropdown-item" id="postorder" onClick={this.handleList}>
+											Giá giảm dần
+									</button>
 								</div>
 							</div>
 							<button
@@ -196,7 +227,7 @@ class CarList extends React.Component {
 						</div>
 					</div>
 				</div>
-				<table className="mt-3" style={{overflowX:"auto"}}>
+				<table className="mt-3" style={{ overflowX: "auto" }}>
 					<thead>
 						<tr>
 							<th>Tên xe</th>
@@ -228,7 +259,7 @@ class CarList extends React.Component {
 				</Modal>
 				<Loading show={this.state.showLoading} />
 				<UpdateSuccess show={this.state.showSuccess} url={'/chothuexe'} />
-				<div className={'id-error ' + this.state.showError} style={{ color: 'red', backgroundColor: 'white', zIndex: 12 }}>
+				<div className={'id-error ' + this.state.showError} style={{ color: 'red', backgroundColor: 'white' }}>
 					<p>{this.state.errorContent}</p>
 				</div>
 				<Confirm

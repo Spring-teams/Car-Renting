@@ -5,7 +5,7 @@ class CarItem extends React.Component {
 		super(props);
 	}
 	render() {
-        console.log(this.props.car);
+        // console.log(this.props.car);
         let cat = this.props.car.categoryId;
 		return (
             <tr>

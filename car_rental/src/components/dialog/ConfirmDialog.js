@@ -19,20 +19,18 @@ class Confirm extends React.Component{
             right: 0,
             bottom: 0,
             backgroundColor:'rgba(0,0,0,0.3)',
-            display: this.props.show,
-            zIndex: 1000
+            display: this.props.show
         }
         let confirmDialog={
-            height: "150px",
             width: "400px",
             margin:"100px auto",
             paddingTop: "30px",
+            paddingBottom: "30px",
             textAlign:"center",
             background: '#f8f9fa',
             border: '2px solid #fff',
             borderRadius: '20px/50px',
-            backgroundClip: 'padding-box',
-            zIndex: 1000
+            backgroundClip: 'padding-box',  
         }
         let buttonGroup={
             width: "100%",
@@ -43,7 +41,7 @@ class Confirm extends React.Component{
         return (
             <div className="backProp" style={backprop} >
                 <div className="confirmDialog" style={confirmDialog}>
-                    <p>{this.props.content}</p>
+                    <p style={{fontSize:"22px", padding: "10px 30px"}}>{this.props.content}</p>
                     <div className="comfirmButton" style={buttonGroup}>
                         <button style={{color: "white",background:"#098625", padding:"3px 10px", border:'none', borderRadius:"3px", display:this.props.canDeleteCar==true?"none":"block"}} onClick={this.deleteCar}>Đồng ý</button>
                         <button style={{color: "white",background:"red", padding:"3px 10px", border:'none', borderRadius:"3px",}} onClick={()=>this.props.close()}>Bỏ qua</button>

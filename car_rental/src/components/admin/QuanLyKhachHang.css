@@ -87,3 +87,6 @@ table tbody td {
     padding: 3px 10px;
     border-radius: 3px;
 }
+#quan-ly-khach-hang>.container-fluid>table tbody tr td.id:hover{
+    background-color: #ddd;
+}
