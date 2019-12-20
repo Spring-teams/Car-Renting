@@ -34,7 +34,7 @@ module.exports={
     },
     getbenifite: (req,res)=>{
         let year = req.params.year;
-        let sql = "select month(beginDate) as month, sum(totalmoney) as total from rental where year(beginDate) = "+year+"  and isDelete =0  group by month(beginDate)";
+        let sql = "select month(beginDate) as month, sum(totalmoney) as total from rental where year(beginDate) = "+year+"  and isDelete =0 and isConfirm =1  group by month(beginDate)";
         db.query(sql,(err,response)=>{
             if(err) throw err;
             else res.json(response);
@@ -42,7 +42,7 @@ module.exports={
     },
     getBranchAnalysis: (req,res)=>{
         let year = req.params.year;
-        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car  on rental.carId = car.carId   where year(beginDate) = "+year+" and rental.isDelete = 0 group by car.branch order by car.branch";
+        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car  on rental.carId = car.carId   where year(beginDate) = "+year+" and rental.isDelete = 0 and rental.isConfirm =1  group by car.branch order by car.branch";
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
@@ -51,7 +51,7 @@ module.exports={
     getAnalysis: (req,res)=>{
         let id = req.params.id;
         let year = req.params.year;
-        let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental  where isDelete = 0 and year(beginDate) = "+ year;
+        let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental  where isConfirm = 1 and isDelete = 0 and year(beginDate) = "+ year;
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);

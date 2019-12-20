@@ -56,9 +56,12 @@ class OwnerHead extends React.Component{
 										<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.getAnalysis}>
 											Thống kê
 										</NavLink>
-										<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>
-											Đăng xuất
-										</NavLink>
+										{
+										this.props.role=="admin"?"":<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>
+										Đăng xuất
+									</NavLink>
+									}
+										
 									</div>
 								</li>
 							</ul>

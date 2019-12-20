@@ -77,6 +77,7 @@ class CarList extends React.Component {
 	async handleDeleteCar(carId) {
 		this.setState({});
 		await fetch('/api/confirmCar/' + carId).then((res) => res.text()).then((data) => {
+			
 			if (data == 'false') {
 				this.setState({
 					confirmContent: 'Bạn có chắc chẵn muốn xóa xe ' + carId,
@@ -128,7 +129,7 @@ class CarList extends React.Component {
 		}
 	}
 	onSearch = (searchKey) => {
-		console.log(searchKey);
+		
 		this.setState({
 			key: searchKey
 		})

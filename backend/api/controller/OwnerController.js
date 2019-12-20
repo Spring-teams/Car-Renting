@@ -182,7 +182,7 @@ module.exports={
         let year = req.params.year;
         
         if(id==-1) id=currentOwnerId;
-        let sql = "select month(beginDate) as month, sum(totalmoney) as total from rental where year(beginDate) = "+year +" and ownerId = "+id+" and isDelete =0  group by month(beginDate)";
+        let sql = "select month(beginDate) as month, sum(totalmoney) as total from rental where year(beginDate) = "+year +" and ownerId = "+id+" and isDelete =0 and rental.isConfirm =1  group by month(beginDate)";
         
         db.query(sql,(err,response)=>{
             res.json(response)
@@ -193,8 +193,8 @@ module.exports={
         if(id==-1) id = currentOwnerId;
         let year = req.params.year;
         let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car on rental.carId = car.carId "+
-        "where rental.ownerId = "+id+" and year(beginDate) = "+year+" and rental.isDelete = 0 group by car.branch order by car.branch";
-        console.log(sql)
+        "where rental.ownerId = "+id+" and year(beginDate) = "+year+" and rental.isDelete = 0 and rental.isConfirm =1 group by car.branch order by car.branch";
+       
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
@@ -207,7 +207,7 @@ module.exports={
         let year = req.params.year;
         
         
-        let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental where isDelete = 0 and ownerId = "+ id+ " and year(beginDate) = "+ year;
+        let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental where isDelete = 0 and isConfirm = 1 and ownerId = "+ id+ " and year(beginDate) = "+ year;
         
         db.query(sql,(err,response)=>{
             if(err) throw err;

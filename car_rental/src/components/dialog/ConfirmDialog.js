@@ -11,6 +11,22 @@ class Confirm extends React.Component{
             window.location.href=this.props.url;
             return;
         }
+        else if(this.props.isOnwer==true){
+            let rental = this.props.rental;
+            rental['isDelete']=1;
+            fetch("/api/updateRental", {
+                method: "POST",
+                headers: {
+                    Accept: "*/*",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(rental)
+            })
+                .then(res => res.text)
+                .then(data => {
+                    
+                })
+        }
         let carId = this.props.deletedCarId;
         await fetch("/api/deletecar/"+carId);
         window.location.href=this.props.url;

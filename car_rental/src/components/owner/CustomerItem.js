@@ -1,6 +1,7 @@
 import React from "react";
 import "../../css/ownerOrder.css";
 import { join } from "path";
+import ConfirmDialog from "../dialog/ConfirmDialog";
 class CustomerItem extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +11,9 @@ class CustomerItem extends React.Component {
                 isPay: 0,
                 isConfirm: 0,
                 isDelete: 0,
-            }
+
+            },
+            show: "none"
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -32,11 +35,15 @@ class CustomerItem extends React.Component {
         let name = event.target.name;
         let obj = JSON.parse(JSON.stringify(this.state.status));
         let rental = JSON.parse(JSON.stringify(this.props.rental));
+        
         if (obj['isDelete'] == 1) {
-            return
+            return ;
+        }
+        if(obj['isPay']==1){
+            return ;
         }
         if (name == "isPay") {
-            if (obj['isRent'] == 0 || obj['isConfirm'] == 0) {
+            if (obj['isRent'] == 0 || obj['isConfirm'] == 0 || obj['isDelete']==1) {
                 return
             }
         }
@@ -44,6 +51,13 @@ class CustomerItem extends React.Component {
             if (obj['isPay'] == 1) {
                 return;
             }
+            if(obj['isRent']==1){
+                return ;
+            }
+        }
+        if(obj['isDelete']==0 && name =="isDelete"){
+            this.openDialog();
+            return ;
         }
         if (name == 'isRent') {
             if (obj['isConfirm'] == 0) {
@@ -52,8 +66,12 @@ class CustomerItem extends React.Component {
         }
 
         obj[name] = obj[name] == 0 ? 1 : 0;
-        alert(name)
+        
         rental[name] = obj[name];
+        this.setState({
+            status: obj
+        })
+
         fetch("/api/updateRental", {
             method: "POST",
             headers: {
@@ -64,16 +82,32 @@ class CustomerItem extends React.Component {
         })
             .then(res => res.text)
             .then(data => {
-                console.log(data)
+                
             })
+       
+    }
+    openDialog=()=>{
         this.setState({
-            status: obj
+            show: "block"
         })
     }
+    closeDialog=()=>{
+        this.setState({
+            show: "none"
+        })
+    }
+
     render() {
         let status = this.state.status;
         return (
             <tr>
+                <ConfirmDialog url="/chothuexe/khach-hang" 
+                rental={this.props.rental}
+                show={this.state.show}
+                close={this.closeDialog}
+                isOnwer={true}
+                content={"Bạn có chắc muốn xóa đơn hàng "+this.props.rental.rentalId+" của "+this.props.rental.name}
+                />
                 <td>{this.props.rental.rentalId}</td>
                 <td>
                     {this.props.rental.name}

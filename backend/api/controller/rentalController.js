@@ -43,7 +43,7 @@ module.exports={
     },
     confirmCar: (req,res)=>{
         let carId = req.params.carId;
-        let sql = "select * from rental where carId = '"+ carId + "' and endDate < now() and isDelete = 0";
+        let sql = "select * from rental where carId = '"+ carId + "' and isDelete = 0";
         
         db.query(sql,(err,response)=>{
             if(err) throw err;

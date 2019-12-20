@@ -45,7 +45,7 @@ class Orderdetail extends React.Component {
     }
     closeDialog=()=>{
         this.setState({
-            show: "block"
+            show: "none"
         })
     }
     
@@ -76,7 +76,7 @@ class Orderdetail extends React.Component {
         return (
 
             <tr>
-                <ConfirmDialog url = "/order" rental={this.props.rental} content= {"Bạn có chắc chắn muốn xóa đơn hàng: "+ rental.rentalId} show={this.state.show} deleteCar={this.state.deleteOrder} isRental={true}/>
+                <ConfirmDialog url = "/order" rental={this.props.rental} content= {"Bạn có chắc chắn không muốn thuê xe: "+ rental.carName} show={this.state.show} deleteCar={this.state.deleteOrder} isRental={true} close={this.closeDialog}/>
                 <td>{rental.carName}</td>
                 <td>
                     <img src={"/images/" + rental.image} style={{ width: "100px", padding: '1px 0' }} class="img-fluid" alt="" />
@@ -89,7 +89,7 @@ class Orderdetail extends React.Component {
                 <td>{formatNumber(rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(rental.totalmoney)}<sup>đ</sup></td>
                 <td>
-                    <label className="label-status">
+                    <label className="label-status" style={{backgroundColor: status=="Đã xác nhận"|| status =="Đang thuê"?"green":status=="Đợi xác nhận"?"yellow":""}} >
                         {status}
                     </label>
                 </td>
