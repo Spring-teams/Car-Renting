@@ -85,12 +85,14 @@ class Login extends React.Component {
   }
   openDialog(){
       this.setState({
-          showRegis: "block"
+          showRegis: "block",
+          showError: "loginError"
       })
   }
   closeRegis=()=>{
     this.setState({
       showRegis: "none"
+
     })
   }
   
@@ -130,7 +132,7 @@ class Login extends React.Component {
         <Loading show = {this.state.showLoading}/>
         
       </form>
-      <Register show ={this.state.showRegis} role={this.props.role} close = {this.closeRegis} url={this.props.url}/>
+      <Register show ={this.state.showRegis} role={this.props.role} close = {this.closeRegis} url={this.props.url} isregis= {true}/>
       </div>
     );
   }

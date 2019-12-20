@@ -65,7 +65,8 @@ class Orderdetail extends React.Component {
             let lastDay = rental.endDate;
             lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
             var date = new Date();
-            date.setDate(date.getDate() +1);
+            
+            date.setDate(date.getDate());
             if (lastDay < date) status = "Quá hạn";
             else status = "Đang thuê";
         }
@@ -83,13 +84,13 @@ class Orderdetail extends React.Component {
                 </td>
                 <td>{rental.carId}</td>
                 <td>{rental.ownerName}</td>
-                <td>{rental.phone}</td>
+                <td>{"0"+rental.phone}</td>
                 <td>{rental.address}</td>
                 <td>{rental.beginDate == null ? "" : rental.beginDate.slice(0, 8) + (Number(rental.beginDate.slice(8, 10)) + 1)} đến  {rental.endDate == null ? "" : rental.endDate.slice(0, 8) + (Number(rental.endDate.slice(8, 10)) + 1)}</td>
                 <td>{formatNumber(rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(rental.totalmoney)}<sup>đ</sup></td>
                 <td>
-                    <label className="label-status" style={{backgroundColor: status=="Đã xác nhận"|| status =="Đang thuê"?"green":(status=="Đợi xác nhận"?"yellow":(status=="Bị hủy"?"gray":""))}} >
+                    <label className="label-status" style={{backgroundColor: status=="Đã xác nhận"|| status =="Đang thuê"?"green":(status=="Đợi xác nhận"?"yellow":(status=="Bị hủy"?"gray":(status=="Đã thuê"?"rgba(75, 119, 190, 1)":"")))}} >
                         {status}
                     </label>
                 </td>

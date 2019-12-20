@@ -60,7 +60,7 @@ class CarItem extends React.Component {
 						<div className="price-car text-center">
 							<p>
 								<i className="fas fa-shopping-cart" /> {formatNumber(price)}
-								<sup>đ</sup>
+								<sup>đ/ngày</sup>
 							</p>
 						</div>
 					</div>

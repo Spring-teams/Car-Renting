@@ -123,7 +123,7 @@ class SubmitBody extends React.Component {
     }
 	render() {
 		let car = this.state.car;
-
+		
 		if (this.state.isLogin == false) {
 			window.location.href = '/login';
 			return;
@@ -246,19 +246,19 @@ class SubmitBody extends React.Component {
 					<div className="row mt-2">
 						<div className="col-md-12 col-lg-6 col-xl-6">
 							<div className=" box-text">
-								<h5>Thông tin xe</h5>
+								<h5>Thông tin chung: </h5>
 								<p>
-									<i className="fas fa-car" /> Hãng xe: {this.state.car.branch}
+								<i class="fas fa-users"></i> Tên chủ xe : {this.state.car.ownerName}
 								</p>
 								<p>
-									<i className="fas fa-couch" /> Số ghế: {this.state.car.numberSeat}
+								<i class="fas fa-phone-volume"></i> Số điện thoại: {"0"+this.state.car.phone}
 								</p>
 								<p>
-									<i className="fas fa-money-bill-wave-alt" /> Đơn giá:{' '}
-									{formatNumber(this.state.car.price)}
+									<i className="fas fa-money-bill-wave-alt" /> Email chủ xe:{' '}
+									{this.state.car.email}
 								</p>
 								<p>
-									<i className="fas fa-table" /> Số ngày: {this.state.diffDate}
+									<i className="fas fa-table" /> Số ngày thuê: {this.state.diffDate}
 								</p>
 								<p className="total-money">
 									<i className="fas fa-money-bill" /> Thành tiền:{' '}

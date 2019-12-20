@@ -104,6 +104,7 @@ class Register extends React.Component {
             isError = true;
             errorContent = "Số điện thoại không hợp lệ!"
         }
+        
         const res = this.setState({
             warning: warning,
             inputError: isError == true ? "show" : " ",
@@ -257,7 +258,9 @@ class Register extends React.Component {
                     </table>
                     <div>
                         <button className="btn btn-success" onClick={this.onSubmit} >Đăng ký</button>
-                        <button className="btn btn-danger" style={{ marginRight: "10px" }} onClick={() => this.props.close()}>Hủy bỏ</button>
+                        <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => {
+                            this.setState({inputError: ""})
+                            this.props.close()}}>Hủy bỏ</button>
                     </div>
                 </div>
                 

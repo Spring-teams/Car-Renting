@@ -78,7 +78,7 @@ class Order extends React.Component {
 				let lastDay = rental.endDate;
 				lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
 				var date = new Date();
-				date.setDate(date.getDate() +1);
+				date.setDate(date.getDate());
 				
 				return lastDay < date&&rental.isRent == 1 && rental.isDelete == 0 && rental.isPay == 0;
 			})
@@ -87,11 +87,10 @@ class Order extends React.Component {
 			listOrder = listOrder.filter((rental) => {
 				rental = rental;
 				let lastDay = rental.endDate;
-				
-				lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
+				lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10)+1));
 				var date = new Date();
-				date.setDate(date.getDate() + 1);
-				return lastDay > date
+				date.setDate(date.getDate()-1);
+				return lastDay > date && rental.isRent==1 &&rental.isPay ==0;
 			})
 		}
 		else if(filterStatus === "Đã thuê"){
@@ -103,7 +102,7 @@ class Order extends React.Component {
 		else if(filterStatus === "Bị hủy"){
 			listOrder = listOrder.filter((rental) => {
 				rental = rental;
-				return rental.isDelete == 1
+				return rental.isDelete == 1;
 			})
 		}	
 		if (searchKey) {

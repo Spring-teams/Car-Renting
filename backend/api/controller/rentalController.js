@@ -20,7 +20,7 @@ module.exports={
         db.query(sql,(err,response)=>{
             if(err) throw err;
         })
-        sql = "select * from rental inner join owner on rental.ownerId = owner.ownerId inner join car on car.carId = rental.carId where customerId = "+ req.params.customerId + " order by rental.beginDate desc";
+        sql = "select * from rental inner join owner on rental.ownerId = owner.ownerId inner join car on car.carId = rental.carId where customerId = "+ req.params.customerId + " order by rental.endDate desc";
         
         db.query(sql,(err,response)=>{
             if(err){ 

@@ -59,6 +59,11 @@ class CustomerItem extends React.Component {
             this.openDialog();
             return ;
         }
+        if(name=='isConfirm'){
+            if(obj['isRent']==1 || obj['isPay']==1 ||obj[name]==1){
+                return;
+            }
+        }
         if (name == 'isRent') {
             if (obj['isConfirm'] == 0) {
                 return;
@@ -84,7 +89,7 @@ class CustomerItem extends React.Component {
         })
             .then(res => res.text)
             .then(data => {
-                
+                window.location.reload();
             })
        
     }
@@ -114,7 +119,7 @@ class CustomerItem extends React.Component {
                 <td>
                     {this.props.rental.name}
                 </td>
-                <td>{this.props.rental.phone}</td>
+                <td>{"0"+this.props.rental.phone}</td>
                 <td>{this.props.rental.address}</td>
                 <td>{this.props.rental.carName}</td>
                 <td>

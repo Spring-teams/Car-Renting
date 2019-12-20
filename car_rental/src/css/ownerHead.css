@@ -10,7 +10,7 @@ div#owner-head > nav.navbar{
 	position: fixed;
     z-index: 10;
 	width: 100%;
-	background: #17a2b8 !important;
+	background: #3F51B3 !important;
 	top: 0;
 }
 div#owner-head > nav.navbar .container{
@@ -24,7 +24,7 @@ div#owner-head > nav.navbar .container > a{
 	text-shadow: 0px 0px 5px #000,0px 0px 8px #000,0px 0px 12px #000,0px 0px 16px #000 ;
 }
 div#owner-head > nav.navbar .container > button.navbar-toggler{
-	background: #FF9800;
+	background: #3F51B3;
 	color: #000;
 	padding: 0;
 }
@@ -32,7 +32,7 @@ div#owner-head > nav.navbar #nav-menu-content{
 	justify-content: flex-end;
 }
 div#owner-head > nav.navbar ul li.nav-item{
-	display: flex;
+	display: flex; 
 	justify-content: center;
 	align-items: center;
 	width: 120px;
@@ -40,7 +40,7 @@ div#owner-head > nav.navbar ul li.nav-item{
 }
 div#owner-head > nav.navbar ul li.nav-item:hover{
 	color: yellow;
-	background: #17a2b8 !important;
+	background: #3F51B3 !important;
 }
 div#owner-head > nav.navbar ul li.nav-item a{
 	text-decoration: none;
@@ -60,7 +60,7 @@ div#owner-head > nav.navbar ul li.nav-item div.dropdown-menu a{
 	line-height: 30px;
 }
 div#owner-head > nav.navbar ul li.nav-item div.dropdown-menu a:hover{
-	background: #16adc5 !important;
+	background: #3F51B3 !important;
 	color: yellow;
 }
 div#owner-head > nav.navbar #nav-menu-content ul li a i{

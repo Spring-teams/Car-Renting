@@ -6,7 +6,6 @@ module.exports=function(app){
     app.route("/api/getowner").get(OwnerCtrl.curr); 
 
     app.route("/api/getCustomerByOwner").get(OwnerCtrl.getCustomer);
-
     
     app.route("/api/checkOwnerLogin").get(OwnerCtrl.checkLogin);
 

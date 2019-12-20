@@ -10,7 +10,7 @@
 #customer-info > .info-container{
     width: 500px;
     height: 500px;
-    background: #17a2b88a;
+    background:rgba(34, 167, 240, 0.3);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -28,8 +28,9 @@
     border: none;
     width: 107%;
 }
-.label{
-    color: orange;
+#customer-info .label{
+    color: black !important;
+    
 }
 .react-datepicker-wrapper{
     width: 100%;
@@ -48,10 +49,10 @@
     background: #2cb54b;
     margin-left: 50px;
 }
-.fa-edit:before {
+#customer-info .fa-edit:before {
     content: "\f044";
     font-size: 30px;
-    color: yellow;
+    color: white
 }
 .react-datepicker__input-container > input#ctmRegis {
     border-radius: 3px;

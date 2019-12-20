@@ -17,6 +17,9 @@ class Head extends React.Component {
 		}
 		else window.location.href = "/login";
 	}
+	goToOwner=()=>{
+		window.location.href = "/chothuexe";
+	}
 	render() {
 		let Log = this.props.isLogin ? "Đăng xuất" : "Đăng nhập";
 		return (
@@ -41,6 +44,9 @@ class Head extends React.Component {
 									<div className="dropdown-menu" aria-labelledby="loai-xe">
 										<NavLink to='sport-car' className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={this.handleInfo}>
 											Thông tin cá nhân
+										</NavLink>
+										<NavLink to='/chothuexe' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.goToOwner}>
+											Cho thuê xe
 										</NavLink>
 										<NavLink to='order-detail' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.handleLog}>
 											{Log}

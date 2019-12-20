@@ -4,6 +4,7 @@ import Modal from './Dialog';
 import Loading from '../dialog/loading';
 import UpdateSuccess from '../dialog/UpdateSuccess';
 import Confirm from '../dialog/ConfirmDialog';
+import Footer from "../footer";
 import "../../css/ownerCarList.css";
 class CarList extends React.Component {
 	constructor(props) {
@@ -246,6 +247,7 @@ class CarList extends React.Component {
 					</tbody>
 					<tfoot />
 				</table>
+				<Footer/>
 				<Modal
 					show={this.state.isOpen}
 					onClose={this.toggleModal}
@@ -262,6 +264,7 @@ class CarList extends React.Component {
 				<div className={'id-error ' + this.state.showError} style={{ color: 'red', backgroundColor: 'white' }}>
 					<p>{this.state.errorContent}</p>
 				</div>
+
 				<Confirm
 					show={this.state.showConfirm}
 					content={this.state.confirmContent}
@@ -270,6 +273,7 @@ class CarList extends React.Component {
 					deletedCarId={this.state.deletedCarId}
 					url="/chothuexe"
 				/>
+				
 			</div>
 		);
 	}

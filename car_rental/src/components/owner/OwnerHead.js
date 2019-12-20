@@ -40,7 +40,7 @@ class OwnerHead extends React.Component{
 							<ul className="navbar-nav">
 								<li className="nav-item">
 									<NavLink to='#' onClick={this.handleCustomer}>
-										<i className="fas fa-cart-plus" style={{ fontSize: "13px", color:"yellow !important" }}></i> Đơn hàng
+										<i className="fas fa-cart-plus" style={{ fontSize: "13px", color:"yellow !important" }}></i> Khách hàng
 							</NavLink>
 								</li>
 								<li className="nav-item dropdown">

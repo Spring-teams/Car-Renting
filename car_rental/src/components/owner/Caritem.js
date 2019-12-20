@@ -9,15 +9,15 @@ class CarItem extends React.Component {
         let cat = this.props.car.categoryId;
 		return (
             <tr>
-                <td>{this.props.car.carName}</td>
+                <td style={{textAlign: "left"}}>{this.props.car.carName}</td>
                 <td>
                     <img src={'/images/' + this.props.car.image} style={{width:"100px", padding:'1px 0'}} class="img-fluid" alt="" />
                 </td>
-                <td>{this.props.car.carId}</td>
-                <td>{this.props.car.branch}</td>
-                <td>{cat === 1 ? "Xe thể thao" : (cat === 2)? "Xe du lịch":(cat === 3)? "Xe thương mại": "Khác"}</td>
+                <td style={{textAlign: "left"}}>{this.props.car.carId}</td>
+                <td style={{textAlign: "left"}}>{this.props.car.branch}</td>
+                <td style={{textAlign: "left"}}>{cat === 1 ? "Xe thể thao" : (cat === 2)? "Xe du lịch":(cat === 3)? "Xe thương mại": "Khác"}</td>
                 <td>{this.props.car.numberSeat}</td>
-                <td>{formatNumber(this.props.car.price)}<sup>đ</sup></td>
+                <td style={{textAlign: "left"}}>{formatNumber(this.props.car.price)}<sup>đ</sup></td>
                 <td>
                 <button
 						style={{background:"#ffc107", padding:'2px 5px', color:"#fff", border:'none', borderRadius:"3px"}}

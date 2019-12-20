@@ -3,7 +3,7 @@ import OwnerHead from "./OwnerHead";
 import CarList from "./CarList";
 import Footer from "../footer";
 // import OwnerLogin from "./Login";
-import "../../css/O_DanhSachSanPham.css";
+
 // import "../.../css/boostrap.min.css";
 import Modal from "./Dialog";
 import { lstat } from "fs";

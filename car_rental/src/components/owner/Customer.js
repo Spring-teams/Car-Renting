@@ -25,11 +25,16 @@ class Customer extends React.Component {
                 .then((res) => res.json())
                 .then((data) => {
                     this.setState({ customers: data, origin: data })
-                    this.setState({
-                        isLoad: true,
-                        owner: data[0],
-                    })
+                   
                 })
+            fetch("/api/getowner")
+            .then(res=>res.json())
+            .then(res=>{
+                this.setState({
+                    isLoad: true,
+                    owner: res[0],
+                })
+            })
 
         }
         else {
@@ -60,7 +65,7 @@ class Customer extends React.Component {
         if (name == "isLose") {
             let a = "2019-12-10"
             let day = new Date();
-            day.setDate(day.getDate() - 2);
+            day.setDate(day.getDate());
             customers = customers.filter((customer) => (new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, customer.endDate.slice(8, 10)) < day && customer.isRent == 1 && customer.isPay==0))
 
         }
@@ -230,11 +235,11 @@ class Customer extends React.Component {
                         </thead>
                         <tbody>
                             {this.state.isLoad == true ? customers.map((customer) => {
-                                let a = "2019-12-10"
+                               
                                 let day = new Date();
-                                day.setDate(day.getDate() - 2);
+                                day.setDate(day.getDate());
                                 let color="black";
-                                if(new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, customer.endDate.slice(8, 10)) < day && customer.isRent == 1 && customer.isPay==0){
+                                if(new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, Number(customer.endDate.slice(8, 10))+1) < day && customer.isRent == 1 && customer.isPay==0){
                                     color="red";
                                 }
 

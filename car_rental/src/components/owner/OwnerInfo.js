@@ -4,6 +4,7 @@ import { NONAME } from "dns";
 import DatePicker from "react-datepicker";
 import UpdateSuccess from "../dialog/UpdateSuccess";
 import OwnerHead from "./OwnerHead";
+import Footer from "../footer";
 import "../../css/ownerInfo.css"
 
 class OwnerInfo extends React.Component {
@@ -39,7 +40,7 @@ class OwnerInfo extends React.Component {
 				let obj = JSON.parse(JSON.stringify(this.state.OwnerInfo));
 				obj["birthday"] = new Date(obj['birthday'].slice(0, 4), parseInt(obj['birthday'].slice(5, 7)) < 10 ? parseInt(obj['birthday'].slice(5, 7)) - 1 : "0" + (parseInt(obj['birthday'].slice(5, 7)) - 1), parseInt(obj['birthday'].slice(8, 10)) + 1 < 10 ? parseInt(obj['birthday'].slice(8, 10)) + 1 : "0" + (parseInt(obj['birthday'].slice(8, 10)) + 1));
 
-				console.log(obj['birthday'])
+				
 				this.setState({
 					OwnerInfo: obj,
 					isload: true,
@@ -306,6 +307,7 @@ class OwnerInfo extends React.Component {
 							timeCaption="Heure"
 							showDisabledMonthNavigation
 							readOnly={this.state.readOnly}
+							id = "ctmRegis"
 						/>
 
 						<span className="warning" style={{ opacity: this.state.warning['birthday'] }}></span>
@@ -333,12 +335,6 @@ class OwnerInfo extends React.Component {
 						/>
 						<span className="warning" style={{ opacity: this.state.warning['pass'] }}></span>
 					</div>
-					{/* <div className="customer-info-wrapper">
-          <div>Nhập lại mật khẩu: </div>
-          <input type="password" readOnly className="must-fill" value={customer.pass} />
-          <span className="warning"></span>
-        </div> */}
-
 					<div className="customer-info-wrapper">
 						<div className="label">Công ty </div>
 						<input
@@ -377,10 +373,13 @@ class OwnerInfo extends React.Component {
             </button>
 					</div>
 				</div>
+				
 				<UpdateSuccess show={this.state.showSuccessDialog} url="/chothuexe/thong-tin-ca-nhan" />
 				<div className={"id-error " + this.state.openIdError}>
 					<p>{this.state.errorContent}</p>
 				</div>
+
+			
 			</div>
 		);
 	}
