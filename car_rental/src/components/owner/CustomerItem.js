@@ -68,6 +68,8 @@ class CustomerItem extends React.Component {
         obj[name] = obj[name] == 0 ? 1 : 0;
         
         rental[name] = obj[name];
+        rental.beginDate = rental.beginDate.slice(0, 8) + (Number(rental.beginDate.slice(8, 10)) + 1);
+        rental.endDate= rental.endDate.slice(0, 8) + (Number(rental.endDate.slice(8, 10)) + 1);
         this.setState({
             status: obj
         })
@@ -100,7 +102,7 @@ class CustomerItem extends React.Component {
     render() {
         let status = this.state.status;
         return (
-            <tr>
+            <tr style={{color: this.props.color}}>
                 <ConfirmDialog url="/chothuexe/khach-hang" 
                 rental={this.props.rental}
                 show={this.state.show}
@@ -121,7 +123,7 @@ class CustomerItem extends React.Component {
                         width="100px"
                     />
                 </td>
-                <td>{this.props.rental.beginDate.slice(0, 10)} đến {this.props.rental.endDate.slice(0, 10)}</td>
+                <td>{this.props.rental.beginDate.slice(0, 8) + (Number(this.props.rental.beginDate.slice(8, 10)) + 1)} đến {this.props.rental.endDate.slice(0, 8) + (Number(this.props.rental.endDate.slice(8, 10)) + 1)}</td>
                 <td>{formatNumber(this.props.rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(this.props.rental.totalmoney)}<sup>đ</sup></td>
                 <td>

@@ -96,7 +96,10 @@ class Register extends React.Component {
             isError = true;
             errorContent = "Mật khẩu nhập không khớp!"
         }
-        let regex = /(09|01[2|6|8|9])+([0-9]{8})\b/
+        if(data['phone'][0]=='0'){
+            data['phone']=data['phone'].slice(1);
+        }
+        let regex = /(9|1[2|6|8|9])+([0-9]{8})\b/
         if (!regex.test(data['phone'])) {
             isError = true;
             errorContent = "Số điện thoại không hợp lệ!"
@@ -136,6 +139,7 @@ class Register extends React.Component {
     render() {
         let data = this.state.obj;
         return (
+            <div>
             <div className="regis-background" style={{ display: this.props.show }}>
 
                 <div id="register-form">
@@ -153,9 +157,9 @@ class Register extends React.Component {
                             </td>
                             <td>
                                 <input type="text" name="name" className="must-fill" value={data['name']} onChange={this.handleChange} />{" "}
-                                <span>
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['name']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -164,9 +168,9 @@ class Register extends React.Component {
                             </td>
                             <td>
                                 <input type="text" name="id" className="must-fill" value={data['id']} onChange={this.handleChange} />{" "}
-                                <span>
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['id']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -184,9 +188,9 @@ class Register extends React.Component {
                                     name="birthday"
                                 />
                                 {/* <input type="text" name="birthday" className="must-fill" value={data['birthday']} onChange={this.handleChange} />{" "} */}
-                                <span>
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['birthday']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -195,9 +199,9 @@ class Register extends React.Component {
                             </td>
                             <td>
                                 <input type="text" name="phone" className="must-fill" value={data['phone']} onChange={this.handleChange} />{" "}
-                                <span>
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['phone']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -206,18 +210,18 @@ class Register extends React.Component {
                             </td>
                             <td>
                                 <input type="text" name="email" className="must-fill" value={data['email']} onChange={this.handleChange} />{" "}
-                                <span>
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['email']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
                             <td>Tên công ty</td>
                             <td>
                                 <input type="text" name="companyName" className="must-fill" value={data['companyName']} onChange={this.handleChange} />{" "}
-                                <span>
+                                {/* <span>
                                     <i className="fas fa-exclamation-triangle"></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -225,10 +229,10 @@ class Register extends React.Component {
                                 Mật khẩu <span> * </span>
                             </td>
                             <td>
-                                <input type="text" name="pass" className="must-fill" value={data['pass']} onChange={this.handleChange} />{" "}
-                                <span>
+                                <input type="password" name="pass" className="must-fill" value={data['pass']} onChange={this.handleChange} />{" "}
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['pass']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -236,10 +240,10 @@ class Register extends React.Component {
                                 Nhập lại mật khẩu <span> * </span>
                             </td>
                             <td>
-                                <input type="text" name="repass" className="must-fill" value={data['repass']} onChange={this.handleChange} />{" "}
-                                <span>
+                                <input type="password" name="repass" className="must-fill" value={data['repass']} onChange={this.handleChange} />{" "}
+                                {/* <span>
                                     <i className={"fas fa-exclamation-triangle " + this.state.warning['repass']}></i>
-                                </span>
+                                </span> */}
                             </td>
                         </tr>
                         <tr>
@@ -256,10 +260,12 @@ class Register extends React.Component {
                         <button className="btn btn-danger" style={{ marginRight: "10px" }} onClick={() => this.props.close()}>Hủy bỏ</button>
                     </div>
                 </div>
-                <div className={"id-error " + this.state.inputError}>
-                    <p>{this.state.errorContent}</p>
-                </div>
+                
             </div>
+            <div className={"id-error " + this.state.inputError}>
+            <p>{this.state.errorContent}</p>
+        </div>
+        </div>
         );
     }
 }

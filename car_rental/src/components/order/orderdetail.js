@@ -65,7 +65,7 @@ class Orderdetail extends React.Component {
             let lastDay = rental.endDate;
             lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
             var date = new Date();
-            date.setDate(date.getDate() + 1);
+            date.setDate(date.getDate() +1);
             if (lastDay < date) status = "Quá hạn";
             else status = "Đang thuê";
         }
@@ -79,7 +79,7 @@ class Orderdetail extends React.Component {
                 <ConfirmDialog url = "/order" rental={this.props.rental} content= {"Bạn có chắc chắn không muốn thuê xe: "+ rental.carName} show={this.state.show} deleteCar={this.state.deleteOrder} isRental={true} close={this.closeDialog}/>
                 <td>{rental.carName}</td>
                 <td>
-                    <img src={"/images/" + rental.image} style={{ width: "100px", padding: '1px 0' }} class="img-fluid" alt="" />
+                    <img src={"/images/" + rental.image} style={{ width: "100px", padding: '1px 0' }} className="img-fluid" alt="" />
                 </td>
                 <td>{rental.carId}</td>
                 <td>{rental.ownerName}</td>
@@ -89,11 +89,16 @@ class Orderdetail extends React.Component {
                 <td>{formatNumber(rental.price)}<sup>đ</sup></td>
                 <td>{formatNumber(rental.totalmoney)}<sup>đ</sup></td>
                 <td>
-                    <label className="label-status" style={{backgroundColor: status=="Đã xác nhận"|| status =="Đang thuê"?"green":status=="Đợi xác nhận"?"yellow":""}} >
+                    <label className="label-status" style={{backgroundColor: status=="Đã xác nhận"|| status =="Đang thuê"?"green":(status=="Đợi xác nhận"?"yellow":(status=="Bị hủy"?"gray":""))}} >
                         {status}
                     </label>
                 </td>
-                <td><label className={status ==="Đợi xác nhận"? "label-huy": ""} onClick={this.showConfirmDialog}>{status ==="Đợi xác nhận"? "Hủy": ""}</label></td>
+                <td><label
+                className={status ==="Đợi xác nhận"? "label-huy": ""} 
+                style={{cursor: "pointer"}}
+                onClick={this.showConfirmDialog}>{status ==="Đợi xác nhận"? "Hủy": ""}
+                
+                </label></td>
             </tr>
         );
     }

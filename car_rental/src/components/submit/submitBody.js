@@ -14,7 +14,7 @@ class SubmitBody extends React.Component {
 			car: { price: 0 },
 			isLogin: true,
 			beginDate: new Date(),
-			address: '144 Xuân Thủy, Cầu Giấy, Hà Nội',
+			address: '',
 			customer: {},
 			endDate: new Date(a.getTime() + 60 * 60 * 24 * 1000),
 			totalMoney: 0,
@@ -99,7 +99,10 @@ class SubmitBody extends React.Component {
 		rental['isConfirm'] = 0;
 		rental['address'] = this.state.address;
 		rental['totalMoney'] = this.state.totalMoney;
-
+		if(this.state.address.replace(/\s+/, "")==""){
+			alert("Vui lòng nhập địa chỉ nhận xe!");
+			return;
+		}
 		fetch('/api/addrental/', {
 			method: 'POST',
 			headers: {
@@ -115,7 +118,7 @@ class SubmitBody extends React.Component {
 				}
 			})
 			.catch(function(error) {
-				console.log(error);
+				
 			});
     }
 	render() {
@@ -125,8 +128,7 @@ class SubmitBody extends React.Component {
 			window.location.href = '/login';
 			return;
 		}
-		console.log(this.state.car);
-
+	
 		return (
 			<div style={{ background: '#f5f5f5' }}>
 				<Head isLogin={this.state.isLogin} hide={'show'} handleLog={this.props.handleLog} />
@@ -198,15 +200,12 @@ class SubmitBody extends React.Component {
 									được tư vấn và báo giá nhanh nhất, chính xác nhất theo hành trình mà Quý khách có
 									nhu cầu. Xin chân thành cảm ơn và rất mong được sự hợp tác.
 								</p>
-								<p>4. Quý khách cần trả xe đúng hẹn, để tránh phát sinh thêm phí</p>
+								<p>4. Quý khách cần trả xe đúng hẹn, để tránh bị ăn đấm</p>
 								<p>
-									5. Nếu quý khách thêm dịch vụ khác thì liên hệ với số {this.state.car.phone} để biết
+									5. Nếu quý khách thêm dịch vụ khác thì liên hệ với số {"0"+this.state.car.phone} để biết
 									thêm thông tin chi tiết
 								</p>
-								<p>
-									6. Nếu quý muốn thay đổi địa chỉ nhận xe thì liên hệ số {this.state.car.phone} để
-									check phí vận chuyển
-								</p>
+								
 							</div>
 						</div>
 					</div>

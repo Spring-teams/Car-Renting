@@ -13,6 +13,8 @@ class Confirm extends React.Component{
         }
         else if(this.props.isOnwer==true){
             let rental = this.props.rental;
+            rental.beginDate = rental.beginDate.slice(0, 8) + (Number(rental.beginDate.slice(8, 10)) + 1);
+            rental.endDate= rental.endDate.slice(0, 8) + (Number(rental.endDate.slice(8, 10)) + 1);
             rental['isDelete']=1;
             fetch("/api/updateRental", {
                 method: "POST",

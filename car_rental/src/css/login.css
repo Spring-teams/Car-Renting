@@ -97,16 +97,6 @@ h1 {
 
 /*dialog*/
 
-.regis-background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(235, 240, 245);
-  padding-top: 100px;
-}
-
 /* Login error */
 .loginError {
   height: 50px;
@@ -121,6 +111,7 @@ h1 {
   display: none;
   transition: 1s;
 }
+
 .loginError p {
   text-align: center;
   line-height: 50px;
@@ -143,105 +134,71 @@ h1 {
   color: red;
 }
 
-/* Register */
-#register-form .register-rwd-table {
-  margin: 1em 0;
-  min-width: 600px;
-  margin-left:auto;
-  margin-right:auto;
-  font-size: 16px;
-}
-#register-form .register-rwd-table tr {
-  /* border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd; */
-}
-#register-form .register-rwd-table th {
-  display: none;
-}
-#register-form .register-rwd-table td {
-  display: block;
-}
-#register-form .register-rwd-table td:first-child {
-  padding-top: .5em;
-}
-#register-form .register-rwd-table td:last-child {
-  padding-bottom: .5em;
-}
-#register-form .register-rwd-table td:before {
-  content: attr(data-th) ": ";
-  font-weight: bold;
-  width: 9.5em;
-  display: inline-block;
-}
-@media (min-width: 480px) {
-  #register-form .register-rwd-table td:before {
-    display: none;
-  }
-}
-#register-form .register-rwd-table th, #register-form .register-rwd-table td {
-  text-align: left;
-}
-@media (min-width: 480px) {
-  #register-form .register-rwd-table th, #register-form .register-rwd-table td {
-    display: table-cell;
-    padding: .25em .5em;
-  }
-  #register-form .register-rwd-table th:first-child, #register-form .register-rwd-table td:first-child {
-    padding-left: 0;
-  }
-  #register-form .register-rwd-table th:last-child, #register-form .register-rwd-table td:last-child {
-    padding-right: 0;
-  }
+.regis-background{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 #register-form{
-  background: #fff;
-  color: #000;
-  border-radius: .4em;
-  overflow: hidden; 
+    width: 600px;
+    padding: 30px 50px;
+    border: none;
+    box-shadow: none;
+    background: #f5f5f5;
+    margin: 0 auto;
+    border-radius: 10px;
 }
-#register-form .register-rwd-table tr {
-	height: 40px;
-  border-color: #46627f;
+#register-form table{
+    border: none;
+    box-shadow: none;
 }
-#register-form .register-rwd-table th, #register-form .register-rwd-table td {
-  margin: .5em 1em;
+#register-form table tr{
+    border: none;
+    line-height: 40px;
 }
-@media (min-width: 480px) {
-  #register-form .register-rwd-table th, .rwd-table td {
-    padding: 1em !important;
-  }
+#register-form table tr td{
+    border: none;
 }
-#register-form .register-rwd-table th, #register-form .register-rwd-table td:before {
-  color: #dd5;
+#register-form table tr td:nth-child(1){
+    width: 100px;
+    color: #17a2b8;
+    font-weight: 600;
+    font-size: 18px;
 }
-body{
-	position: relative;
-}
-#register-form {
-	width: 450px;
-  box-shadow: 0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000;
-	margin: 0 auto;
-	padding: 20px;
-}
-#register-form .register-rwd-table td:nth-child(1){
-	width: 70px;
-}
-#register-form .register-rwd-table td:nth-child(2){
-	width: 200px;
-}
-#register-form .register-rwd-table td span{
-	color: orangered;
+#register-form table tr td:nth-child(2){
+    width: 300px;
 }
 #register-form .register-rwd-table td input{
-	width: 200px;
-	height: 25px;
+    color: #000;
+    padding-left: 10px;
+    border: 1px solid #17a2b8;
+    width: 300px;
+    height: 35px !important;
+    background: none;
+    border-radius: 5px;
 }
-
-#register-form span i {
-  color: red;
-  opacity: 0;
+#register-form .register-rwd-table td:nth-child(2) {
+    position: relative;
+    width: 200px;
 }
-#register-form span .show{
-  opacity: 1;
+.react-datepicker__input-container{
+    position: absolute;
+    top: 0;
+    right: 45px;
 }
-
+#register-form .register-rwd-table td p{
+    color: red;
+    font-size: 16px;
+}
+/* .id-error{
+    display: none;
+    position: absolute;
+    right: -3px;
+    transition: 3s
+}
+.id-error.show {
+    display: block;
+    top: 75px;
+    left: 600px;
+} */

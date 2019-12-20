@@ -331,6 +331,7 @@ class CustomerInfo extends React.Component {
                             showDisabledMonthNavigation
                             readOnly={this.state.readOnly}
                             name="birthday"
+                            id = "ctmRegis"
                         />
 
                         <span
@@ -436,7 +437,10 @@ function formatDate(date) {
     return temp.getFullYear() + "-" + (temp.getMonth() + 1) + "-" + a;
 }
 function phoneValidate(number) {
-    let regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    if(number[0]=='0'){
+        number=number.slice(1);
+    }
+    let regex = /(9|1[2|6|8|9])+([0-9]{8})\b/
     return regex.test(number);
 }
 export default CustomerInfo;

@@ -505,16 +505,13 @@ div.price:hover{
 	height: 50px;
 	width: 300px;
 	position: absolute;
-	top: 150px;
-	left: 100%;
+	top: 80px;
+	left: 200%;
 	border: 1px solid red;
 	font-size: 13px;
 	background-color: rgba(241, 169, 160, 0.1);
-	/* background-color: white; */
 	border-radius: 10px;
-	/* display: none; */
 	transition: 1s;
-	/* color: red; */
 }
 .id-error p {
 	text-align: center;

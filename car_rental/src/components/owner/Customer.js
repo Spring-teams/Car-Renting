@@ -45,7 +45,7 @@ class Customer extends React.Component {
             fetch("/api/getowner/" + this.props.match.params.id)
                 .then((res => res.json()))
                 .then(((data) => {
-                    console.log(data);
+                    
                     this.setState({
                         owner: data[0]
                     })
@@ -59,8 +59,9 @@ class Customer extends React.Component {
 
         if (name == "isLose") {
             let a = "2019-12-10"
-            let day = new Date(a.slice(0, 4), a.slice(5, 7) - 1, a.slice(8, 10));
-            customers = customers.filter((customer) => (new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, customer.endDate.slice(8, 10)) < new Date() && customer.isRent == 1))
+            let day = new Date();
+            day.setDate(day.getDate() - 2);
+            customers = customers.filter((customer) => (new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, customer.endDate.slice(8, 10)) < day && customer.isRent == 1 && customer.isPay==0))
 
         }
         else if (name == "isDelete") {
@@ -106,7 +107,6 @@ class Customer extends React.Component {
 		}
     }
     onSearch = (searchKey) => {
-		console.log(searchKey);
 		this.setState({
 			key: searchKey
 		})
@@ -125,7 +125,7 @@ class Customer extends React.Component {
     }
      render() {
         // {this.state.isLoad==true ? this.state.customers.map((customer)=> <CustomerItem rental={customer}/>) : " "}
-        console.log(this.state.owner);
+       
 
         let styleSearchBox = {
             width: '70%',
@@ -152,7 +152,7 @@ class Customer extends React.Component {
         if (key) {
 			// console.log(key);
 			customers = customers.filter((customer) => {
-				console.log(customer);
+				
 				return customer.name.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
 					customer.phone.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
 					customer.ownerId.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1 ||
@@ -164,7 +164,7 @@ class Customer extends React.Component {
 					customer.carName.toString().toLowerCase().indexOf(key.toString().toLowerCase()) !== -1
                     
 			})
-			// console.log(carItems);/
+			
 		}
         return (
             <div>
@@ -229,7 +229,18 @@ class Customer extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.isLoad == true ? customers.map((customer) => <CustomerItem key={customer.rentalId} rental={customer} role={this.props.role} />) : null}
+                            {this.state.isLoad == true ? customers.map((customer) => {
+                                let a = "2019-12-10"
+                                let day = new Date();
+                                day.setDate(day.getDate() - 2);
+                                let color="black";
+                                if(new Date(customer.endDate.slice(0, 4), customer.endDate.slice(5, 7) - 1, customer.endDate.slice(8, 10)) < day && customer.isRent == 1 && customer.isPay==0){
+                                    color="red";
+                                }
+
+                                return <CustomerItem key={customer.rentalId} rental={customer} role={this.props.role} color={color}/>
+                            
+     }) : null}
                         </tbody>
                         <tfoot />
                     </table>

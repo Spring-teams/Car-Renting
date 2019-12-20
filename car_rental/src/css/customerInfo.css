@@ -26,7 +26,7 @@
     background-color: #17a2b88a;
     color: yellow;
     border: none;
-    width: 115%;
+    width: 107%;
 }
 .label{
     color: orange;
@@ -34,7 +34,7 @@
 .react-datepicker-wrapper{
     width: 100%;
     margin-right: 80px;
-    margin-left: 42px;
+    margin-left: 55px;
 }
 .react-datepicker-wrapper{
     width: 100%;
@@ -47,4 +47,18 @@
     border: none;
     background: #2cb54b;
     margin-left: 50px;
+}
+.fa-edit:before {
+    content: "\f044";
+    font-size: 30px;
+    color: yellow;
+}
+.react-datepicker__input-container > input#ctmRegis {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: 35px;
+    margin-left: 54px;
+    padding-left: 10px;
+    line-height: 35px;
+    margin-top: 5px;
 }

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { NavLink } from 'react-router-dom'
 import "../../css/bootstrap.min.css";
@@ -33,10 +32,10 @@ class Head extends React.Component {
 								<li className="nav-item">
 									<NavLink to='/order'>
 										<i className="fas fa-cart-plus" style={{ fontSize: "13px", color: "yellow !important" }}></i> Đơn hàng
-							</NavLink>
+									</NavLink>
 								</li>
 								<li className="nav-item dropdown">
-									<a className="nav-link dropdown-toggle" href="anchor" id="loai-xe" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a className="nav-link dropdown-toggle" id="loai-xe" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i className="fas fa-user" style={{ fontSize: "13px", color: "yellow" }}></i> Tài khoản
 									</a>
 									<div className="dropdown-menu" aria-labelledby="loai-xe">
@@ -48,7 +47,9 @@ class Head extends React.Component {
 										</NavLink>
 									</div>
 								</li>
+								
 							</ul>
+							
 						</div>
 					</div>
 				</nav>
@@ -60,5 +61,3 @@ class Head extends React.Component {
 }
 
 export default Head;
-
-

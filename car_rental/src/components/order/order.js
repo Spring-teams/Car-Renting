@@ -51,7 +51,7 @@ class Order extends React.Component {
 		})
 	}
 	onSearch = (searchKey) => {
-		console.log(searchKey);
+		
 		this.setState({
 			searchKey:searchKey
 		})
@@ -75,19 +75,19 @@ class Order extends React.Component {
 		}
 		else if(filterStatus === "Quá hạn"){
 			listOrder = listOrder.filter((rental) => {
-				rental = rental;
 				let lastDay = rental.endDate;
 				lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
 				var date = new Date();
-				date.setDate(date.getDate() + 1);
-				return lastDay < date
+				date.setDate(date.getDate() +1);
+				
+				return lastDay < date&&rental.isRent == 1 && rental.isDelete == 0 && rental.isPay == 0;
 			})
 		}
 		else if(filterStatus === "Đang thuê"){
 			listOrder = listOrder.filter((rental) => {
 				rental = rental;
 				let lastDay = rental.endDate;
-				console.log(lastDay)
+				
 				lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, Number(lastDay.slice(8, 10))+1);
 				var date = new Date();
 				date.setDate(date.getDate() + 1);
@@ -107,9 +107,9 @@ class Order extends React.Component {
 			})
 		}	
 		if (searchKey) {
-			console.log(searchKey);
+		
 			listOrder = listOrder.filter((car) => {
-				console.log(car);
+				
 				return car.carId.toLowerCase().search(searchKey.toString().toLowerCase()) !== -1
 				|| car.carName.toString().toLowerCase().search(searchKey.toString().toLowerCase()) !== -1
 				|| car.ownerName.toString().toLowerCase().search(searchKey.toString().toLowerCase()) !== -1
