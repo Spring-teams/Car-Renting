@@ -42,7 +42,7 @@ module.exports={
         sql = "update rental set customerId = '"+body['customerId']+"' where customerId = '"+body['old_id']+"' ;";
         db.query(sql);
         body['birthday']=body['birthday'].slice(0,10);
-        console.log(sql)
+       
         db.query(sql);
         sql = "delete from customer where customerId='"+body['old_id']+"' ;";
         db.query(sql);
@@ -89,5 +89,13 @@ module.exports={
         db.query(sql,(err,response)=>{
             res.json(response)
         })
+    },
+    deleteOrder:(req,res)=>{
+        let id = req.params.id;
+        let sql = "update rental set isDelete = 1  where rentalId = " + id;
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            else res.send(true)
+        }) 
     }
 }

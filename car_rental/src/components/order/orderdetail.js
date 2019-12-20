@@ -1,12 +1,14 @@
 import React from "react";
 import { runInThisContext } from "vm";
 // import { deflate } from "zlib";
+import ConfirmDialog from "../dialog/ConfirmDialog"
 class Orderdetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             car: null,
-            isLoad: 0
+            isLoad: 0,
+            show: "none"
         };
         this.componentDidMount = this.componentDidMount.bind(this);
         this.callApi = this.callApi.bind(this);
@@ -31,10 +33,22 @@ class Orderdetail extends React.Component {
         lastDay = new Date(lastDay.slice(0, 4), lastDay.slice(5, 7) - 1, lastDay.slice(8, 10));
         return lastDay > new Date();
     }
+   
 
     callApi() {
         return fetch("/api/getcarbyid/" + this.props.rental.carId)
     }
+    showConfirmDialog=()=>{
+        this.setState({
+            show: "block"
+        })
+    }
+    closeDialog=()=>{
+        this.setState({
+            show: "block"
+        })
+    }
+    
     render() {
         let rental = this.props.rental;
         this.checkRental(rental)
@@ -60,7 +74,9 @@ class Orderdetail extends React.Component {
         }
         else status = "Bị hủy";
         return (
+
             <tr>
+                <ConfirmDialog url = "/order" rental={this.props.rental} content= {"Bạn có chắc chắn muốn xóa đơn hàng: "+ rental.rentalId} show={this.state.show} deleteCar={this.state.deleteOrder} isRental={true}/>
                 <td>{rental.carName}</td>
                 <td>
                     <img src={"/images/" + rental.image} style={{ width: "100px", padding: '1px 0' }} class="img-fluid" alt="" />
@@ -77,7 +93,7 @@ class Orderdetail extends React.Component {
                         {status}
                     </label>
                 </td>
-                <td><label className={status ==="Đợi xác nhận"? "label-huy": ""}>{status ==="Đợi xác nhận"? "Hủy": ""}</label></td>
+                <td><label className={status ==="Đợi xác nhận"? "label-huy": ""} onClick={this.showConfirmDialog}>{status ==="Đợi xác nhận"? "Hủy": ""}</label></td>
             </tr>
         );
     }

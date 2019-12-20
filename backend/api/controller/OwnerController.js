@@ -82,10 +82,6 @@ module.exports={
         body['ownerId']=currentOwnerId;
         // console.log(body)
         let sql ="update rental set carId = '"+body['carId'] +"' where carId = '"+body['old_carId']+"'";
-
-       
-
-
         db.query(sql);
         if(typeof body['old_carId']!="undefined"){
             sql = "delete from car where carId = '"+ body['old_carId']+"'";
@@ -105,7 +101,7 @@ module.exports={
     getById: (req,res)=>{
         let id = req.params.id;
         if(id == "-1") id= currentOwnerId;
-        console.log("ok")
+      
         let sql = "select * from owner where ownerId = "+ id;
         
         db.query(sql,(err,response)=>{

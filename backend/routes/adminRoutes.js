@@ -22,5 +22,7 @@ module.exports=function(app){
 
     app.route("/api/disableowner").post(AdminCtrl.disableOwner);
 
-    app.route("/api/undisableowner").post(AdminCtrl.activeOwner)
+    app.route("/api/undisableowner").post(AdminCtrl.activeOwner);
+
+    app.route("/api/admin/dologout").get(AdminCtrl.doLogout);
 }

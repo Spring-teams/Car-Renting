@@ -19,5 +19,6 @@ module.exports=function(app){
 
     app.route("/api/getcustomer/:id").get(customerCtrl.getById);
 
+    app.route("/api/deleterental/:id").get(customerCtrl.deleteOrder);
 
 }

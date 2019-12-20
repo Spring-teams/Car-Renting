@@ -30,6 +30,7 @@ module.exports={
     },
     doLogout: (req,res)=>{
         isLogin=false;
+        res.send(true)
     },
     getbenifite: (req,res)=>{
         let year = req.params.year;

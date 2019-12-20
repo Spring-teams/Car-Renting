@@ -6,6 +6,11 @@ class Confirm extends React.Component{
         this.deleteCar=this.deleteCar.bind(this);
     }
     async deleteCar(){
+        if(this.props.isRental==true){
+            await fetch("/api/deleterental/"+this.props.rental.rentalId);
+            window.location.href=this.props.url;
+            return;
+        }
         let carId = this.props.deletedCarId;
         await fetch("/api/deletecar/"+carId);
         window.location.href=this.props.url;

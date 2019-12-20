@@ -7,6 +7,16 @@ class adminMenu extends Component {
         super(props);
        
     }
+    doLogout=(e)=>{
+        e.preventDefault();
+        fetch("/api/admin/dologout")
+        .then(res=>res.text())
+        .then(data=>{
+            if(data=="true"){
+                window.location.href="/admin";
+            }
+        })
+    }
     
     render() {
         
@@ -34,6 +44,11 @@ class adminMenu extends Component {
                                 <li className="nav-item">
                                     <NavLink to='/admin/quan-ly-cua-hang'>
                                         Quản lý cửa hàng
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink onClick={(e)=>this.doLogout(e)} to = "/">
+                                        Đăng xuất
                                     </NavLink>
                                 </li>
                             </ul>

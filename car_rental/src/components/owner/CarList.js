@@ -31,8 +31,7 @@ class CarList extends React.Component {
 	componentDidMount() {
 		if (typeof this.props.owner != 'undefined') {
 			fetch('/api/getCarByOwnerId/' + this.props.owner.ownerId).then((res) => res.json()).then((data) => {
-				console.log(data);
-
+				
 				this.setState({
 					carItems: data
 				});
