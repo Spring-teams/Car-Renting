@@ -92,13 +92,15 @@ class Owner extends React.Component{
       })
     }
     render(){
+        let {listCar} = this.state;
+        console.log(this.state.owner);
+        
         if(this.state.isLogin==false&&this.props.role!="admin"){
             return <Login role={"owner"} url={"/chothuexe"}/>
         }
         return (
             <div className="owner">
-                <OwnerHead role={this.props.role} id = {this.props.role=="admin"?this.props.match.params.id:-1}/>
-                
+                <OwnerHead owner = {this.state.owner} role={this.props.role} id = {this.props.role=="admin"?this.props.match.params.id:-1}/>
                 {this.state.isLoad==true ? <CarList cars={this.state.listCar} owner = {this.state.owner} role={this.props.role}/>: " "}
                 <Footer/>
                 

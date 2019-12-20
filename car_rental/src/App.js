@@ -74,7 +74,7 @@ class App extends React.Component {
           ></Route>
           <Route path="/order">
             <Order
-              isLogin={this.state.isCustomerLogin}
+              isLogin={this.state.isCustomerLogin} 
               url={"/"}
               customer={this.state.currentCustomer}
             />
@@ -94,7 +94,7 @@ class App extends React.Component {
             <OwnerInfo />
           </Route>
           <Route path="/chothuexe/thong-ke">
-            <Analysis />
+            <Analysis isAdmin={false}/>
           </Route>
           <Route path="/admin" exact>
             <AdminHome />

@@ -79,3 +79,11 @@ table tbody td {
     margin-left: 3px;
     box-sizing: border-box;
 }
+.btn-danger{
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+.btn-success{
+    padding: 3px 10px;
+    border-radius: 3px;
+}

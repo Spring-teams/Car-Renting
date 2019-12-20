@@ -1,58 +1,58 @@
-import React from "react";
+import React from 'react';
 
-class CarItem extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            
-            
+class CarItem extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+        console.log(this.props.car);
+        let cat = this.props.car.categoryId;
+		return (
             <tr>
-              <td>
-                <p>
-        <span>{this.props.car.carName}</span>
-                </p>
-        <p>Biển số: {this.props.car.carId}</p>
-              </td>
-              <td>
-                <img
-                  src={"/images/"+this.props.car.image}
-                  className="img-fluid"
-                  alt="Responsive image"
-                />
-              </td>
-              <td>
-        <p>Hãng xe: {this.props.car.branch}</p>
-        <p>Loại xe: {this.props.car.categoryName}</p>
-        <p>Số ghế: {this.props.car.numberSeat}</p>
-        <p className="price-rent">Giá thuê: {this.props.car.price} VND</p>
-                <br />
-              </td>
-              <td>
+                <td>{this.props.car.carName}</td>
+                <td>
+                    <img src={'/images/' + this.props.car.image} style={{width:"100px", padding:'1px 0'}} class="img-fluid" alt="" />
+                </td>
+                <td>{this.props.car.carId}</td>
+                <td>{this.props.car.branch}</td>
+                <td>{cat === 1 ? "Xe thể thao" : (cat === 2)? "Xe du lịch":(cat === 3)? "Xe thương mại": "Khác"}</td>
+                <td>{this.props.car.numberSeat}</td>
+                <td>{formatNumber(this.props.car.price)}<sup>đ</sup></td>
+                <td>
                 <button
-                  className="btn btn-success"
-                  data-toggle="modal"
-                  data-target="#edit"
-                  onClick={()=>{this.props.toggleModal(this.props.car)}}
-                  disabled={this.props.role=="admin"?true:false}
-                >
-                  Sửa
-                </button>
+						style={{background:"#ffc107", padding:'2px 5px', color:"#fff", border:'none', borderRadius:"3px"}}
+						data-toggle="modal"
+						data-target="#edit"
+						onClick={() => {
+							this.props.toggleModal(this.props.car);
+						}}
+						disabled={this.props.role == 'admin' ? true : false}
+					>
+						<i class="fas fa-edit"></i>
+					</button>
+                </td>
+                <td>
                 <button
-                  className="btn btn-danger mt-1"
-                  data-toggle="modal"
-                  data-target="#delete"
-                  onClick={()=>{this.props.deleteCar(this.props.car.carId)}}
-                  disabled={this.props.role=="admin"?true:false}  
-                >
-                  Xóa
-                </button>
-              </td>
+						style={{background:"#ffc107", padding:'2px 7px', color:"#fff", border:'none', borderRadius:"3px"}}
+						data-toggle="modal"
+						data-target="#delete"
+						onClick={() => {
+							this.props.deleteCar(this.props.car.carId);
+						}}
+						disabled={this.props.role == 'admin' ? true : false}
+					>
+						<i class="fas fa-trash"></i>
+					</button>
+                </td>
             </tr>
-            
-        )
-    }
+        );
+        function formatNumber(num) {
+            if (num == null) {
+                return;
+            }
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        }
+	}
 }
 
 export default CarItem;

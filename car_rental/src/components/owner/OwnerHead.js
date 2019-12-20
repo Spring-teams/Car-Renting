@@ -1,5 +1,6 @@
 import React from "react"
-
+import './../../css/ownerHead.css'
+import { NavLink } from 'react-router-dom'
 class OwnerHead extends React.Component{
     constructor(props){
         super(props);
@@ -25,35 +26,46 @@ class OwnerHead extends React.Component{
 		else window.location.href="/chothuexe/khach-hang";
 	}
     render(){
+		
         // let Log = this.props.isOwnerLogin
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark" style={{position: "relative"}}>
-			<div className="container">
-					<a className="navbar-brand" href="/chothuexe"><img src="/images/image/image/Capture.png" id="logo" alt="" className="img-fluid" /> CarRenting.com</a>
-					<button className="navbar-toggler collapsed " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-						<span className="navbar-toggler-icon"></span>
-					</button>
-				<div className={"navbar-collapse collapse "+this.props.hide} id="navbarSupportedContent">
-				    <form className="form-inline my-2 my-lg-0 w-100 ml-4">
-						<input className="form-control mx-sm-3 w-60" type="search" placeholder="Search for..." aria-label="Search for..." />
-					</form>
-					<ul className="navbar-nav ml-auto w-100 ml-5">
-						<li className="nav-item active ml-4">
-							<a className="nav-link" onClick={this.handleCustomer}><i className="fas fa-users" ></i> Danh sách đơn hàng<span className="sr-only">(current)</span></a>
-						</li>
-						<li className="nav-item dropdown active ml-4">
-						<a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user"></i>
-						 Tài khoản</a>
-							<div className="dropdown-menu" aria-labelledby="navbarDropdown" id="Account">
-								{this.props.role=="admin"?" ":<a className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={()=>window.location.href="/chothuexe/thong-tin-ca-nhan"}>Thông tin cá nhân</a>}
-								<a className="dropdown-item"  data-toggle="modal" onClick={this.getAnalysis}>Thống kê</a>
-								{this.props.role=="admin"?" ":<a className="dropdown-item"  data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>Đăng xuất</a>}
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+			<div id="owner-head">
+				<nav className="navbar navbar-expand-lg navbar-light bg-light">
+					<div className="container">
+						<a className="navbar-brand mr-5" href={this.props.role=="admin"?"/admin":"/chothuexe"} style={{ float: 'left' }}>{this.props.owner.ownerName}</a>
+						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-menu-content" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span className="navbar-toggler-icon"></span>
+						</button>
+						<div className="collapse navbar-collapse ml-5" id="nav-menu-content">
+							<ul className="navbar-nav">
+								<li className="nav-item">
+									<NavLink to='#' onClick={this.handleCustomer}>
+										<i className="fas fa-cart-plus" style={{ fontSize: "13px", color:"yellow !important" }}></i> Đơn hàng
+							</NavLink>
+								</li>
+								<li className="nav-item dropdown">
+									<a className="nav-link dropdown-toggle" href="anchor" id="loai-xe" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i className="fas fa-user" style={{ fontSize: "13px",color:"yellow" }}></i> Tài khoản
+						</a>
+									<div className="dropdown-menu" aria-labelledby="loai-xe">{
+										this.props.role=="admin"?"":<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#singinModal" onClick={()=>window.location.href="/chothuexe/thong-tin-ca-nhan"}>
+										Thông tin cá nhân
+									</NavLink>
+									}
+										
+										<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.getAnalysis}>
+											Thống kê
+										</NavLink>
+										<NavLink to='#' className="dropdown-item" data-toggle="modal" data-target="#loginModal" onClick={this.doLogout}>
+											Đăng xuất
+										</NavLink>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div >
         )
     }
 }

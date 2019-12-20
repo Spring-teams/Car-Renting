@@ -35,4 +35,5 @@ module.exports=function(app){
     app.route("/api/getowner/:id").get(OwnerCtrl.getById);
 
     app.route("/api/getCustomerByOwner/:id").get(OwnerCtrl.getCustomerById);
+    
 }

@@ -1,0 +1,82 @@
+.nothing{
+	background-color: #f5f5f5;
+}
+div#customer-head{
+	font-weight: 500;
+	margin-bottom: 60px;
+	background: #fff;
+}
+div#customer-head > nav.navbar{
+	position: fixed;
+    z-index: 10;
+	width: 100%;
+	background: #3F51B3 !important;
+	top: 0;
+}
+div#customer-head > nav.navbar .container{
+	display: flex;
+	justify-content: space-around;
+}
+div#customer-head > nav.navbar .container > a{
+	font-weight: 600;
+	font-size: 1.3rem;
+	color: yellow;
+	text-shadow: 0px 0px 5px #000,0px 0px 8px #000,0px 0px 12px #000,0px 0px 16px #000 ;
+}
+div#customer-head > nav.navbar .container > button.navbar-toggler{
+	background: #FF9800;
+	color: #000;
+	padding: 0;
+}
+div#customer-head > nav.navbar #nav-menu-content{
+	justify-content: flex-end;
+}
+div#customer-head > nav.navbar ul li.nav-item{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	line-height: 20px;
+}
+div#customer-head > nav.navbar ul li.nav-item:hover{
+	color: yellow;
+	background: #3F51B3;
+}
+div#customer-head > nav.navbar ul li.nav-item a{
+	text-decoration: none;
+	color: yellow;
+	font-size: 1rem;
+}
+div#customer-head > nav.navbar ul li.nav-item a:hover{
+	color: aliceblue;
+}
+div#customer-head > nav.navbar ul li.nav-item a i{
+    color: yellow !important;
+}
+div#customer-head > nav.navbar ul li.nav-item div.dropdown-menu{
+	background: #3F51B3;
+}
+div#customer-head > nav.navbar ul li.nav-item div.dropdown-menu a{
+	line-height: 30px;
+}
+div#customer-head > nav.navbar ul li.nav-item div.dropdown-menu a:hover{
+	background: #337ab7;
+	color: #fff;
+}
+div#customer-head > nav.navbar #nav-menu-content ul li a i{
+	color: yellow;
+}
+@media only screen and (max-width: 991px) {
+	div#customer-head > nav.navbar #nav-menu-content ul li{
+		height: 35px;
+		display: flex;
+		justify-content: flex-start;
+		padding-left: 10px;
+		position: relative;
+	}
+	div#customer-head > nav.navbar #nav-menu-content ul li div.dropdown-menu{
+		position: absolute;
+		left: 120px;
+		top: 0;
+	}
+}

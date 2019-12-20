@@ -1,0 +1,50 @@
+#owner-info{
+    margin-top: 0;
+    padding-top: 0;
+    width: 100%;
+    height: calc(100vh - 55px);
+    background-image: url('https://www.mercedes-benz.com/wp-content/uploads/sites/3/2018/02/mercedes-benz-passenger-cars-e-class-coupe-c-238-avantgarde-obsidian-black-metallic-3400x1440.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#owner-info > .info-container{
+    width: 500px;
+    height: 500px;
+    background: #17a2b88a;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+}
+#owner-info > .info-container .customer-info-wrapper> input{
+    background-color: #17a2b88a;
+    color: yellow;
+    width: 100%;
+}
+#owner-info > .info-container .customer-info-wrapper div div > input{
+    background-color: #17a2b88a;
+    color: yellow;
+    border: none;
+    width: 115%;
+}
+.label{
+    color: orange;
+}
+.react-datepicker-wrapper{
+    width: 100%;
+    margin-right: 80px;
+    margin-left: 42px;
+}
+.react-datepicker-wrapper{
+    width: 100%;
+}
+#owner-info > .info-container button:first-child{
+    background: red;
+    border: none;
+}
+#owner-info > .info-container button:last-child{
+    border: none;
+    background: #2cb54b;
+    margin-left: 50px;
+}

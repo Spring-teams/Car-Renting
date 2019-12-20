@@ -1,0 +1,48 @@
+
+#des-car p {
+	line-height: 20px;
+}
+.box-text p i {
+	color: #000 ;
+}
+.col-xl-6,
+.col-lg-6,
+.col-md-12 {
+	padding-top: 0px;
+	padding-bottom: 0px;
+    margin: 0;
+    padding: 3px;
+}
+.box-text {
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+	height: 100%;
+    padding: 15px;
+	background: #fff;
+    border-radius: 3px;
+    
+}
+.react-datepicker__input-container > input {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: 35px;
+    margin-left: 5px;
+    padding-left: 10px;
+    line-height: 35px;
+    margin-top: 5px;
+}
+.react-datepicker__input-container > input:first-child{
+    margin-right: 20px;
+}
+#address{
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 0px 10px;
+}
+.total-money{
+    color: orangered !important;
+    font-size: 20px;
+}
+.total-money i{
+    font-size: 20px;
+    color: orangered !important;
+}

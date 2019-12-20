@@ -24,6 +24,7 @@ class QuanLyKhachHang extends Component {
         let rendered = this.state.customers.length==0?" ":this.state.customers.map((customer,index)=><ItemQLKH customer={customer} index = {index}/>)
         return (
             <div id="quan-ly-khach-hang" className="mt-5">
+                <h2 className="text-center p-3">Quản lý khách hàng</h2>
                 <div className="container-fluid">
                     <table className="rwd-table">
                         <thead>

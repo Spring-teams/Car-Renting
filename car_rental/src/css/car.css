@@ -1,0 +1,21 @@
+#List-Car  .title p i{
+    color: #000;
+}
+#List-Car .price-car p i{
+    color: orangered;
+}
+.price-car p{
+    font-size: 20px;
+    color: orangered;
+    margin-bottom: 4px;
+}
+#List-Car .card{
+    box-shadow: 0 0.0625rem 0.125rem 0 rgba(0,0,0,.1);
+    border-radius: .125rem;
+    z-index: 2;
+}
+#List-Car .card:hover{
+    border: 1px solid #ee4d2d;
+    box-sizing: content-box;
+    transform: scale(1.01);
+}

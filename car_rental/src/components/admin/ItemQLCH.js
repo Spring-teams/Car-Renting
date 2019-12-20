@@ -55,9 +55,9 @@ class ItemQLCH extends Component {
 	}
 	render() {
 		return (
-			<tr>
+			<tr  onClick={this.handleClick}>
 	<td>{this.props.index}</td>
-	<td style={{cursor: "pointer", textDecoration: "underline", color: "blue", textAlign: "center"}} onClick={this.handleClick}>{this.props.owner.ownerId}</td>
+	<td>{this.props.owner.ownerId}</td>
 		<td>{this.props.owner.ownerName}</td>
 				<td data-toggle="modal" data-target={`#modal${this.props.index}`}>
 					{this.props.owner.phone}

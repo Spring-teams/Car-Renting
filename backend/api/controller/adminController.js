@@ -41,7 +41,7 @@ module.exports={
     },
     getBranchAnalysis: (req,res)=>{
         let year = req.params.year;
-        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car  where year(beginDate) = "+year+" and rental.isDelete = 0 group by car.branch order by car.branch";
+        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car on rental.carId = car.carId where year(beginDate) = "+year+" and rental.isDelete = 0 group by car.branch order by car.branch";
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
@@ -80,7 +80,7 @@ module.exports={
     disableOwner: (req,res)=>{
         let body = req.body;
         let sql = "update owner set isOwnerActive = 0 where ownerId = "+body['ownerId'];
-        console.log(sql)
+       
         db.query(sql,(err,response)=>{
             if(err){
                 res.send(false);

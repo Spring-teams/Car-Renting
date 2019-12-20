@@ -2,6 +2,7 @@ let util=require("util");
 let mysql = require("mysql");
 const db = require("../../db")
 const multer = require("multer");
+// const tf = require("@tensorflow/tfjs-node")
 let isLogin = false;
 var currentOwnerId="1234";
 let carId ="0";
@@ -60,7 +61,9 @@ module.exports={
         res.send("true")
     },
     getCustomer: (req,res)=>{
-        let sql = "select * from customer inner join rental on customer.customerId = rental.customerId  inner join car on car.carId = rental.carId where rental.ownerId = '"+currentOwnerId+"' order by customer.customerId ";
+        let sql = "call rentalTrack()"
+        db.query(sql);
+        sql = "select * from customer inner join rental on customer.customerId = rental.customerId inner join car on car.carId = rental.carId  inner join owner on owner.ownerId = rental.ownerId  where rental.ownerId = '"+currentOwnerId+"' order by customer.customerId ";
         //  console.log(sql)
         db.query(sql,(err,response)=>{
             res.json(response)
@@ -74,13 +77,17 @@ module.exports={
             if(err) throw err;
             res.send("true")
         })
+
     },
     addCarByOwner: (req,res)=>{
         let body=req.body
         body['ownerId']=currentOwnerId;
         // console.log(body)
         let sql ="update rental set carId = '"+body['carId'] +"' where carId = '"+body['old_carId']+"'";
-        
+
+       
+
+
         db.query(sql);
         if(typeof body['old_carId']!="undefined"){
             sql = "delete from car where carId = '"+ body['old_carId']+"'";
@@ -95,6 +102,17 @@ module.exports={
         db.query(sql,(err,response)=>{
             res.send("ok");
             
+        })
+    },
+    getById: (req,res)=>{
+        let id = req.params.id;
+        if(id == "-1") id= currentOwnerId;
+        console.log("ok")
+        let sql = "select * from owner where ownerId = "+ id;
+        
+        db.query(sql,(err,response)=>{
+            if(err) throw err;
+            res.json(response)
         })
     },
     updateOwner: (req,res)=>{
@@ -148,8 +166,10 @@ module.exports={
         let rental={};
         let sql ="delete from rental where rentalId = " + body['rentalId'];
         db.query(sql);
+        
         sql = "insert into rental (rentalId,customerId,carId,ownerId,beginDate,endDate,totalMoney,isRent,isPay,isConfirm,address,isDelete) values("+
         body['rentalId']+",'"+body['customerId']+"','"+body['carId']+"','"+body['ownerId']+"','"+body['beginDate'].slice(0,10)+"','"+body['endDate'].slice(0,10)+"',"+body['totalmoney']+","+body['isRent']+","+body['isPay']+","+body['isConfirm']+",'"+body['address']+"',"+body['isDelete']+")";
+        // console.log(sql)
         db.query(sql)
         res.send(true)
     },
@@ -180,7 +200,9 @@ module.exports={
         let id = req.params.id;
         if(id==-1) id = currentOwnerId;
         let year = req.params.year;
-        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car  where rental.ownerId = "+id+" and year(beginDate) = "+year+" group by car.branch order by car.branch";
+        let sql = "select car.branch as branch, sum(rental.totalmoney) as total from rental inner join car on rental.carId = car.carId "+
+        "where rental.ownerId = "+id+" and year(beginDate) = "+year+" and rental.isDelete = 0 group by car.branch order by car.branch";
+        console.log(sql)
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
@@ -191,19 +213,16 @@ module.exports={
         let id = req.params.id;
         if (id ==-1) id = currentOwnerId;
         let year = req.params.year;
+        
+        
         let sql = "select count(rentalId) as num, sum(totalmoney) as totalmoney from rental where isDelete = 0 and ownerId = "+ id+ " and year(beginDate) = "+ year;
+        
         db.query(sql,(err,response)=>{
             if(err) throw err;
             res.json(response);
         });
     },
-    getById: (req,res)=>{
-        let id =req.params.id;
-        let sql = "select * from owner where ownerId = "+id;
-        db.query(sql,(err,response)=>{
-            res.json(response)
-        })
-    },
+    
     getCustomerById: (req,res)=>{
         let id = req.params.id;
         let sql = "select * from customer inner join rental on customer.customerId = rental.customerId  inner join car on car.carId = rental.carId where rental.ownerId = '"+id+"' order by customer.customerId ";

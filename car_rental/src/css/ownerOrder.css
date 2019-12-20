@@ -1,128 +1,67 @@
-#owner-rent-car .container .card .card-body table thead{
-    background: #0025ff26;
-}
-#owner-rent-car .container .card .card-body table thead th{
-    padding: 5px;
-}
-#owner-rent-car .container .card .card-body table tbody td{
-    padding: 5px;
-}
-#owner-rent-car .container .card .card-body table tr th:nth-child(1),td:nth-child(1){
-    width: 20%;
-}
-#owner-rent-car .container .card .card-body table tr th:nth-child(6),td:nth-child(6){
-    width: 8%;
-}
-#owner-rent-car .container .card .card-body table tr th:nth-child(5),td:nth-child(5){
-    width: 12%;
-}
-#owner-rent-car .container .card .card-body table tr th:nth-child(4),td:nth-child(4){
-    width: 8%;
 
+#owner-order-details > table{
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    font-size: 16px;
 }
-#owner-rent-car .container .card .card-body table tr th:nth-child(3),td:nth-child(3){
-    width: 8%;
-
+#owner-order-details > table tr{
+    width: 100%;
 }
-#owner-rent-car .container .card .card-body table tr td #searchbox{
-    width: 100%
+#owner-order-details > table tr th{
+    background-color: #3f51b3;
+    text-align: center;
+    padding: 10px;
+    /* bowner-order-details-color: red; */
+    color: yellow;
+    box-shadow: 0 0.0625rem 0.125rem 0 rgba(0,0,0,.1);
 }
-#owner-rent-car .container .card .card-body table tr td .container-checkbox {
-    display: block;
-    position: relative;
-    /* padding-left: 35px; */
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 25px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+#owner-order-details > table tr th:nth-child(1){
+    width: 15%;
+    min-width: 70px;
+    min-width: 100px;
 }
-#owner-rent-car .card-body{
-    padding: 0 !important;
+#owner-order-details > table tr th:nth-child(2){
+    width: 15%;
+    min-width: 150px;
 }
-/* Hide the browser's default checkbox */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox input{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%)
-    }
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
-
-    /* Create a custom checkbox */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox .checkmark {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, 0);
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
-        margin-top: 20px;
-    }
-
-    /* On mouse-over, add a grey background color */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox:hover input ~ .checkmark {
-        background-color: #ccc;
-    }
-
-    /* When the checkbox is checked, add a blue background */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox input:checked ~ .checkmark {
-        background-color: #2196F3;
-    }
-
-    /* Create the checkmark/indicator (hidden when not checked) */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-
-    /* Show the checkmark when checked */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox input:checked ~ .checkmark:after {
-        display: block;
-    }
-
-    /* Style the checkmark/indicator */
-    #owner-rent-car .container .card .card-body table tr td .container-checkbox .checkmark:after {
-        left: 9px;
-        top: 5px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-    #owner-rent-car .container .card .card-body table tr td p{
-        padding: 0;
-        margin: 0;
-    }
-    #owner-rent-car tbody tr{
-        height: 150px;
-    }
-    #owner-rent-car .container{
-        width: 1300px !important;
-    /* padding-right: 15px; */
-    /* padding-left: 15px; */
-    margin-right: auto;
-    margin-left: auto;
+#owner-order-details > table tr th:nth-child(3){
+    width: 7%;
+    min-width: 80px;
+    max-width: 100px;
 }
-#owner-rent-car .mt-3{
-    margin-top: 3rem!important;
+#owner-order-details > table tr th:nth-child(4){
+    width: 7%;
+    min-width: 40px;
 }
-@media (min-width: 1200px)
-{
-    #owner-rent-car .container {
-        max-width: 1300px !important;
-    }
+#owner-order-details > table tr th:nth-child(5){
+    width: 10%;
+    min-width: 70px;
 }
-
-    
+#owner-order-details > table tr th:nth-child(6){
+    width: 10%;
+    min-width: 100px;
+}
+#owner-order-details > table tr th:nth-child(7){
+    width: 10%;
+    min-width: 100px;
+}
+#owner-order-details > table tr th:nth-child(8){
+    width: 10%;
+    min-width: 120px;
+}
+#owner-order-details > table tr td{
+    background: #fff;
+    padding: 0px 10px;
+}
+#owner-order-details > table tr td img{
+    background: #fff;
+    padding: 1px 10px;
+}
+.label-status{
+    background: orangered;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+}

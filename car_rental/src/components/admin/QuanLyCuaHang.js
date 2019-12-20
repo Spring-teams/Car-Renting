@@ -22,6 +22,7 @@ class QuanLyCuaHang extends Component {
         let rendered= this.state.owners.size==0 ?" " : this.state.owners.map((owner,index)=><ItemQLCH owner={owner} index={index}/>)
         return (
             <div id="quan-ly-cua-hang" className="mt-5">
+                <h2 className="text-center p-3">Quản lý cửa hàng</h2>
                 <div className="container-fluid">
                     <table className="rwd-table">
                         <thead>

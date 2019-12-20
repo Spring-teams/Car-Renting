@@ -1,113 +1,94 @@
-import React from "react";
-import "../../css/bootstrap.min.css";
+import React from 'react';
+import '../../css/bootstrap.min.css';
+import './../../css/search.css';
 class Search extends React.Component {
-  constructor(props) {
-	super(props);
-	this.state={
-		branch: "Tất cả",
-		numberSeat: "Tất cả",
-		category:"Tất cả",
+	constructor(props) {
+		super(props);
+		this.state = {
+			filterBranch: 'Tất cả',
+			filterNumberSeat: 'Tất cả',
+			filterCategory: 0
+		};
 	}
-	this.handleChangeBranch=this.handleChangeBranch.bind(this);
-	this.handleChangeCategory=this.handleChangeCategory.bind(this);
-	this.handleChangeNumberSeat= this.handleChangeNumberSeat.bind(this);
-  }
+	onChange = (event) => {
+		let target = event.target;
+		let name = target.name;
+		let value = target.value;
+		this.props.onFilter(
+			name === "filterCategory" ? value : this.state.filterCategory,
+			name === "filterBranch" ? value : this.state.filterBranch,
+			name === "filterNumberSeat" ? value : this.state.filterNumberSeat,
+		)
+		this.setState({
+			[name]: value
+		})
+	}
+	onSearch = () => {
+		this.props.onSearch();
+	}
+	render() {
+		let {filterCategory,filterBranch,filterNumberSeat} = this.state;
+		// console.log(filterCategory,filterBranch, filterNumberSeat);
+		return (
+			<div
+				className="container"
+				id="search-form-customer"
+				style={{
+					width: '100%',
+					height: '',
+					background: '#e9ecefe0',
+					padding: '15px',
+					display: 'flex',
+					flexWrap: 'wrap'
+				}}
+			>
+				<div className="select">
+					<select name="filterBranch" onChange={this.onChange}>
+						<option value="Tất cả">--- Hãng xe ---</option>
+						<option>Mercedes</option>
+						<option>Toyota</option>
+						<option>Ford</option>
+						<option>Honda</option>
+						<option>Mazda</option>
+						<option>Vinfast</option>
+						<option>Huyndai</option>
+						<option>Samco</option>
+						<option>Audi</option>
+						<option>Khác</option>
+					</select>
+				</div>
+				<div className="select">
+					<select name="filterCategory" onChange={this.onChange}>
+						<option value={0}>--- Loại xe ---</option>
+						<option value={1}>Xe du lịch</option>
+						<option value={2}>Xe thể thao</option>
+						<option value={3}>Xe thương mại</option>
+						<option value={4}>Khác</option>
+					</select>
+				</div>
+				<div className="select">
+					<select name="filterNumberSeat" onChange={this.onChange}>
+						<option value="Tất cả">--- Số chỗ ngồi---</option>
+						<option>2</option>
+						<option>4</option>
+						<option>7</option>
+						<option>16</option>
+						<option>29</option>
+						<option>45</option>
+						<option>47</option>
+					</select>
+				</div>
 
-  handleChangeBranch(event){
-	if(event.target.value=="Tất cả"){
-		this.setState({branch: ""})
-	  }
-	  this.setState({branch: event.target.value})
-  }
-  handleChangeNumberSeat(event){
-	  if(event.target.value=="Tất cả"){
-		this.setState({numberSeat: ""})
-	  }
-	  this.setState({numberSeat: event.target.value})
-  }
-  handleChangeCategory(event){
-	if(event.target.value=="Tất cả"){
-		this.setState({category: ""})
-	  }
-	
-	if(event.target.value=="Xe du lịch"){
-		this.setState({category: "1"})
+				<button
+					onClick={this.onSearch}
+					className="btn"
+					style={{ background: '#fd710d', color: '#fff', marginLeft: '15px', marginTop: '5px' }}
+				>
+					Tìm kiếm
+				</button>
+			</div>
+		);
 	}
-	if(event.target.value=="Xe thể thao"){
-		this.setState({category: "2"})
-	}
-	if(event.target.value=="Xe thương mại"){
-		this.setState({category: "3"})
-  }
-  if(event.target.value=="Khác"){
-    this.setState({category: "4"})
-  }
-  }
-  
-
-  render() {
-    return (
-      <div id="menu-bar" style={{width: "70%", margin:"0 auto"}}>
-        <div className="row text-center">
-          
-        </div>
-        <div className="mt-2 search-sort">
-          <div className="row">
-            <div className="col">
-              <div className="form-group">
-                <label>Hãng xe</label>
-                <select className="form-control" onChange={this.handleChangeBranch}>
-                  <option>Tất cả</option>
-                  <option>Mercedes</option>
-                  <option>Ford</option>
-                  <option>Honda</option>
-                  <option>Mazda</option>
-                  <option>Toyota</option>
-                  <option>Khác</option>
-                </select>
-              </div>
-            </div>
-            <div className="col">
-              <div className="form-group">
-                <label>Số chỗ ngồi</label>
-                <select className="form-control" onChange={this.handleChangeNumberSeat}>
-                  <option>Tất cả</option>
-                  <option>2</option>
-                  <option>4</option>
-                  <option>7</option>
-                  <option>16</option>
-                  <option>29</option>
-                </select>
-              </div>
-            </div>
-            {/* <div className="col">
-              <div className="form-group">
-                <label>Tên xe</label>
-                <input type="text" className="form-control" name="" />
-              </div>
-            </div> */}
-            <div className="col">
-              <div className="form-group">
-                <label>Loại xe</label>
-                <select className="form-control" onChange={this.handleChangeCategory}>
-                  <option>Tất cả</option>
-                  <option id="1">Xe du lịch</option>
-                  <option id="2">Xe thể thao</option>
-                  <option id="3">Xe thương mại</option>
-                  <option id="4">Khác</option>
-                </select>
-              </div>
-            </div>
-            <div className="col">
-              <div className="form-group" style={{marginTop: "45px"}}>
-                <button className="btn btn-success" onClick={()=>this.props.handleSearch(this.state.branch,this.state.numberSeat,this.state.category)}>Tìm kiếm</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 
 export default Search;
