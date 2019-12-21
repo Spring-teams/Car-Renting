@@ -31,6 +31,8 @@ Phạm Công Tuấn Anh|17020587|  phamcongtuananh99@gmail.com
 
 * back-end: **npm run start**
 * front-end: **npm start**
+* packages: express,multer,mysql,react-chartjs-2,react-datepicker
+
 
 __Chú ý:__
 
