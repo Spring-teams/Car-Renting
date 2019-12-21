@@ -169,7 +169,7 @@ class Modal extends React.Component {
 		}
 
 		this.props.openLoading();
-		console.log(car['file']);
+		
 		form_data.append('myImage', this.state.file);
 
 		delete car['file'];
@@ -184,7 +184,7 @@ class Modal extends React.Component {
 		})
 			.then((res) => res.text())
 			.then((data) => {
-				console.log(data);
+				
 			})
 			.then(() => {
 				fetch('/api/addImageCar', {
