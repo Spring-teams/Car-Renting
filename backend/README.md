@@ -67,7 +67,7 @@ address|varchar|Địa chỉ giao nhận xe
 
 
 ### Sơ đồ thực thể liên kết
-![CSDL](db.jpg)
+![CSDL](db.JPG)
 
 
 
