@@ -26,19 +26,24 @@ Phạm Công Tuấn Anh|17020587|  phamcongtuananh99@gmail.com
 #### Công nghệ sử dụng: 
 * Back-end: Nodejs,Mysql
 * Front-end: Reactjs, html,css,boostrap
+* Packages: express,multer,mysql,react-chartjs-2,react-datepicker
 
 #### Hướng dẫn thực thi chương trình:
+* Clone project từ link [sau đây](https://github.com/Spring-teams/Car-Renting)
 
+* Tạo cơ sở dữ liệu từ file backend/backup.sql: 
+  * Đăng nhập và mysql: mysql -y root -p
+  * Sau đó nhập lệnh: source backup.sql
+  
 * back-end: **npm run start**
 * front-end: **npm start**
-* packages: express,multer,mysql,react-chartjs-2,react-datepicker
 
 
 __Chú ý:__
 
     - Cần thiết lập cấu hình Mysql trước khi chạy 
     
-    - Nếu có lỗi: Search Google 
+    - Nếu có lỗi: Thống báo cho nhóm hoặc search Google 
 
     - Admin Acccount:
         username: spring
