@@ -7,7 +7,7 @@
 ### [Tài liệu mô tả ứng dụng](https://docs.google.com/document/d/1wMjBnJVuxVzujK2nn6sznOTFAGja6iSF0MlnuAg4lCk/edit?usp=sharing)
 
 ### [Cơ sở dữ liệu](https://github.com/Spring-teams/Car-Renting/blob/master/backend/README.md)
-
+### [Tes case](https://docs.google.com/spreadsheets/d/1RtKZ3yhOXhoOdOrCtu90mBCQGN_DuZ4DKzXBFUlgetI/edit?usp=sharing)
 
 
 #### Thành viên nhóm số 4
